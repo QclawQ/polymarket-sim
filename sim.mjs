@@ -14,6 +14,8 @@
  *   snapshot — capture current market prices & volumes
  *   scan     — detect anomalous price/volume moves between snapshots
  *   auto-bet — run all 5 strategies simultaneously
+ *   fetch-history — fetch resolved markets from Polymarket API
+ *   backtest — run backtest on historical data with all 5 strategies
  */
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'fs';
@@ -30,6 +32,8 @@ const BETS_FILE = join(DATA_DIR, 'bets.json');
 const HISTORY_FILE = join(DATA_DIR, 'history.json');
 const SNAPSHOTS_DIR = join(DATA_DIR, 'snapshots');
 const SIGNALS_FILE = join(DATA_DIR, 'signals.json');
+const HISTORICAL_MARKETS_FILE = join(DATA_DIR, 'historical-markets.json');
+const BACKTEST_RESULTS_FILE = join(DATA_DIR, 'backtest-results.json');
 
 const POLYMARKET_CLI = '/Users/quen/.openclaw/workspace/skills/polymarket-odds/polymarket.mjs';
 const GAMMA_API = 'https://gamma-api.polymarket.com';
