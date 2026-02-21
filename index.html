@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polymarket Sim — Paper Trading</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+/* ─── Reset & Base ─────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg-0:#0a0e17;--bg-1:#111827;--bg-2:#1a2235;--bg-3:#243049;
+  --fg:#e2e8f0;--fg-dim:#94a3b8;--fg-muted:#64748b;
+  --green:#22c55e;--green-bg:rgba(34,197,94,.12);
+  --red:#ef4444;--red-bg:rgba(239,68,68,.12);
+  --accent:#6366f1;--accent-bg:rgba(99,102,241,.12);
+  --yellow:#eab308;
+  --border:#1e293b;
+  --radius:10px;
+  --font:'SF Mono','Cascadia Code','Fira Code',monospace;
+}
+html{font-size:14px}
+body{background:var(--bg-0);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh;line-height:1.5}
+
+/* ─── Layout ───────────────────────────────────────────────── */
+.app{max-width:1280px;margin:0 auto;padding:16px}
+header{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);margin-bottom:20px;flex-wrap:wrap;gap:8px}
+header h1{font-size:1.25rem;font-weight:700;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
+header h1 .dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.tag{font-size:.65rem;background:var(--accent-bg);color:var(--accent);padding:2px 8px;border-radius:99px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.refresh-btn{background:var(--bg-2);border:1px solid var(--border);color:var(--fg-dim);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:.8rem;transition:all .15s}
+.refresh-btn:hover{background:var(--bg-3);color:var(--fg)}
+
+/* ─── Stats Row ────────────────────────────────────────────── */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:20px}
+.stat-card{background:var(--bg-1);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px}
+.stat-card .label{font-size:.7rem;color:var(--fg-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;font-weight:600}
+.stat-card .value{font-size:1.4rem;font-weight:700;font-family:var(--font)}
+.stat-card .sub{font-size:.75rem;color:var(--fg-dim);margin-top:2px}
+.positive{color:var(--green)}.negative{color:var(--red)}.neutral{color:var(--fg)}
+
+/* ─── Chart ────────────────────────────────────────────────── */
+.chart-wrap{background:var(--bg-1);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:20px}
+.chart-wrap h2{font-size:.85rem;color:var(--fg-dim);margin-bottom:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.chart-wrap canvas{width:100%!important;max-height:240px}
+
+/* ─── Sections ─────────────────────────────────────────────── */
+.section{margin-bottom:24px}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.section-header h2{font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--fg-dim)}
+.section-header .count{font-size:.75rem;background:var(--bg-3);color:var(--fg-dim);padding:2px 8px;border-radius:99px}
+
+/* ─── Position Cards ───────────────────────────────────────── */
+.positions{display:grid;gap:10px}
+.pos-card{background:var(--bg-1);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;display:grid;grid-template-columns:1fr auto;gap:8px;transition:border-color .15s}
+.pos-card:hover{border-color:var(--bg-3)}
+.pos-card .title{font-size:.85rem;font-weight:600;line-height:1.4;grid-column:1/-1}
+.pos-card .meta{display:flex;gap:16px;flex-wrap:wrap;font-size:.75rem;color:var(--fg-dim);grid-column:1/-1}
+.pos-card .meta span{display:flex;align-items:center;gap:4px}
+.side-badge{font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em}
+.side-yes{background:var(--green-bg);color:var(--green)}
+.side-no{background:var(--red-bg);color:var(--red)}
+.pnl-tag{font-family:var(--font);font-weight:700;font-size:.8rem}
+
+/* ─── History Table ────────────────────────────────────────── */
+.history-table{width:100%;border-collapse:collapse;font-size:.8rem}
+.history-table th{text-align:left;padding:8px 12px;border-bottom:1px solid var(--border);color:var(--fg-muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:.7rem}
+.history-table td{padding:8px 12px;border-bottom:1px solid var(--border)}
+.history-table tr:last-child td{border-bottom:none}
+.history-table tr:hover{background:var(--bg-2)}
+
+/* ─── Empty State ──────────────────────────────────────────── */
+.empty{text-align:center;padding:48px 20px;color:var(--fg-muted)}
+.empty .icon{font-size:2.5rem;margin-bottom:12px}
+.empty p{font-size:.85rem;max-width:360px;margin:0 auto}
+.empty code{background:var(--bg-2);padding:2px 6px;border-radius:4px;font-family:var(--font);font-size:.75rem;color:var(--fg-dim)}
+
+/* ─── Footer ───────────────────────────────────────────────── */
+footer{text-align:center;padding:24px 0;color:var(--fg-muted);font-size:.7rem;border-top:1px solid var(--border);margin-top:20px}
+
+/* ─── Responsive ───────────────────────────────────────────── */
+@media(max-width:640px){
+  .app{padding:10px}
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .stat-card{padding:12px}
+  .stat-card .value{font-size:1.1rem}
+  .pos-card{padding:12px}
+  .history-table{font-size:.72rem}
+  .history-table th,.history-table td{padding:6px 8px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1><span class="dot"></span> Polymarket Sim <span class="tag">Paper</span></h1>
+    <button class="refresh-btn" onclick="loadData()">↻ Refresh</button>
+  </header>
+
+  <!-- Stats -->
+  <div class="stats-grid" id="statsGrid">
+    <div class="stat-card"><div class="label">Total Equity</div><div class="value neutral" id="stEquity">$10,000.00</div></div>
+    <div class="stat-card"><div class="label">Cash Balance</div><div class="value neutral" id="stCash">$10,000.00</div></div>
+    <div class="stat-card"><div class="label">Total P&L</div><div class="value neutral" id="stPnl">$0.00</div><div class="sub" id="stRoi">ROI 0.00%</div></div>
+    <div class="stat-card"><div class="label">Open Positions</div><div class="value neutral" id="stOpen">0</div></div>
+    <div class="stat-card"><div class="label">Win Rate</div><div class="value neutral" id="stWinRate">—</div><div class="sub" id="stTrades">0 trades</div></div>
+    <div class="stat-card"><div class="label">Sharpe Ratio</div><div class="value neutral" id="stSharpe">—</div></div>
+  </div>
+
+  <!-- Equity Curve -->
+  <div class="chart-wrap">
+    <h2>Equity Curve</h2>
+    <canvas id="equityChart"></canvas>
+  </div>
+
+  <!-- Open Positions -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Open Positions</h2>
+      <span class="count" id="openCount">0</span>
+    </div>
+    <div class="positions" id="positionsContainer">
+      <div class="empty" id="emptyPositions">
+        <div class="icon">📭</div>
+        <p>No open positions yet. Place your first bet:</p>
+        <p style="margin-top:8px"><code>node sim.mjs bet --market &lt;slug&gt; --side YES --amount 100</code></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- History -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Trade History</h2>
+      <span class="count" id="histCount">0</span>
+    </div>
+    <div id="historyContainer">
+      <div class="empty" id="emptyHistory">
+        <div class="icon">📋</div>
+        <p>No closed trades yet.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>Polymarket Paper Trading Simulator &mdash; Data is simulated. Not financial advice.</footer>
+</div>
+
+<script>
+let chart = null;
+
+function $(id){return document.getElementById(id)}
+function fmt(v){return v>=0?`+$${v.toFixed(2)}`:`-$${Math.abs(v).toFixed(2)}`}
+function fmtUsd(v){return `$${v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`}
+function pnlClass(v){return v>0?'positive':v<0?'negative':'neutral'}
+function pctStr(v){return (v*100).toFixed(1)+'¢'}
+
+async function loadData(){
+  try{
+    const [portfolio,bets,history]=await Promise.all([
+      fetch('data/portfolio.json').then(r=>r.json()),
+      fetch('data/bets.json').then(r=>r.json()),
+      fetch('data/history.json').then(r=>r.json()),
+    ]);
+    render(portfolio,bets,history);
+  }catch(e){
+    console.error('Failed to load data:',e);
+  }
+}
+
+function render(portfolio,bets,history){
+  // ── Stats ──
+  const openValue=bets.reduce((s,b)=>s+b.shares*(b.currentPrice||b.entryPrice),0);
+  const openCost=bets.reduce((s,b)=>s+b.cost,0);
+  const unrealizedPnl=openValue-openCost;
+  const realizedPnl=history.reduce((s,h)=>s+(h.pnl||0),0);
+  const totalPnl=realizedPnl+unrealizedPnl;
+  const totalEquity=portfolio.cashBalance+openValue;
+  const roi=(totalPnl/portfolio.initialBalance*100).toFixed(2);
+  const wins=history.filter(h=>h.pnl>0).length;
+  const winRate=history.length>0?(wins/history.length*100).toFixed(1)+'%':'—';
+
+  $('stEquity').textContent=fmtUsd(totalEquity);
+  $('stEquity').className='value '+pnlClass(totalPnl);
+  $('stCash').textContent=fmtUsd(portfolio.cashBalance);
+  $('stPnl').textContent=fmt(totalPnl);
+  $('stPnl').className='value '+pnlClass(totalPnl);
+  $('stRoi').textContent=`ROI ${roi}%`;
+  $('stOpen').textContent=bets.length;
+  $('stWinRate').textContent=winRate;
+  $('stTrades').textContent=`${history.length} trades`;
+
+  // Sharpe (annualized, from equity curve daily returns)
+  const curve=portfolio.equityCurve||[];
+  if(curve.length>=3){
+    const returns=[];
+    for(let i=1;i<curve.length;i++){
+      returns.push((curve[i].equity-curve[i-1].equity)/curve[i-1].equity);
+    }
+    const mean=returns.reduce((a,b)=>a+b,0)/returns.length;
+    const std=Math.sqrt(returns.reduce((a,r)=>a+Math.pow(r-mean,2),0)/returns.length);
+    const sharpe=std>0?(mean/std*Math.sqrt(252)).toFixed(2):'—';
+    $('stSharpe').textContent=sharpe;
+  }else{
+    $('stSharpe').textContent='—';
+  }
+
+  // ── Equity Chart ──
+  renderChart(curve,portfolio.initialBalance);
+
+  // ── Open Positions ──
+  $('openCount').textContent=bets.length;
+  const pc=$('positionsContainer');
+  if(bets.length===0){
+    pc.innerHTML=`<div class="empty"><div class="icon">📭</div><p>No open positions yet. Place your first bet:</p><p style="margin-top:8px"><code>node sim.mjs bet --market &lt;slug&gt; --side YES --amount 100</code></p></div>`;
+  }else{
+    pc.innerHTML=bets.map(b=>{
+      const cv=b.shares*(b.currentPrice||b.entryPrice);
+      const pnl=cv-b.cost;
+      const pnlPct=(pnl/b.cost*100).toFixed(1);
+      return `<div class="pos-card">
+        <div class="title">${esc(b.question||b.marketSlug)}</div>
+        <div class="meta">
+          <span class="side-badge side-${b.side.toLowerCase()}">${b.side}</span>
+          <span>Entry ${pctStr(b.entryPrice)}</span>
+          <span>Now ${pctStr(b.currentPrice||b.entryPrice)}</span>
+          <span>${b.shares.toFixed(2)} shares</span>
+          <span>Cost ${fmtUsd(b.cost)}</span>
+          <span class="pnl-tag ${pnlClass(pnl)}">${fmt(pnl)} (${pnlPct}%)</span>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // ── History ──
+  $('histCount').textContent=history.length;
+  const hc=$('historyContainer');
+  if(history.length===0){
+    hc.innerHTML=`<div class="empty"><div class="icon">📋</div><p>No closed trades yet.</p></div>`;
+  }else{
+    const rows=history.slice().reverse().map(h=>{
+      const icon=h.status==='won'?'🏆':h.status==='lost'?'❌':'💰';
+      return `<tr>
+        <td>${icon}</td>
+        <td>${esc(h.question||h.marketSlug)}</td>
+        <td><span class="side-badge side-${h.side.toLowerCase()}">${h.side}</span></td>
+        <td>${pctStr(h.entryPrice)}</td>
+        <td>${pctStr(h.exitPrice)}</td>
+        <td>${fmtUsd(h.cost)}</td>
+        <td class="${pnlClass(h.pnl)}">${fmt(h.pnl)}</td>
+        <td>${h.closedAt?new Date(h.closedAt).toLocaleDateString():''}</td>
+      </tr>`;
+    }).join('');
+    hc.innerHTML=`<div style="overflow-x:auto"><table class="history-table">
+      <thead><tr><th></th><th>Market</th><th>Side</th><th>Entry</th><th>Exit</th><th>Cost</th><th>P&L</th><th>Closed</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>`;
+  }
+}
+
+function renderChart(curve,initialBalance){
+  const ctx=$('equityChart').getContext('2d');
+  if(chart)chart.destroy();
+  
+  const labels=curve.map(c=>c.date);
+  const data=curve.map(c=>c.equity);
+  const isUp=data.length>0&&data[data.length-1]>=initialBalance;
+
+  chart=new Chart(ctx,{
+    type:'line',
+    data:{
+      labels,
+      datasets:[{
+        data,
+        borderColor:isUp?'#22c55e':'#ef4444',
+        backgroundColor:isUp?'rgba(34,197,94,.08)':'rgba(239,68,68,.08)',
+        fill:true,
+        tension:.3,
+        pointRadius:data.length>30?0:3,
+        pointHoverRadius:5,
+        borderWidth:2,
+      },{
+        data:Array(labels.length).fill(initialBalance),
+        borderColor:'#334155',
+        borderDash:[4,4],
+        borderWidth:1,
+        pointRadius:0,
+        fill:false,
+      }]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      interaction:{mode:'index',intersect:false},
+      plugins:{legend:{display:false},tooltip:{
+        backgroundColor:'#1e293b',titleColor:'#e2e8f0',bodyColor:'#e2e8f0',borderColor:'#334155',borderWidth:1,
+        callbacks:{label:ctx=>'$'+ctx.parsed.y.toLocaleString('en-US',{minimumFractionDigits:2})}
+      }},
+      scales:{
+        x:{grid:{color:'#1e293b'},ticks:{color:'#64748b',maxTicksLimit:8,font:{size:11}}},
+        y:{grid:{color:'#1e293b'},ticks:{color:'#64748b',font:{size:11},callback:v=>'$'+v.toLocaleString()}}
+      }
+    }
+  });
+}
+
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+
+loadData();
+</script>
+</body>
+</html>

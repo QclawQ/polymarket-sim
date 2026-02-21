@@ -1,0 +1,12 @@
+{
+  "initialBalance": 10000,
+  "cashBalance": 10000,
+  "totalDeposited": 10000,
+  "createdAt": "2026-02-21T05:29:10.903Z",
+  "equityCurve": [
+    {
+      "date": "2026-02-21",
+      "equity": 10000
+    }
+  ]
+}
