@@ -21,7 +21,7 @@
       ]
     },
     "status_quo": {
-      "cash": 1547.56,
+      "cash": 2000,
       "initialCash": 2000,
       "equityCurve": [
         {
@@ -31,7 +31,7 @@
       ]
     },
     "cheap_contracts": {
-      "cash": 1901.98,
+      "cash": 2000,
       "initialCash": 2000,
       "equityCurve": [
         {
@@ -41,7 +41,7 @@
       ]
     },
     "arb": {
-      "cash": 1825.34,
+      "cash": 2000,
       "initialCash": 2000,
       "equityCurve": [
         {
@@ -52,5 +52,5 @@
     }
   },
   "totalInitial": 10000,
-  "createdAt": "2026-02-21T07:55:32.827Z"
+  "createdAt": "2026-02-21T08:25:05.739Z"
 }

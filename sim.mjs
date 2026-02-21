@@ -38,6 +38,44 @@ const STRATEGY_NAMES = ['momentum', 'contrarian', 'status_quo', 'cheap_contracts
 const INITIAL_PER_STRATEGY = 2000;
 const TOTAL_INITIAL = INITIAL_PER_STRATEGY * STRATEGY_NAMES.length;
 
+// ─── Auto-bet limits ─────────────────────────────────────────────
+const MAX_BETS_PER_STRATEGY = 10;
+const MIN_BET_AMOUNT = 50;           // $50 minimum for most strategies
+const MIN_BET_CHEAP_CONTRACTS = 20;  // $20 minimum for cheap_contracts
+
+// Sports / non-political market filter
+const SPORTS_KEYWORDS = [
+  // Sports terms
+  'KO', 'TKO', 'submission', 'goal scorer', 'win by',
+  'Rookie Card', 'seed in NCAA', 'fight',
+  // Over/under player stats
+  'Points', 'Rebounds', 'Assists', 'O/U',
+  // Leagues & organizations
+  'UFC', 'FIFA', 'NFL', 'NBA', 'NHL', 'EPL', 'MLS',
+  'Ligue 1', 'Serie A', 'La Liga', 'Bundesliga',
+  // Team markers
+  ' FC', 'F.C.',
+];
+
+// Case-insensitive regex built from keywords (word-boundary where appropriate)
+const SPORTS_RE = new RegExp(
+  SPORTS_KEYWORDS.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|'),
+  'i'
+);
+
+// Additional heuristic: "X vs. Y" in a sports-like context
+const VS_SPORTS_RE = /\bvs\.?\s/i;
+
+function isSportsMarket(title) {
+  if (SPORTS_RE.test(title)) return true;
+  // "vs." only counts as sports if title also contains common sport cues
+  if (VS_SPORTS_RE.test(title)) {
+    const sportsCues = /\b(game|match|round|bout|fight|winner|finals?|playoffs?|series|championship|cup|league|season|draft|roster|coach|player|team|score|seed|bracket)\b/i;
+    if (sportsCues.test(title)) return true;
+  }
+  return false;
+}
+
 // ─── Data helpers ────────────────────────────────────────────────
 
 function loadJSON(file) {
@@ -218,8 +256,11 @@ function computeStrategyStats(strategyName, portfolio, bets, history) {
 
 function runMomentumStrategy(signals) {
   // Price spike >10% → follow direction
+  // Filter sports, sort by abs price delta, top 10
   return signals
-    .filter(s => s.isPriceSpike)
+    .filter(s => s.isPriceSpike && !isSportsMarket(s.title))
+    .sort((a, b) => Math.abs(b.priceDelta) - Math.abs(a.priceDelta))
+    .slice(0, MAX_BETS_PER_STRATEGY)
     .map(s => ({
       strategy: 'momentum',
       slug: s.slug,
@@ -234,8 +275,11 @@ function runMomentumStrategy(signals) {
 
 function runContrarianStrategy(signals) {
   // Price spike >10% → OPPOSITE direction (fade the move)
+  // Filter sports, sort by abs price delta, top 10
   return signals
-    .filter(s => s.isPriceSpike)
+    .filter(s => s.isPriceSpike && !isSportsMarket(s.title))
+    .sort((a, b) => Math.abs(b.priceDelta) - Math.abs(a.priceDelta))
+    .slice(0, MAX_BETS_PER_STRATEGY)
     .map(s => ({
       strategy: 'contrarian',
       slug: s.slug,
@@ -250,14 +294,17 @@ function runContrarianStrategy(signals) {
 
 function runStatusQuoStrategy(snapshotMarkets) {
   // Markets with "Will" in title, price 0.10-0.40 → buy NO (bet it won't happen)
+  // Filter sports, sort by conviction (lower YES price = more confident NO), top 10
   const willPatterns = /\b(will|going to|expected to|set to|likely to|plan to|could|may)\b/i;
   return snapshotMarkets
     .filter(m => {
+      if (isSportsMarket(m.title)) return false;
       if (!willPatterns.test(m.title)) return false;
       if (m.price < 0.10 || m.price > 0.40) return false;
       return true;
     })
-    .slice(0, 5) // limit to top 5
+    .sort((a, b) => a.price - b.price) // lowest YES price first (strongest NO signal)
+    .slice(0, MAX_BETS_PER_STRATEGY)
     .map(m => ({
       strategy: 'status_quo',
       slug: m.slug,
@@ -272,10 +319,11 @@ function runStatusQuoStrategy(snapshotMarkets) {
 
 function runCheapContractsStrategy(snapshotMarkets) {
   // Price < $0.05 → buy YES (lottery ticket)
+  // Filter sports, sort by cheapest first, top 10
   return snapshotMarkets
-    .filter(m => m.price > 0 && m.price < 0.05)
+    .filter(m => m.price > 0 && m.price < 0.05 && !isSportsMarket(m.title))
     .sort((a, b) => a.price - b.price)
-    .slice(0, 5)
+    .slice(0, MAX_BETS_PER_STRATEGY)
     .map(m => ({
       strategy: 'cheap_contracts',
       slug: m.slug,
@@ -321,7 +369,7 @@ async function findArbOpportunities(snapshotMarkets) {
     // Instead, look for extremely thin markets where we can get better fills
     // For simulation purposes, flag markets where price is between 0.48-0.52 (nearly 50/50 = uncertain)
     // and liquidity is low — these are where real arbs would appear
-    if (m.liquidity && m.liquidity < 5000 && m.price > 0.45 && m.price < 0.55) {
+    if (m.liquidity && m.liquidity < 5000 && m.price > 0.45 && m.price < 0.55 && !isSportsMarket(m.title)) {
       arbs.push({
         strategy: 'arb',
         slug: m.slug,
@@ -987,7 +1035,9 @@ async function cmdAutoBet() {
       strat.cash * 0.5 // never more than 50% of strategy cash in one bet
     );
 
-    if (betSize < 1 || betSize > strat.cash) continue;
+    // Enforce minimum bet amounts
+    const minBet = strategy === 'cheap_contracts' ? MIN_BET_CHEAP_CONTRACTS : MIN_BET_AMOUNT;
+    if (betSize < minBet || betSize > strat.cash) continue;
 
     if (prop.side === 'BOTH') {
       // Arb: split between YES and NO
