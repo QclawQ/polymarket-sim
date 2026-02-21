@@ -215,12 +215,77 @@ footer{text-align:center;padding:24px 0;color:var(--fg-muted);font-size:.7rem;bo
 
   <!-- Tab Navigation -->
   <div class="tab-bar">
-    <button class="tab-btn active" data-tab="dashboard" onclick="switchTab('dashboard')">📊 Dashboard</button>
+    <button class="tab-btn active" data-tab="backtest" onclick="switchTab('backtest')">📈 Backtest</button>
+    <button class="tab-btn" data-tab="dashboard" onclick="switchTab('dashboard')">📊 Live Trading</button>
     <button class="tab-btn" data-tab="strategies" onclick="switchTab('strategies')">📚 Strategy Library</button>
   </div>
 
-  <!-- Dashboard Tab -->
-  <div class="tab-content active" id="tab-dashboard">
+  <!-- Backtest Tab (DEFAULT) -->
+  <div class="tab-content active" id="tab-backtest">
+    <div id="bt-loading" class="empty"><div class="icon">⏳</div><p>Loading backtest results…</p></div>
+    <div id="bt-content" style="display:none">
+
+    <!-- Backtest Header -->
+    <div class="bt-header" style="margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <div>
+        <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:4px">🔬 Backtest Report</h2>
+        <div id="btMeta" style="font-size:.78rem;color:var(--fg-muted)"></div>
+      </div>
+      <div id="btBadge" class="tag" style="font-size:.7rem">Historical Simulation</div>
+    </div>
+
+    <!-- Backtest Stats Grid -->
+    <div class="stats-grid" id="btStatsGrid">
+      <div class="stat-card"><div class="label">Markets Analyzed</div><div class="value neutral" id="btMarkets">—</div></div>
+      <div class="stat-card"><div class="label">Total Bets</div><div class="value neutral" id="btTotalBets">—</div></div>
+      <div class="stat-card"><div class="label">Overall Win Rate</div><div class="value neutral" id="btWinRate">—</div></div>
+      <div class="stat-card"><div class="label">Combined P&L</div><div class="value neutral" id="btPnl">—</div></div>
+      <div class="stat-card"><div class="label">Best Strategy</div><div class="value neutral" id="btBest">—</div></div>
+      <div class="stat-card"><div class="label">Date Range</div><div class="value neutral" id="btDateRange" style="font-size:1rem">—</div></div>
+    </div>
+
+    <!-- Backtest Leaderboard -->
+    <div class="leaderboard-wrap">
+      <h2>🏆 Strategy Performance — Backtest</h2>
+      <table class="lb-table" id="btLbTable">
+        <thead>
+          <tr>
+            <th style="width:40px">#</th>
+            <th>Strategy</th>
+            <th class="num">Bets</th>
+            <th class="num">Wins</th>
+            <th class="num">Win %</th>
+            <th class="num">P&L</th>
+            <th class="num">ROI %</th>
+            <th class="num">Sharpe</th>
+            <th class="num">Final $</th>
+          </tr>
+        </thead>
+        <tbody id="btLbBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Backtest Equity Curve -->
+    <div class="chart-wrap">
+      <h2>Equity Curves — Backtest Simulation</h2>
+      <canvas id="btEquityChart"></canvas>
+      <div class="chart-legend" id="btChartLegend"></div>
+    </div>
+
+    <!-- Top Trades Sample -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Notable Trades</h2>
+        <span class="count" id="btTradeCount">0</span>
+      </div>
+      <div id="btTradesContainer"></div>
+    </div>
+
+    </div>
+  </div><!-- /tab-backtest -->
+
+  <!-- Dashboard Tab (Live Trading) -->
+  <div class="tab-content" id="tab-dashboard">
 
   <!-- Stats -->
   <div class="stats-grid" id="statsGrid">
@@ -823,6 +888,257 @@ function renderStrategies(data){
     kl.innerHTML='<span class="kol-chip">No KOLs tracked</span>';
   }
 }
+
+// ── Backtest Tab ──
+let btChart = null;
+
+async function loadBacktest() {
+  try {
+    const data = await fetch('data/backtest-results.json').then(r => r.ok ? r.json() : null);
+    if (!data) {
+      $('bt-loading').innerHTML = '<div class="icon">📭</div><p>No backtest data. Run <code>node sim.mjs fetch-history</code> then <code>node sim.mjs backtest</code></p>';
+      return;
+    }
+    $('bt-loading').style.display = 'none';
+    $('bt-content').style.display = 'block';
+    renderBacktest(data);
+  } catch (e) {
+    console.error('Failed to load backtest:', e);
+    $('bt-loading').innerHTML = '<div class="icon">⚠️</div><p>Failed to load backtest data.</p>';
+  }
+}
+
+function renderBacktest(data) {
+  const strats = data.strategies || {};
+  const dr = data.dateRange || {};
+
+  // Meta info
+  $('btMeta').textContent = `Based on ${data.marketsAnalyzed?.toLocaleString() || '?'} markets from ${dr.from || '?'} to ${dr.to || '?'} (~${dr.months || '?'} months) · Initial $${(data.initialCapitalPerStrategy || 10000).toLocaleString()} per strategy · Run: ${data.runAt ? new Date(data.runAt).toLocaleString() : '?'}`;
+
+  // Stats
+  const names = ['momentum', 'contrarian', 'status_quo', 'cheap_contracts', 'arb'];
+  let totalBets = 0, totalWins = 0, totalPnl = 0;
+  let bestName = '', bestRoi = -Infinity;
+
+  for (const name of names) {
+    const s = strats[name];
+    if (!s) continue;
+    totalBets += s.bets;
+    totalWins += s.wins;
+    totalPnl += s.pnl;
+    if (s.roi > bestRoi) { bestRoi = s.roi; bestName = name; }
+  }
+
+  $('btMarkets').textContent = (data.marketsAnalyzed || 0).toLocaleString();
+  $('btTotalBets').textContent = totalBets.toLocaleString();
+  $('btWinRate').textContent = totalBets > 0 ? (totalWins / totalBets * 100).toFixed(1) + '%' : '—';
+  $('btWinRate').className = 'value ' + (totalWins / totalBets > 0.5 ? 'positive' : 'negative');
+  $('btPnl').textContent = fmt(totalPnl);
+  $('btPnl').className = 'value ' + pnlClass(totalPnl);
+  $('btBest').innerHTML = `<span style="font-size:.85rem">${STRATEGY_LABELS[bestName] || bestName}</span>`;
+  $('btBest').className = 'value positive';
+  $('btDateRange').textContent = `${dr.from || '?'} → ${dr.to || '?'}`;
+
+  // Leaderboard
+  const sorted = names.map(n => ({ name: n, ...strats[n] })).filter(s => s.bets !== undefined).sort((a, b) => b.roi - a.roi);
+  const body = $('btLbBody');
+  body.innerHTML = sorted.map((s, i) => {
+    const rank = i === 0 ? '🏆' : `#${i+1}`;
+    const color = STRATEGY_COLORS[s.name];
+    const label = STRATEGY_LABELS[s.name] || s.name;
+    const winStr = s.winRate !== null ? s.winRate.toFixed(1) + '%' : '—';
+    const sharpeStr = s.sharpe !== null ? s.sharpe.toFixed(2) : '—';
+    const pnlCls = pnlClass(s.pnl);
+    const roiCls = pnlClass(s.roi);
+
+    // Expandable detail with sample trades
+    const sampleTrades = (s.trades || []).filter(t => Math.abs(t.pnl) > 5).slice(-8);
+    const tradeRows = sampleTrades.length > 0
+      ? sampleTrades.map(t => {
+          const icon = t.won ? '✅' : '❌';
+          return `<div class="bet-row">
+            <span>${icon}</span>
+            <span class="side-badge side-${(t.side||'yes').toLowerCase()}">${t.side}</span>
+            <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(t.title)}</span>
+            <span style="font-family:var(--font)">${(t.buyPrice*100).toFixed(1)}¢</span>
+            <span class="pnl-tag ${pnlClass(t.pnl)}">${fmt(t.pnl)}</span>
+            <span style="font-size:.68rem;color:var(--fg-muted)">${t.date||''}</span>
+          </div>`;
+        }).join('')
+      : '<div class="lb-no-bets">No significant trades</div>';
+
+    return `
+      <tr class="lb-row strat-${s.name}" onclick="toggleLbDetail('bt-detail-${s.name}', this)">
+        <td><span class="lb-rank">${rank}</span></td>
+        <td>
+          <div style="display:flex;align-items:center">
+            <span class="strat-dot" style="background:${color}"></span>
+            <div>
+              <div class="lb-strategy">${label}</div>
+              <div class="lb-strategy-desc">${STRATEGY_DESCRIPTIONS[s.name] || ''}</div>
+            </div>
+          </div>
+        </td>
+        <td class="num">${s.bets}</td>
+        <td class="num">${s.wins}</td>
+        <td class="num">${winStr}</td>
+        <td class="num ${pnlCls}">${fmt(s.pnl)}</td>
+        <td class="num ${roiCls}">${s.roi.toFixed(1)}%</td>
+        <td class="num">${sharpeStr}</td>
+        <td class="num">$${s.finalCash.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</td>
+      </tr>
+      <tr class="lb-detail" id="bt-detail-${s.name}">
+        <td colspan="9">
+          <div class="lb-detail-inner">
+            <div class="lb-detail-stats">
+              <span>🎯 Wins: ${s.wins} | Losses: ${s.losses}</span>
+              <span>💰 P&L: <span class="${pnlCls}">${fmt(s.pnl)}</span></span>
+              <span>📈 ROI: <span class="${roiCls}">${s.roi.toFixed(1)}%</span></span>
+              <span>📊 Sharpe: ${sharpeStr}</span>
+            </div>
+            <div style="font-size:.72rem;color:var(--fg-muted);margin:6px 0">Sample Trades:</div>
+            <div class="lb-detail-bets">${tradeRows}</div>
+          </div>
+        </td>
+      </tr>`;
+  }).join('');
+
+  // Equity Chart
+  renderBtChart(strats, names, data.initialCapitalPerStrategy || 10000);
+
+  // Notable trades
+  let allTrades = [];
+  for (const name of names) {
+    const s = strats[name];
+    if (!s || !s.trades) continue;
+    for (const t of s.trades) {
+      allTrades.push({ ...t, strategy: name });
+    }
+  }
+
+  // Top winners and losers
+  allTrades.sort((a, b) => b.pnl - a.pnl);
+  const topWins = allTrades.filter(t => t.pnl > 0).slice(0, 5);
+  const topLosses = allTrades.filter(t => t.pnl < 0).sort((a, b) => a.pnl - b.pnl).slice(0, 5);
+  const notableTrades = [...topWins, ...topLosses];
+
+  $('btTradeCount').textContent = allTrades.length;
+  const tc = $('btTradesContainer');
+  if (notableTrades.length === 0) {
+    tc.innerHTML = '<div class="empty"><div class="icon">📋</div><p>No trades to show.</p></div>';
+  } else {
+    tc.innerHTML = `<div style="overflow-x:auto"><table class="history-table">
+      <thead><tr><th></th><th>Strategy</th><th>Market</th><th>Side</th><th>Entry</th><th>Bet</th><th>P&L</th><th>Date</th></tr></thead>
+      <tbody>${notableTrades.map(t => {
+        const icon = t.won ? '✅' : '❌';
+        return `<tr>
+          <td>${icon}</td>
+          <td><span class="strat-badge">${t.strategy}</span></td>
+          <td style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(t.title)}</td>
+          <td><span class="side-badge side-${(t.side||'yes').toLowerCase()}">${t.side}</span></td>
+          <td>${(t.buyPrice*100).toFixed(1)}¢</td>
+          <td>$${t.betSize.toFixed(2)}</td>
+          <td class="${pnlClass(t.pnl)}">${fmt(t.pnl)}</td>
+          <td>${t.date||''}</td>
+        </tr>`;
+      }).join('')}</tbody>
+    </table></div>`;
+  }
+}
+
+function renderBtChart(strats, names, initialCapital) {
+  const ctx = $('btEquityChart').getContext('2d');
+  if (btChart) btChart.destroy();
+
+  // Collect all unique dates
+  const allDates = new Set();
+  for (const name of names) {
+    const curve = strats[name]?.equityCurve || [];
+    curve.forEach(c => { if (c.date) allDates.add(c.date); });
+  }
+  const labels = [...allDates].sort();
+
+  const datasets = names.map(name => {
+    const curve = strats[name]?.equityCurve || [];
+    const curveMap = {};
+    curve.forEach(c => { if (c.date) curveMap[c.date] = c.equity; });
+
+    const data = [];
+    let last = initialCapital;
+    for (const d of labels) {
+      if (curveMap[d] !== undefined) last = curveMap[d];
+      data.push(last);
+    }
+
+    return {
+      label: STRATEGY_LABELS[name] || name,
+      data,
+      borderColor: STRATEGY_COLORS[name],
+      backgroundColor: STRATEGY_COLORS[name] + '15',
+      fill: false,
+      tension: .3,
+      pointRadius: data.length > 50 ? 0 : 2,
+      pointHoverRadius: 5,
+      borderWidth: 2,
+    };
+  });
+
+  // Baseline
+  datasets.push({
+    label: `Baseline ($${initialCapital.toLocaleString()})`,
+    data: Array(labels.length).fill(initialCapital),
+    borderColor: '#334155',
+    borderDash: [4, 4],
+    borderWidth: 1,
+    pointRadius: 0,
+    fill: false,
+  });
+
+  btChart = new Chart(ctx, {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1e293b', titleColor: '#e2e8f0', bodyColor: '#e2e8f0',
+          borderColor: '#334155', borderWidth: 1,
+          callbacks: { label: ctx => `${ctx.dataset.label}: $${ctx.parsed.y.toLocaleString('en-US',{minimumFractionDigits:2})}` }
+        }
+      },
+      scales: {
+        x: { grid: { color: '#1e293b' }, ticks: { color: '#64748b', maxTicksLimit: 12, font: { size: 11 } } },
+        y: { grid: { color: '#1e293b' }, ticks: { color: '#64748b', font: { size: 11 }, callback: v => '$' + v.toLocaleString() } }
+      }
+    }
+  });
+
+  // Legend
+  const legend = $('btChartLegend');
+  legend.innerHTML = names.map(name => {
+    return `<div class="chart-legend-item" onclick="toggleBtDataset('${name}')">
+      <span class="chart-legend-dot" style="background:${STRATEGY_COLORS[name]}"></span>
+      <span>${STRATEGY_LABELS[name]}</span>
+    </div>`;
+  }).join('');
+}
+
+function toggleBtDataset(name) {
+  if (!btChart) return;
+  const idx = STRATEGY_NAMES.indexOf(name);
+  if (idx === -1) return;
+  const meta = btChart.getDatasetMeta(idx);
+  meta.hidden = !meta.hidden;
+  btChart.update();
+  const items = $('btChartLegend').querySelectorAll('.chart-legend-item');
+  if (items[idx]) items[idx].style.opacity = meta.hidden ? '0.3' : '0.9';
+}
+
+// Load backtest on startup
+loadBacktest();
 
 loadData();
 </script>

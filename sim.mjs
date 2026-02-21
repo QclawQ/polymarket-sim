@@ -1139,6 +1139,483 @@ async function cmdAutoBet() {
   printStrategyBalances(portfolio);
 }
 
+// ─── Fetch Historical Data ───────────────────────────────────────
+
+async function cmdFetchHistory() {
+  if (!existsSync(DATA_DIR)) mkdirSync(DATA_DIR, { recursive: true });
+  console.log('📥 Fetching resolved markets from Polymarket API…\n');
+
+  // Strategy: ascending from ~6 months ago, filter aggressively, cap at 500 pages
+  const now = new Date();
+  const sixMonthsAgo = new Date();
+  sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+
+  // Binary search for the right starting offset (6 months ago)
+  console.log('  Finding starting offset for 6 months ago…');
+  let startOffset = 0;
+  let lo = 0, hi = 150000;
+  for (let i = 0; i < 12; i++) {
+    const mid = Math.floor((lo + hi) / 2);
+    try {
+      const probe = await fetchJSON(`${GAMMA_API}/markets?closed=true&limit=1&offset=${mid}&order=closedTime&ascending=true`);
+      if (probe && probe.length > 0) {
+        const dt = new Date(probe[0].closedTime || probe[0].endDate);
+        if (dt < sixMonthsAgo) {
+          lo = mid;
+        } else {
+          hi = mid;
+        }
+      } else {
+        hi = mid;
+      }
+    } catch { hi = mid; }
+    await new Promise(r => setTimeout(r, 100));
+  }
+  startOffset = lo;
+  console.log(`  Starting from offset ${startOffset}\n`);
+
+  let allMarkets = [];
+  let offset = startOffset;
+  const limit = 100;
+  let hasMore = true;
+  let page = 0;
+  let skippedSports = 0;
+  let skippedNoResolution = 0;
+  let skippedNoise = 0;
+  const MAX_PAGES = 150;
+
+  // Noise filters
+  const isNoiseMarket = (title) => {
+    const t = title.toLowerCase();
+    if (t.includes('up or down') && /\d+:\d+/i.test(title)) return true;  // crypto 5-min
+    if (/will the (highest|lowest) temperature/i.test(title)) return true;  // weather
+    if (/temperature in .+ be \d/i.test(title)) return true;
+    if (/snow in .+ on /i.test(title)) return true;
+    if (/rain in .+ on /i.test(title)) return true;
+    if (t.includes('over/under') && t.includes('kills')) return true;  // esports noise
+    return false;
+  };
+
+  while (hasMore && page < MAX_PAGES) {
+    const url = `${GAMMA_API}/markets?closed=true&limit=${limit}&offset=${offset}&order=closedTime&ascending=true`;
+    try {
+      const batch = await fetchJSON(url);
+      if (!batch || batch.length === 0) { hasMore = false; break; }
+
+      for (const m of batch) {
+        const closedTime = m.closedTime || m.endDate || '';
+
+        // Skip if before cutoff (shouldn't happen much with binary search)
+        if (closedTime && new Date(closedTime) < sixMonthsAgo) continue;
+        // Stop if future (shouldn't happen)
+        if (closedTime && new Date(closedTime) > now) continue;
+
+        // Parse outcome prices
+        let outcomes, prices;
+        try {
+          outcomes = JSON.parse(m.outcomes || '[]');
+          prices = JSON.parse(m.outcomePrices || '[]');
+        } catch { continue; }
+
+        const price0 = parseFloat(prices[0] || 0);
+        const price1 = parseFloat(prices[1] || 0);
+
+        let resolvedOutcome = null;
+        if (price0 >= 0.99 && price1 <= 0.01) {
+          resolvedOutcome = outcomes[0] || 'Yes';
+        } else if (price1 >= 0.99 && price0 <= 0.01) {
+          resolvedOutcome = outcomes[1] || 'No';
+        } else {
+          skippedNoResolution++;
+          continue;
+        }
+
+        const title = m.question || m.title || m.slug;
+
+        // Filter sports
+        if (isSportsMarket(title)) { skippedSports++; continue; }
+        const evCat = (m.events && m.events[0]?.category) || m.category || '';
+        if (evCat.toLowerCase() === 'sports') { skippedSports++; continue; }
+
+        // Filter noise
+        if (isNoiseMarket(title)) { skippedNoise++; continue; }
+
+        // Minimum volume $5,000
+        const vol = m.volumeNum || parseFloat(m.volume || 0);
+        if (vol < 5000) continue;
+
+        const lastTradePrice = parseFloat(m.lastTradePrice || 0);
+        const oneDayPriceChange = parseFloat(m.oneDayPriceChange || 0);
+        const entryPrice = Math.max(0.001, Math.min(0.999, lastTradePrice - oneDayPriceChange));
+
+        allMarkets.push({
+          slug: m.slug || m.id,
+          title,
+          conditionId: m.conditionId || '',
+          closedTime,
+          endDate: m.endDateIso || m.endDate || '',
+          outcomes,
+          outcomePrices: prices.map(Number),
+          resolvedOutcome,
+          yesWon: resolvedOutcome.toLowerCase() === 'yes',
+          lastTradePrice,
+          oneDayPriceChange,
+          entryPriceEstimate: parseFloat(entryPrice.toFixed(4)),
+          volume: vol,
+          liquidity: m.liquidityNum || parseFloat(m.liquidity || 0),
+          category: evCat || '',
+          description: (m.description || '').slice(0, 200),
+        });
+      }
+
+      offset += batch.length;
+      page++;
+      const latest = allMarkets.length > 0 ? allMarkets[allMarkets.length - 1].closedTime?.slice(0, 10) : '?';
+      process.stdout.write(`\r  Page ${page}: ${allMarkets.length} markets | through ${latest} (offset ${offset})      `);
+
+      await new Promise(r => setTimeout(r, 150));
+      if (batch.length < limit) hasMore = false;
+    } catch (e) {
+      console.error(`\n  Error at offset ${offset}: ${e.message}`);
+      await new Promise(r => setTimeout(r, 3000));
+      offset += limit; // skip past problematic page
+      page++;
+    }
+  }
+
+  // Sort chronologically
+  allMarkets.sort((a, b) => new Date(a.closedTime) - new Date(b.closedTime));
+
+  const result = {
+    fetchedAt: new Date().toISOString(),
+    totalMarkets: allMarkets.length,
+    skippedSports,
+    skippedNoResolution,
+    skippedNoise,
+    dateRange: {
+      from: allMarkets.length > 0 ? allMarkets[0].closedTime : null,
+      to: allMarkets.length > 0 ? allMarkets[allMarkets.length - 1].closedTime : null,
+    },
+    markets: allMarkets,
+  };
+
+  saveJSON(HISTORICAL_MARKETS_FILE, result);
+  console.log(`\n\n✅ Historical data saved to data/historical-markets.json`);
+  console.log(`   Total resolved markets: ${allMarkets.length}`);
+  console.log(`   Skipped sports: ${skippedSports} | noise: ${skippedNoise} | unresolved: ${skippedNoResolution}`);
+  if (allMarkets.length > 0) {
+    console.log(`   Date range: ${result.dateRange.from?.slice(0, 10)} → ${result.dateRange.to?.slice(0, 10)}`);
+  }
+}
+
+// ─── Backtest Engine ─────────────────────────────────────────────
+
+function runBacktest() {
+  const data = loadJSON(HISTORICAL_MARKETS_FILE);
+  if (!data || !data.markets || data.markets.length === 0) {
+    console.error('❌ No historical data found. Run `node sim.mjs fetch-history` first.');
+    process.exit(1);
+  }
+
+  const markets = data.markets;
+  console.log(`\n🔬 Running backtest on ${markets.length} resolved markets…\n`);
+
+  // Initialize strategy state
+  const BACKTEST_INITIAL = 10000;
+  const MAX_BET_DEFAULT = 200;    // 2% position size
+  const MAX_BET_CHEAP = 100;      // 1% for cheap contracts
+
+  const strategies = {
+    momentum: { cash: BACKTEST_INITIAL, bets: [], wins: 0, losses: 0, totalPnl: 0, trades: [], equityCurve: [{ date: null, equity: BACKTEST_INITIAL }] },
+    contrarian: { cash: BACKTEST_INITIAL, bets: [], wins: 0, losses: 0, totalPnl: 0, trades: [], equityCurve: [{ date: null, equity: BACKTEST_INITIAL }] },
+    status_quo: { cash: BACKTEST_INITIAL, bets: [], wins: 0, losses: 0, totalPnl: 0, trades: [], equityCurve: [{ date: null, equity: BACKTEST_INITIAL }] },
+    cheap_contracts: { cash: BACKTEST_INITIAL, bets: [], wins: 0, losses: 0, totalPnl: 0, trades: [], equityCurve: [{ date: null, equity: BACKTEST_INITIAL }] },
+    arb: { cash: BACKTEST_INITIAL, bets: [], wins: 0, losses: 0, totalPnl: 0, trades: [], equityCurve: [{ date: null, equity: BACKTEST_INITIAL }] },
+  };
+
+  // Process markets chronologically
+  // Key insight: we use entryPriceEstimate (= lastTradePrice - oneDayPriceChange)
+  // as the "day before resolution" price for realistic entry simulation.
+  // This avoids look-ahead bias where lastTradePrice already reflects the outcome.
+
+  for (const market of markets) {
+    const yesWon = market.yesWon;
+    const lastPrice = market.lastTradePrice;
+    const priceChange = market.oneDayPriceChange;
+    const entryPrice = market.entryPriceEstimate;  // price before the final move
+    const closedDate = market.closedTime ? market.closedTime.slice(0, 10) : null;
+
+    // Skip markets with extreme or invalid entry prices
+    if (entryPrice <= 0.01 || entryPrice >= 0.99) continue;
+    if (lastPrice <= 0 || lastPrice >= 1) continue;
+
+    // ─── Strategy 1: Momentum ───
+    // Signal: price moved >10% in last day. Entry at entryPriceEstimate (pre-move price).
+    // Direction: follow the move — if moving UP, buy YES at current entry price
+    if (Math.abs(priceChange) > 0.10) {
+      const strat = strategies.momentum;
+      const betSize = Math.min(MAX_BET_DEFAULT, strat.cash * 0.02);
+      if (betSize >= 1 && strat.cash >= betSize) {
+        // If price moving UP → buy YES at the entry estimate
+        // If price moving DOWN → buy NO at (1 - entryPrice)
+        const side = priceChange > 0 ? 'YES' : 'NO';
+        const buyPrice = priceChange > 0 ? entryPrice : (1 - entryPrice);
+        if (buyPrice > 0.02 && buyPrice < 0.98) {
+          const shares = betSize / buyPrice;
+          const won = (side === 'YES' && yesWon) || (side === 'NO' && !yesWon);
+          const payout = won ? shares * 1.0 : 0;
+          const pnl = payout - betSize;
+
+          strat.cash -= betSize;
+          strat.cash += payout;
+          strat.totalPnl += pnl;
+          if (won) strat.wins++; else strat.losses++;
+          strat.trades.push({
+            slug: market.slug, title: market.title, side, buyPrice: parseFloat(buyPrice.toFixed(4)),
+            betSize: parseFloat(betSize.toFixed(2)), pnl: parseFloat(pnl.toFixed(2)), won, date: closedDate,
+            reason: `momentum: Δ${(priceChange * 100).toFixed(1)}%, entry@${(buyPrice * 100).toFixed(1)}¢`,
+          });
+          strat.equityCurve.push({ date: closedDate, equity: parseFloat(strat.cash.toFixed(2)) });
+        }
+      }
+    }
+
+    // ─── Strategy 2: Contrarian ───
+    // Same signal but FADE the move — bet against the direction
+    if (Math.abs(priceChange) > 0.10) {
+      const strat = strategies.contrarian;
+      const betSize = Math.min(MAX_BET_DEFAULT, strat.cash * 0.02);
+      if (betSize >= 1 && strat.cash >= betSize) {
+        const side = priceChange > 0 ? 'NO' : 'YES';
+        const buyPrice = priceChange > 0 ? (1 - entryPrice) : entryPrice;
+        if (buyPrice > 0.02 && buyPrice < 0.98) {
+          const shares = betSize / buyPrice;
+          const won = (side === 'YES' && yesWon) || (side === 'NO' && !yesWon);
+          const payout = won ? shares * 1.0 : 0;
+          const pnl = payout - betSize;
+
+          strat.cash -= betSize;
+          strat.cash += payout;
+          strat.totalPnl += pnl;
+          if (won) strat.wins++; else strat.losses++;
+          strat.trades.push({
+            slug: market.slug, title: market.title, side, buyPrice: parseFloat(buyPrice.toFixed(4)),
+            betSize: parseFloat(betSize.toFixed(2)), pnl: parseFloat(pnl.toFixed(2)), won, date: closedDate,
+            reason: `contrarian: fading Δ${(priceChange * 100).toFixed(1)}%, entry@${(buyPrice * 100).toFixed(1)}¢`,
+          });
+          strat.equityCurve.push({ date: closedDate, equity: parseFloat(strat.cash.toFixed(2)) });
+        }
+      }
+    }
+
+    // ─── Strategy 3: Status Quo ───
+    // Title matches "Will X happen" pattern AND estimated entry YES price < 40¢ → buy NO
+    {
+      const willPatterns = /\b(will|going to|expected to|set to|likely to|plan to)\b/i;
+      if (willPatterns.test(market.title) && entryPrice < 0.40) {
+        const strat = strategies.status_quo;
+        const noPrice = 1 - entryPrice;  // Use entry estimate for buy price
+        const betSize = Math.min(MAX_BET_DEFAULT, strat.cash * 0.02);
+        if (betSize >= 1 && strat.cash >= betSize && noPrice > 0.02 && noPrice < 0.98) {
+          const shares = betSize / noPrice;
+          const won = !yesWon;  // We bought NO
+          const payout = won ? shares * 1.0 : 0;
+          const pnl = payout - betSize;
+
+          strat.cash -= betSize;
+          strat.cash += payout;
+          strat.totalPnl += pnl;
+          if (won) strat.wins++; else strat.losses++;
+          strat.trades.push({
+            slug: market.slug, title: market.title, side: 'NO', buyPrice: parseFloat(noPrice.toFixed(4)),
+            betSize: parseFloat(betSize.toFixed(2)), pnl: parseFloat(pnl.toFixed(2)), won, date: closedDate,
+            reason: `status quo: YES@${(entryPrice * 100).toFixed(1)}¢ → buying NO@${(noPrice * 100).toFixed(1)}¢`,
+          });
+          strat.equityCurve.push({ date: closedDate, equity: parseFloat(strat.cash.toFixed(2)) });
+        }
+      }
+    }
+
+    // ─── Strategy 4: Cheap Contracts ───
+    // Entry price estimate < 5¢ → buy YES (lottery ticket)
+    if (entryPrice > 0 && entryPrice < 0.05) {
+      const strat = strategies.cheap_contracts;
+      const betSize = Math.min(MAX_BET_CHEAP, strat.cash * 0.01);
+      if (betSize >= 1 && strat.cash >= betSize) {
+        const shares = betSize / entryPrice;
+        const won = yesWon;
+        const payout = won ? shares * 1.0 : 0;
+        const pnl = payout - betSize;
+
+        strat.cash -= betSize;
+        strat.cash += payout;
+        strat.totalPnl += pnl;
+        if (won) strat.wins++; else strat.losses++;
+        strat.trades.push({
+          slug: market.slug, title: market.title, side: 'YES', buyPrice: parseFloat(entryPrice.toFixed(4)),
+          betSize: parseFloat(betSize.toFixed(2)), pnl: parseFloat(pnl.toFixed(2)), won, date: closedDate,
+          reason: `cheap contract: YES@${(entryPrice * 100).toFixed(1)}¢`,
+        });
+        strat.equityCurve.push({ date: closedDate, equity: parseFloat(strat.cash.toFixed(2)) });
+      }
+    }
+
+    // ─── Strategy 5: Arbitrage ───
+    // Simulated arb: for binary markets near 50/50 with moderate volume,
+    // buy both sides. In theory YES+NO on orderbook < $1.00 due to spread.
+    // We simulate with a 2% edge (buy both at 98¢ combined, get $1 payout).
+    // Only trades on lower-volume markets where spread opportunities exist.
+    {
+      if (entryPrice > 0.40 && entryPrice < 0.60 && market.volume < 50000 && market.volume >= 5000) {
+        const strat = strategies.arb;
+        const yesPrice = entryPrice;
+        const noPrice = 1 - entryPrice;
+        // Simulate buying both with 2% spread advantage
+        const spreadEdge = 0.02;
+        const adjYesCost = yesPrice * (1 - spreadEdge / 2);
+        const adjNoCost = noPrice * (1 - spreadEdge / 2);
+        const totalCostPerShare = adjYesCost + adjNoCost;  // ~0.98
+        const betSize = Math.min(MAX_BET_DEFAULT, strat.cash * 0.02);
+
+        if (betSize >= 2 && strat.cash >= betSize && totalCostPerShare < 1.0) {
+          const halfBet = betSize / 2;
+          const yesShares = halfBet / adjYesCost;
+          const noShares = halfBet / adjNoCost;
+          const yesPayout = yesWon ? yesShares * 1.0 : 0;
+          const noPayout = !yesWon ? noShares * 1.0 : 0;
+          const totalPayout = yesPayout + noPayout;
+          const pnl = totalPayout - betSize;
+
+          strat.cash -= betSize;
+          strat.cash += totalPayout;
+          strat.totalPnl += pnl;
+          if (pnl > 0) strat.wins++; else strat.losses++;
+          strat.trades.push({
+            slug: market.slug, title: market.title, side: 'BOTH',
+            buyPrice: parseFloat(yesPrice.toFixed(4)),
+            betSize: parseFloat(betSize.toFixed(2)), pnl: parseFloat(pnl.toFixed(2)),
+            won: pnl > 0, date: closedDate,
+            reason: `arb: YES@${(adjYesCost * 100).toFixed(1)}¢ + NO@${(adjNoCost * 100).toFixed(1)}¢, vol=$${(market.volume/1000).toFixed(0)}K`,
+          });
+          strat.equityCurve.push({ date: closedDate, equity: parseFloat(strat.cash.toFixed(2)) });
+        }
+      }
+    }
+  }
+
+  // ── Calculate Sharpe Ratios ──
+  for (const [name, strat] of Object.entries(strategies)) {
+    const curve = strat.equityCurve;
+    strat.sharpe = null;
+    if (curve.length >= 3) {
+      const returns = [];
+      for (let i = 1; i < curve.length; i++) {
+        if (curve[i - 1].equity > 0) {
+          returns.push((curve[i].equity - curve[i - 1].equity) / curve[i - 1].equity);
+        }
+      }
+      if (returns.length >= 2) {
+        const mean = returns.reduce((a, b) => a + b, 0) / returns.length;
+        const std = Math.sqrt(returns.reduce((a, r) => a + Math.pow(r - mean, 2), 0) / returns.length);
+        if (std > 0.0001) {  // Avoid division by near-zero
+          const raw = mean / std * Math.sqrt(252);
+          strat.sharpe = parseFloat(Math.max(-10, Math.min(10, raw)).toFixed(2));  // Clamp to [-10, 10]
+        }
+      }
+    }
+  }
+
+  // ── Calculate date range ──
+  const firstDate = markets[0]?.closedTime?.slice(0, 10) || '?';
+  const lastDate = markets[markets.length - 1]?.closedTime?.slice(0, 10) || '?';
+  const monthsSpan = markets.length > 0
+    ? ((new Date(lastDate) - new Date(firstDate)) / (1000 * 60 * 60 * 24 * 30)).toFixed(1)
+    : 0;
+
+  // ── Print Report ──
+  console.log(`═══ BACKTEST REPORT (${firstDate} → ${lastDate}, ~${monthsSpan} months) ═══\n`);
+  console.log(`Markets analyzed: ${markets.length.toLocaleString()}`);
+  console.log();
+
+  // Table header
+  const hdr = [
+    'Strategy'.padEnd(18),
+    'Bets'.padStart(6),
+    'Wins'.padStart(6),
+    'Win%'.padStart(7),
+    'P&L'.padStart(12),
+    'ROI%'.padStart(8),
+    'Sharpe'.padStart(8),
+    'Final $'.padStart(12),
+  ].join(' │ ');
+  const sep = '─'.repeat(18) + '─┼─' + '─'.repeat(6) + '─┼─' + '─'.repeat(6) + '─┼─' + '─'.repeat(7) + '─┼─' + '─'.repeat(12) + '─┼─' + '─'.repeat(8) + '─┼─' + '─'.repeat(8) + '─┼─' + '─'.repeat(12);
+  console.log(hdr);
+  console.log(sep);
+
+  const stratOrder = ['momentum', 'contrarian', 'status_quo', 'cheap_contracts', 'arb'];
+  const reportStrategies = {};
+
+  for (const name of stratOrder) {
+    const s = strategies[name];
+    const totalBets = s.wins + s.losses;
+    const winPct = totalBets > 0 ? (s.wins / totalBets * 100).toFixed(1) + '%' : '—';
+    const roi = ((s.totalPnl / BACKTEST_INITIAL) * 100).toFixed(1);
+    const pnlStr = s.totalPnl >= 0 ? `+$${s.totalPnl.toFixed(2)}` : `-$${Math.abs(s.totalPnl).toFixed(2)}`;
+    const sharpeStr = s.sharpe !== null ? s.sharpe.toFixed(2) : '—';
+    const finalCash = s.cash.toFixed(2);
+
+    const row = [
+      name.padEnd(18),
+      (totalBets + '').padStart(6),
+      (s.wins + '').padStart(6),
+      winPct.padStart(7),
+      pnlStr.padStart(12),
+      (roi + '%').padStart(8),
+      sharpeStr.padStart(8),
+      ('$' + finalCash).padStart(12),
+    ].join(' │ ');
+    console.log(row);
+
+    reportStrategies[name] = {
+      bets: totalBets,
+      wins: s.wins,
+      losses: s.losses,
+      winRate: totalBets > 0 ? parseFloat((s.wins / totalBets * 100).toFixed(1)) : null,
+      pnl: parseFloat(s.totalPnl.toFixed(2)),
+      roi: parseFloat(roi),
+      sharpe: s.sharpe,
+      finalCash: parseFloat(finalCash),
+      equityCurve: s.equityCurve,
+      trades: s.trades,
+    };
+  }
+
+  console.log(sep);
+
+  // Summary
+  const totalPnlAll = Object.values(strategies).reduce((s, st) => s + st.totalPnl, 0);
+  const totalBetsAll = Object.values(strategies).reduce((s, st) => s + st.wins + st.losses, 0);
+  const totalWinsAll = Object.values(strategies).reduce((s, st) => s + st.wins, 0);
+  console.log(`\n📊 Combined: ${totalBetsAll} bets, ${totalWinsAll} wins (${totalBetsAll > 0 ? (totalWinsAll / totalBetsAll * 100).toFixed(1) : 0}%), P&L: ${totalPnlAll >= 0 ? '+' : ''}$${totalPnlAll.toFixed(2)}`);
+
+  // Best & worst
+  const ranked = stratOrder.map(n => ({ name: n, roi: reportStrategies[n].roi })).sort((a, b) => b.roi - a.roi);
+  console.log(`🏆 Best strategy: ${ranked[0].name} (ROI ${ranked[0].roi}%)`);
+  console.log(`📉 Worst strategy: ${ranked[ranked.length - 1].name} (ROI ${ranked[ranked.length - 1].roi}%)`);
+
+  // Save results
+  const backtestResult = {
+    runAt: new Date().toISOString(),
+    dateRange: { from: firstDate, to: lastDate, months: parseFloat(monthsSpan) },
+    marketsAnalyzed: markets.length,
+    initialCapitalPerStrategy: BACKTEST_INITIAL,
+    strategies: reportStrategies,
+  };
+
+  saveJSON(BACKTEST_RESULTS_FILE, backtestResult);
+  console.log(`\n💾 Detailed results saved to data/backtest-results.json`);
+}
+
 // ─── Arg parsing ─────────────────────────────────────────────────
 
 function argVal(args, flag) {
@@ -1187,10 +1664,18 @@ const [,, cmd, ...args] = process.argv;
       case 'auto-bet':
         await cmdAutoBet();
         break;
+      case 'fetch-history':
+        await cmdFetchHistory();
+        break;
+      case 'backtest':
+        runBacktest();
+        break;
       default:
         console.log(`Polymarket Paper Trading Simulator — Multi-Strategy Engine
 
 Commands:
+  fetch-history                                  Fetch resolved markets (last 6 months)
+  backtest                                       Run backtest on historical data
   bet      --market <slug> --side YES|NO --amount <usd> [--strategy <name>]
   sell     --bet-id <id> [--price <0-1>]
   resolve                                        Settle resolved markets
@@ -1206,12 +1691,11 @@ Commands:
 Strategies: ${STRATEGY_NAMES.join(', ')}
 
 Examples:
+  node sim.mjs fetch-history      # Pull historical data
+  node sim.mjs backtest           # Run backtest report
   node sim.mjs auto-bet
   node sim.mjs status
-  node sim.mjs status --strategy momentum
   node sim.mjs leaderboard
-  node sim.mjs bet --market will-bitcoin-hit-100k --side YES --amount 100 --strategy momentum
-  node sim.mjs reset
 `);
     }
   } catch (e) {

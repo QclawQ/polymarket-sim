@@ -1,0 +1,6447 @@
+{
+  "runAt": "2026-02-21T09:24:32.509Z",
+  "dateRange": {
+    "from": "2025-08-21",
+    "to": "2025-09-13",
+    "months": 0.8
+  },
+  "marketsAnalyzed": 6843,
+  "initialCapitalPerStrategy": 10000,
+  "strategies": {
+    "momentum": {
+      "bets": 127,
+      "wins": 83,
+      "losses": 44,
+      "winRate": 65.4,
+      "pnl": 9788.38,
+      "roi": 97.9,
+      "sharpe": 4.61,
+      "finalCash": 19788.38,
+      "equityCurve": [
+        {
+          "date": null,
+          "equity": 10000
+        },
+        {
+          "date": "2025-08-23",
+          "equity": 10721.66
+        },
+        {
+          "date": "2025-08-23",
+          "equity": 11173.12
+        },
+        {
+          "date": "2025-08-23",
+          "equity": 11729.27
+        },
+        {
+          "date": "2025-08-23",
+          "equity": 13246.01
+        },
+        {
+          "date": "2025-08-25",
+          "equity": 13046.01
+        },
+        {
+          "date": "2025-08-25",
+          "equity": 13253.75
+        },
+        {
+          "date": "2025-08-26",
+          "equity": 13474.81
+        },
+        {
+          "date": "2025-08-26",
+          "equity": 13682.55
+        },
+        {
+          "date": "2025-08-26",
+          "equity": 14906.04
+        },
+        {
+          "date": "2025-08-26",
+          "equity": 15113.79
+        },
+        {
+          "date": "2025-08-26",
+          "equity": 14913.79
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 15074.15
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 15262.5
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 15458.54
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 15258.54
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 15058.54
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 15258.94
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 15466.69
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 15674.43
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 15882.18
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 16074.34
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 16278.38
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 16460.06
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 16260.06
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 16060.06
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 16267.8
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 16345.58
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 16431.3
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 16512.99
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 16312.99
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 16112.99
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 15912.99
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 16097.6
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 16301.64
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 16526.72
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 16751.8
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 16855.75
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 16655.75
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 16455.75
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 16762.08
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 16562.08
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 16362.08
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 16162.08
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 15962.08
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 15762.08
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 15562.08
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 15362.08
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 15425.24
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 15501.1
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 15539.2
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 15743.24
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 15955.61
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 16163.36
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 16438.98
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 16635.02
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 16842.77
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 16642.77
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 16442.77
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 16650.51
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 16858.26
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 16658.26
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 16458.26
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 16258.26
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 16058.26
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 15858.26
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 16066.01
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 16291.09
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 16495.54
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 16711.77
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 16932.82
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 17029.12
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 17132.15
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 17348.38
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 17548.78
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 17348.78
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 17696.73
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 18067.34
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 18311.29
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 18505.77
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 18679.6
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 18479.6
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 18687.35
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 18487.35
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 18287.35
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 18574.56
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 18808.87
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 19016.62
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 19220.66
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 19020.66
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 19138.12
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 19176.21
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 18976.21
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 18776.21
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 18883.91
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 18683.91
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 18483.91
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 18684.31
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 18892.05
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 19099.8
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 19307.55
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 19507.95
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 19307.95
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 19340.51
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 19140.51
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 18940.51
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 19144.55
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 18944.55
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 18744.55
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 18948.59
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 19125.95
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 19233.64
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 19033.64
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 18833.64
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 18633.64
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 18676.06
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 18796.06
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 18862.37
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 19054.53
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 19248.23
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 19460.6
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 19260.6
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 19461
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 19668.75
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 19876.5
+        },
+        {
+          "date": "2025-09-07",
+          "equity": 19942.99
+        },
+        {
+          "date": "2025-09-10",
+          "equity": 19988.38
+        },
+        {
+          "date": "2025-09-13",
+          "equity": 19788.38
+        }
+      ],
+      "trades": [
+        {
+          "slug": "will-bill-gates-be-named-in-newly-released-epstein-files",
+          "title": "Will Bill Gates be named in newly released Epstein files?",
+          "side": "YES",
+          "buyPrice": 0.217,
+          "betSize": 200,
+          "pnl": 721.66,
+          "won": true,
+          "date": "2025-08-23",
+          "reason": "momentum: Δ78.2%, entry@21.7¢"
+        },
+        {
+          "slug": "will-bill-clinton-be-named-in-newly-released-epstein-files",
+          "title": "Will Bill Clinton be named in newly released Epstein files?",
+          "side": "YES",
+          "buyPrice": 0.307,
+          "betSize": 200,
+          "pnl": 451.47,
+          "won": true,
+          "date": "2025-08-23",
+          "reason": "momentum: Δ69.2%, entry@30.7¢"
+        },
+        {
+          "slug": "will-prince-andrew-be-named-in-newly-released-epstein-files",
+          "title": "Will Prince Andrew be named in newly released Epstein files?",
+          "side": "YES",
+          "buyPrice": 0.2645,
+          "betSize": 200,
+          "pnl": 556.14,
+          "won": true,
+          "date": "2025-08-23",
+          "reason": "momentum: Δ73.5%, entry@26.5¢"
+        },
+        {
+          "slug": "will-hillary-clinton-be-named-in-newly-released-epstein-files",
+          "title": "Will Hillary Clinton be named in newly released Epstein files?",
+          "side": "YES",
+          "buyPrice": 0.1165,
+          "betSize": 200,
+          "pnl": 1516.74,
+          "won": true,
+          "date": "2025-08-23",
+          "reason": "momentum: Δ88.3%, entry@11.7¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-25-8am-et",
+          "title": "Ethereum Up or Down - August 25, 8AM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-25",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-25-3pm-et",
+          "title": "XRP Up or Down - August 25, 3PM ET",
+          "side": "NO",
+          "buyPrice": 0.4905,
+          "betSize": 200,
+          "pnl": 207.75,
+          "won": true,
+          "date": "2025-08-25",
+          "reason": "momentum: Δ-50.0%, entry@49.1¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-26-7am-et",
+          "title": "Ethereum Up or Down - August 26, 7AM ET",
+          "side": "NO",
+          "buyPrice": 0.475,
+          "betSize": 200,
+          "pnl": 221.05,
+          "won": true,
+          "date": "2025-08-26",
+          "reason": "momentum: Δ-48.5%, entry@47.5¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-26-9am-et",
+          "title": "Solana Up or Down - August 26, 9AM ET",
+          "side": "NO",
+          "buyPrice": 0.4905,
+          "betSize": 200,
+          "pnl": 207.75,
+          "won": true,
+          "date": "2025-08-26",
+          "reason": "momentum: Δ-50.0%, entry@49.1¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-26-9am-et",
+          "title": "XRP Up or Down - August 26, 9AM ET",
+          "side": "NO",
+          "buyPrice": 0.1405,
+          "betSize": 200,
+          "pnl": 1223.49,
+          "won": true,
+          "date": "2025-08-26",
+          "reason": "momentum: Δ-50.0%, entry@14.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-26-9am-et",
+          "title": "Ethereum Up or Down - August 26, 9AM ET",
+          "side": "NO",
+          "buyPrice": 0.4905,
+          "betSize": 200,
+          "pnl": 207.75,
+          "won": true,
+          "date": "2025-08-26",
+          "reason": "momentum: Δ-50.0%, entry@49.1¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-26-3pm-et",
+          "title": "Solana Up or Down - August 26, 3PM ET",
+          "side": "YES",
+          "buyPrice": 0.594,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-26",
+          "reason": "momentum: Δ40.5%, entry@59.4¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-26-6pm-et",
+          "title": "Ethereum Up or Down - August 26, 6PM ET",
+          "side": "NO",
+          "buyPrice": 0.555,
+          "betSize": 200,
+          "pnl": 160.36,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ-42.5%, entry@55.5¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-26-6pm-et",
+          "title": "XRP Up or Down - August 26, 6PM ET",
+          "side": "NO",
+          "buyPrice": 0.515,
+          "betSize": 200,
+          "pnl": 188.35,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ-47.5%, entry@51.5¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-26-6pm-et",
+          "title": "Solana Up or Down - August 26, 6PM ET",
+          "side": "NO",
+          "buyPrice": 0.505,
+          "betSize": 200,
+          "pnl": 196.04,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ-25.5%, entry@50.5¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-12am-et",
+          "title": "Ethereum Up or Down - August 27, 12AM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-27-12am-et",
+          "title": "XRP Up or Down - August 27, 12AM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-27-1am-et",
+          "title": "Solana Up or Down - August 27, 1AM ET",
+          "side": "NO",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 200.4,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ-50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-1am-et",
+          "title": "Ethereum Up or Down - August 27, 1AM ET",
+          "side": "NO",
+          "buyPrice": 0.4905,
+          "betSize": 200,
+          "pnl": 207.75,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ-50.0%, entry@49.1¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-august-27-1am-et",
+          "title": "Bitcoin Up or Down - August 27, 1AM ET",
+          "side": "NO",
+          "buyPrice": 0.4905,
+          "betSize": 200,
+          "pnl": 207.75,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ-50.0%, entry@49.1¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-27-1am-et",
+          "title": "XRP Up or Down - August 27, 1AM ET",
+          "side": "NO",
+          "buyPrice": 0.4905,
+          "betSize": 200,
+          "pnl": 207.75,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ-50.0%, entry@49.1¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-27-2am-et",
+          "title": "XRP Up or Down - August 27, 2AM ET",
+          "side": "NO",
+          "buyPrice": 0.51,
+          "betSize": 200,
+          "pnl": 192.16,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ-48.0%, entry@51.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-2am-et",
+          "title": "Ethereum Up or Down - August 27, 2AM ET",
+          "side": "NO",
+          "buyPrice": 0.495,
+          "betSize": 200,
+          "pnl": 204.04,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ-49.5%, entry@49.5¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-august-27-2am-et",
+          "title": "Bitcoin Up or Down - August 27, 2AM ET",
+          "side": "NO",
+          "buyPrice": 0.524,
+          "betSize": 200,
+          "pnl": 181.68,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ-47.5%, entry@52.4¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-27-8am-et",
+          "title": "XRP Up or Down - August 27, 8AM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-8am-et",
+          "title": "Ethereum Up or Down - August 27, 8AM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-27-8am-et",
+          "title": "Solana Up or Down - August 27, 8AM ET",
+          "side": "NO",
+          "buyPrice": 0.4905,
+          "betSize": 200,
+          "pnl": 207.75,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ-50.0%, entry@49.1¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-9am-et",
+          "title": "Ethereum Up or Down - August 27, 9AM ET",
+          "side": "NO",
+          "buyPrice": 0.72,
+          "betSize": 200,
+          "pnl": 77.78,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ-27.0%, entry@72.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-27-9am-et",
+          "title": "XRP Up or Down - August 27, 9AM ET",
+          "side": "NO",
+          "buyPrice": 0.7,
+          "betSize": 200,
+          "pnl": 85.71,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ-24.0%, entry@70.0¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-27-9am-et",
+          "title": "Solana Up or Down - August 27, 9AM ET",
+          "side": "NO",
+          "buyPrice": 0.71,
+          "betSize": 200,
+          "pnl": 81.69,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ-26.0%, entry@71.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-27-10am-et",
+          "title": "XRP Up or Down - August 27, 10AM ET",
+          "side": "YES",
+          "buyPrice": 0.504,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ49.5%, entry@50.4¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-10am-et",
+          "title": "Ethereum Up or Down - August 27, 10AM ET",
+          "side": "YES",
+          "buyPrice": 0.504,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ49.5%, entry@50.4¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-27-10am-et",
+          "title": "Solana Up or Down - August 27, 10AM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-3pm-et",
+          "title": "Ethereum Up or Down - August 27, 3PM ET",
+          "side": "NO",
+          "buyPrice": 0.52,
+          "betSize": 200,
+          "pnl": 184.62,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "momentum: Δ-46.0%, entry@52.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-28-1am-et",
+          "title": "Ethereum Up or Down - August 28, 1AM ET",
+          "side": "NO",
+          "buyPrice": 0.495,
+          "betSize": 200,
+          "pnl": 204.04,
+          "won": true,
+          "date": "2025-08-28",
+          "reason": "momentum: Δ-49.5%, entry@49.5¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-august-28-1am-et",
+          "title": "Bitcoin Up or Down - August 28, 1AM ET",
+          "side": "NO",
+          "buyPrice": 0.4705,
+          "betSize": 200,
+          "pnl": 225.08,
+          "won": true,
+          "date": "2025-08-28",
+          "reason": "momentum: Δ-50.0%, entry@47.1¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-28-1am-et",
+          "title": "XRP Up or Down - August 28, 1AM ET",
+          "side": "NO",
+          "buyPrice": 0.4705,
+          "betSize": 200,
+          "pnl": 225.08,
+          "won": true,
+          "date": "2025-08-28",
+          "reason": "momentum: Δ-50.0%, entry@47.1¢"
+        },
+        {
+          "slug": "will-la-galaxy-win-the-2025-leagues-cup",
+          "title": "Will LA Galaxy win the 2025 Leagues Cup?",
+          "side": "NO",
+          "buyPrice": 0.658,
+          "betSize": 200,
+          "pnl": 103.95,
+          "won": true,
+          "date": "2025-08-28",
+          "reason": "momentum: Δ-24.4%, entry@65.8¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-28-2am-et",
+          "title": "Ethereum Up or Down - August 28, 2AM ET",
+          "side": "YES",
+          "buyPrice": 0.799,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-28",
+          "reason": "momentum: Δ20.0%, entry@79.9¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-august-28-2am-et",
+          "title": "Bitcoin Up or Down - August 28, 2AM ET",
+          "side": "YES",
+          "buyPrice": 0.634,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-28",
+          "reason": "momentum: Δ36.5%, entry@63.4¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-28-3pm-et",
+          "title": "XRP Up or Down - August 28, 3PM ET",
+          "side": "NO",
+          "buyPrice": 0.395,
+          "betSize": 200,
+          "pnl": 306.33,
+          "won": true,
+          "date": "2025-08-28",
+          "reason": "momentum: Δ-49.5%, entry@39.5¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-28-4pm-et",
+          "title": "XRP Up or Down - August 28, 4PM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-28",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-28-5pm-et",
+          "title": "XRP Up or Down - August 28, 5PM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-28",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-28-11pm-et",
+          "title": "Solana Up or Down - August 28, 11PM ET",
+          "side": "YES",
+          "buyPrice": 0.529,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-29",
+          "reason": "momentum: Δ47.0%, entry@52.9¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-28-11pm-et",
+          "title": "Ethereum Up or Down - August 28, 11PM ET",
+          "side": "YES",
+          "buyPrice": 0.514,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-29",
+          "reason": "momentum: Δ48.5%, entry@51.4¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-29-8am-et",
+          "title": "Ethereum Up or Down - August 29, 8AM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-29",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-29-8am-et",
+          "title": "Solana Up or Down - August 29, 8AM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-29",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-29-8am-et",
+          "title": "XRP Up or Down - August 29, 8AM ET",
+          "side": "YES",
+          "buyPrice": 0.504,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-29",
+          "reason": "momentum: Δ49.5%, entry@50.4¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-29-9am-et",
+          "title": "Solana Up or Down - August 29, 9AM ET",
+          "side": "NO",
+          "buyPrice": 0.76,
+          "betSize": 200,
+          "pnl": 63.16,
+          "won": true,
+          "date": "2025-08-29",
+          "reason": "momentum: Δ-23.0%, entry@76.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-29-9am-et",
+          "title": "XRP Up or Down - August 29, 9AM ET",
+          "side": "NO",
+          "buyPrice": 0.725,
+          "betSize": 200,
+          "pnl": 75.86,
+          "won": true,
+          "date": "2025-08-29",
+          "reason": "momentum: Δ-26.5%, entry@72.5¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-29-9am-et",
+          "title": "Ethereum Up or Down - August 29, 9AM ET",
+          "side": "NO",
+          "buyPrice": 0.84,
+          "betSize": 200,
+          "pnl": 38.1,
+          "won": true,
+          "date": "2025-08-29",
+          "reason": "momentum: Δ-15.0%, entry@84.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-29-10am-et",
+          "title": "Ethereum Up or Down - August 29, 10AM ET",
+          "side": "NO",
+          "buyPrice": 0.495,
+          "betSize": 200,
+          "pnl": 204.04,
+          "won": true,
+          "date": "2025-08-29",
+          "reason": "momentum: Δ-49.5%, entry@49.5¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-29-10am-et",
+          "title": "XRP Up or Down - August 29, 10AM ET",
+          "side": "NO",
+          "buyPrice": 0.485,
+          "betSize": 200,
+          "pnl": 212.37,
+          "won": true,
+          "date": "2025-08-29",
+          "reason": "momentum: Δ-49.5%, entry@48.5¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-30-8am-et",
+          "title": "Ethereum Up or Down - August 30, 8AM ET",
+          "side": "NO",
+          "buyPrice": 0.4905,
+          "betSize": 200,
+          "pnl": 207.75,
+          "won": true,
+          "date": "2025-08-30",
+          "reason": "momentum: Δ-50.0%, entry@49.1¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-30-8am-et",
+          "title": "XRP Up or Down - August 30, 8AM ET",
+          "side": "NO",
+          "buyPrice": 0.4205,
+          "betSize": 200,
+          "pnl": 275.62,
+          "won": true,
+          "date": "2025-08-30",
+          "reason": "momentum: Δ-50.0%, entry@42.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-30-9am-et",
+          "title": "XRP Up or Down - August 30, 9AM ET",
+          "side": "NO",
+          "buyPrice": 0.505,
+          "betSize": 200,
+          "pnl": 196.04,
+          "won": true,
+          "date": "2025-08-30",
+          "reason": "momentum: Δ-33.5%, entry@50.5¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-30-9am-et",
+          "title": "Ethereum Up or Down - August 30, 9AM ET",
+          "side": "NO",
+          "buyPrice": 0.4905,
+          "betSize": 200,
+          "pnl": 207.75,
+          "won": true,
+          "date": "2025-08-30",
+          "reason": "momentum: Δ-50.0%, entry@49.1¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-30-10am-et",
+          "title": "XRP Up or Down - August 30, 10AM ET",
+          "side": "YES",
+          "buyPrice": 0.674,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-30",
+          "reason": "momentum: Δ32.5%, entry@67.4¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-30-10am-et",
+          "title": "Ethereum Up or Down - August 30, 10AM ET",
+          "side": "YES",
+          "buyPrice": 0.694,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-30",
+          "reason": "momentum: Δ30.5%, entry@69.4¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-30-4pm-et",
+          "title": "Ethereum Up or Down - August 30, 4PM ET",
+          "side": "NO",
+          "buyPrice": 0.4905,
+          "betSize": 200,
+          "pnl": 207.75,
+          "won": true,
+          "date": "2025-08-30",
+          "reason": "momentum: Δ-50.0%, entry@49.1¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-30-4pm-et",
+          "title": "XRP Up or Down - August 30, 4PM ET",
+          "side": "NO",
+          "buyPrice": 0.4905,
+          "betSize": 200,
+          "pnl": 207.75,
+          "won": true,
+          "date": "2025-08-30",
+          "reason": "momentum: Δ-50.0%, entry@49.1¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-30-6pm-et",
+          "title": "Ethereum Up or Down - August 30, 6PM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-30-6pm-et",
+          "title": "Solana Up or Down - August 30, 6PM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-30-6pm-et",
+          "title": "XRP Up or Down - August 30, 6PM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-30-11pm-et",
+          "title": "XRP Up or Down - August 30, 11PM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-30-11pm-et",
+          "title": "Ethereum Up or Down - August 30, 11PM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-12am-et",
+          "title": "Ethereum Up or Down - August 31, 12AM ET",
+          "side": "NO",
+          "buyPrice": 0.4905,
+          "betSize": 200,
+          "pnl": 207.75,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ-50.0%, entry@49.1¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-12am-et",
+          "title": "XRP Up or Down - August 31, 12AM ET",
+          "side": "NO",
+          "buyPrice": 0.4705,
+          "betSize": 200,
+          "pnl": 225.08,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ-50.0%, entry@47.1¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-august-31-12am-et",
+          "title": "Bitcoin Up or Down - August 31, 12AM ET",
+          "side": "NO",
+          "buyPrice": 0.4945,
+          "betSize": 200,
+          "pnl": 204.45,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ-50.0%, entry@49.5¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-31-12am-et",
+          "title": "Solana Up or Down - August 31, 12AM ET",
+          "side": "NO",
+          "buyPrice": 0.4805,
+          "betSize": 200,
+          "pnl": 216.23,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ-50.0%, entry@48.1¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-1am-et",
+          "title": "XRP Up or Down - August 31, 1AM ET",
+          "side": "NO",
+          "buyPrice": 0.475,
+          "betSize": 200,
+          "pnl": 221.05,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ-46.5%, entry@47.5¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-august-31-1am-et",
+          "title": "Bitcoin Up or Down - August 31, 1AM ET",
+          "side": "NO",
+          "buyPrice": 0.675,
+          "betSize": 200,
+          "pnl": 96.3,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ-31.5%, entry@67.5¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-1am-et",
+          "title": "Ethereum Up or Down - August 31, 1AM ET",
+          "side": "NO",
+          "buyPrice": 0.66,
+          "betSize": 200,
+          "pnl": 103.03,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ-33.0%, entry@66.0¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-31-8am-et",
+          "title": "Solana Up or Down - August 31, 8AM ET",
+          "side": "NO",
+          "buyPrice": 0.4805,
+          "betSize": 200,
+          "pnl": 216.23,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ-50.0%, entry@48.1¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-8am-et",
+          "title": "XRP Up or Down - August 31, 8AM ET",
+          "side": "NO",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 200.4,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ-50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-8am-et",
+          "title": "Ethereum Up or Down - August 31, 8AM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-9am-et",
+          "title": "XRP Up or Down - August 31, 9AM ET",
+          "side": "NO",
+          "buyPrice": 0.365,
+          "betSize": 200,
+          "pnl": 347.95,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ-40.5%, entry@36.5¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-10am-et",
+          "title": "XRP Up or Down - August 31, 10AM ET",
+          "side": "NO",
+          "buyPrice": 0.3505,
+          "betSize": 200,
+          "pnl": 370.61,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ-50.0%, entry@35.1¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-10am-et",
+          "title": "Ethereum Up or Down - August 31, 10AM ET",
+          "side": "NO",
+          "buyPrice": 0.4505,
+          "betSize": 200,
+          "pnl": 243.95,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ-50.0%, entry@45.1¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-3pm-et",
+          "title": "Ethereum Up or Down - August 31, 3PM ET",
+          "side": "NO",
+          "buyPrice": 0.507,
+          "betSize": 200,
+          "pnl": 194.48,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ-47.5%, entry@50.7¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-3pm-et",
+          "title": "XRP Up or Down - August 31, 3PM ET",
+          "side": "NO",
+          "buyPrice": 0.535,
+          "betSize": 200,
+          "pnl": 173.83,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ-45.5%, entry@53.5¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-4pm-et",
+          "title": "XRP Up or Down - August 31, 4PM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-4pm-et",
+          "title": "Ethereum Up or Down - August 31, 4PM ET",
+          "side": "NO",
+          "buyPrice": 0.4905,
+          "betSize": 200,
+          "pnl": 207.75,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ-50.0%, entry@49.1¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-5pm-et",
+          "title": "Ethereum Up or Down - August 31, 5PM ET",
+          "side": "YES",
+          "buyPrice": 0.554,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ44.5%, entry@55.4¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-5pm-et",
+          "title": "XRP Up or Down - August 31, 5PM ET",
+          "side": "YES",
+          "buyPrice": 0.639,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "momentum: Δ36.0%, entry@63.9¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-6pm-et",
+          "title": "XRP Up or Down - August 31, 6PM ET",
+          "side": "NO",
+          "buyPrice": 0.4105,
+          "betSize": 200,
+          "pnl": 287.21,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "momentum: Δ-50.0%, entry@41.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-6pm-et",
+          "title": "Ethereum Up or Down - August 31, 6PM ET",
+          "side": "NO",
+          "buyPrice": 0.4605,
+          "betSize": 200,
+          "pnl": 234.31,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "momentum: Δ-50.0%, entry@46.1¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-august-31-6pm-et",
+          "title": "Bitcoin Up or Down - August 31, 6PM ET",
+          "side": "NO",
+          "buyPrice": 0.4905,
+          "betSize": 200,
+          "pnl": 207.75,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "momentum: Δ-50.0%, entry@49.1¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-31-6pm-et",
+          "title": "Solana Up or Down - August 31, 6PM ET",
+          "side": "NO",
+          "buyPrice": 0.495,
+          "betSize": 200,
+          "pnl": 204.04,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "momentum: Δ-49.5%, entry@49.5¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-31-11pm-et",
+          "title": "Solana Up or Down - August 31, 11PM ET",
+          "side": "YES",
+          "buyPrice": 0.604,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "momentum: Δ39.5%, entry@60.4¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-1-7am-et",
+          "title": "XRP Up or Down - September 1, 7AM ET",
+          "side": "NO",
+          "buyPrice": 0.63,
+          "betSize": 200,
+          "pnl": 117.46,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "momentum: Δ-36.0%, entry@63.0¢"
+        },
+        {
+          "slug": "solana-up-or-down-september-1-7am-et",
+          "title": "Solana Up or Down - September 1, 7AM ET",
+          "side": "NO",
+          "buyPrice": 0.84,
+          "betSize": 200,
+          "pnl": 38.1,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "momentum: Δ-15.0%, entry@84.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-1-8am-et",
+          "title": "XRP Up or Down - September 1, 8AM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-1-8am-et",
+          "title": "Ethereum Up or Down - September 1, 8AM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-1-9am-et",
+          "title": "XRP Up or Down - September 1, 9AM ET",
+          "side": "NO",
+          "buyPrice": 0.65,
+          "betSize": 200,
+          "pnl": 107.69,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "momentum: Δ-28.0%, entry@65.0¢"
+        },
+        {
+          "slug": "solana-up-or-down-september-1-9am-et",
+          "title": "Solana Up or Down - September 1, 9AM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-1-10am-et",
+          "title": "Ethereum Up or Down - September 1, 10AM ET",
+          "side": "YES",
+          "buyPrice": 0.504,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "momentum: Δ49.5%, entry@50.4¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-1-4pm-et",
+          "title": "Ethereum Up or Down - September 1, 4PM ET",
+          "side": "NO",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 200.4,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "momentum: Δ-50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-1-4pm-et",
+          "title": "XRP Up or Down - September 1, 4PM ET",
+          "side": "NO",
+          "buyPrice": 0.4905,
+          "betSize": 200,
+          "pnl": 207.75,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "momentum: Δ-50.0%, entry@49.1¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-1-5pm-et",
+          "title": "XRP Up or Down - September 1, 5PM ET",
+          "side": "NO",
+          "buyPrice": 0.4905,
+          "betSize": 200,
+          "pnl": 207.75,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "momentum: Δ-50.0%, entry@49.1¢"
+        },
+        {
+          "slug": "solana-up-or-down-september-1-5pm-et",
+          "title": "Solana Up or Down - September 1, 5PM ET",
+          "side": "NO",
+          "buyPrice": 0.4905,
+          "betSize": 200,
+          "pnl": 207.75,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "momentum: Δ-50.0%, entry@49.1¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-1-5pm-et",
+          "title": "Ethereum Up or Down - September 1, 5PM ET",
+          "side": "NO",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 200.4,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "momentum: Δ-50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-1-11pm-et",
+          "title": "Ethereum Up or Down - September 1, 11PM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-09-02",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-september-2-12am-et",
+          "title": "Bitcoin Up or Down - September 2, 12AM ET",
+          "side": "NO",
+          "buyPrice": 0.86,
+          "betSize": 200,
+          "pnl": 32.56,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "momentum: Δ-13.0%, entry@86.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-2-12am-et",
+          "title": "Ethereum Up or Down - September 2, 12AM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-09-02",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-2-12am-et",
+          "title": "XRP Up or Down - September 2, 12AM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-09-02",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-2-1am-et",
+          "title": "Ethereum Up or Down - September 2, 1AM ET",
+          "side": "NO",
+          "buyPrice": 0.495,
+          "betSize": 200,
+          "pnl": 204.04,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "momentum: Δ-49.5%, entry@49.5¢"
+        },
+        {
+          "slug": "solana-up-or-down-september-2-1am-et",
+          "title": "Solana Up or Down - September 2, 1AM ET",
+          "side": "YES",
+          "buyPrice": 0.504,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-09-02",
+          "reason": "momentum: Δ49.5%, entry@50.4¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-2-1am-et",
+          "title": "XRP Up or Down - September 2, 1AM ET",
+          "side": "YES",
+          "buyPrice": 0.504,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-09-02",
+          "reason": "momentum: Δ49.5%, entry@50.4¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-september-2-1am-et",
+          "title": "Bitcoin Up or Down - September 2, 1AM ET",
+          "side": "NO",
+          "buyPrice": 0.495,
+          "betSize": 200,
+          "pnl": 204.04,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "momentum: Δ-49.5%, entry@49.5¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-september-2-7am-et",
+          "title": "Bitcoin Up or Down - September 2, 7AM ET",
+          "side": "NO",
+          "buyPrice": 0.53,
+          "betSize": 200,
+          "pnl": 177.36,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "momentum: Δ-46.0%, entry@53.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-2-7am-et",
+          "title": "XRP Up or Down - September 2, 7AM ET",
+          "side": "NO",
+          "buyPrice": 0.65,
+          "betSize": 200,
+          "pnl": 107.69,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "momentum: Δ-34.0%, entry@65.0¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-september-2-9am-et",
+          "title": "Bitcoin Up or Down - September 2, 9AM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-09-02",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-2-9am-et",
+          "title": "XRP Up or Down - September 2, 9AM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-09-02",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-2-10am-et",
+          "title": "XRP Up or Down - September 2, 10AM ET",
+          "side": "YES",
+          "buyPrice": 0.859,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-09-02",
+          "reason": "momentum: Δ14.0%, entry@85.9¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-2-10am-et",
+          "title": "Ethereum Up or Down - September 2, 10AM ET",
+          "side": "NO",
+          "buyPrice": 0.825,
+          "betSize": 200,
+          "pnl": 42.42,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "momentum: Δ-16.5%, entry@82.5¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-2-3pm-et",
+          "title": "Ethereum Up or Down - September 2, 3PM ET",
+          "side": "NO",
+          "buyPrice": 0.625,
+          "betSize": 200,
+          "pnl": 120,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "momentum: Δ-35.5%, entry@62.5¢"
+        },
+        {
+          "slug": "will-the-new-york-liberty-make-the-playoffs",
+          "title": "Will the New York Liberty make the playoffs?",
+          "side": "YES",
+          "buyPrice": 0.751,
+          "betSize": 200,
+          "pnl": 66.31,
+          "won": true,
+          "date": "2025-09-03",
+          "reason": "momentum: Δ24.8%, entry@75.1¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-3-1am-et",
+          "title": "XRP Up or Down - September 3, 1AM ET",
+          "side": "NO",
+          "buyPrice": 0.51,
+          "betSize": 200,
+          "pnl": 192.16,
+          "won": true,
+          "date": "2025-09-03",
+          "reason": "momentum: Δ-48.0%, entry@51.0¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-september-3-1am-et",
+          "title": "Bitcoin Up or Down - September 3, 1AM ET",
+          "side": "NO",
+          "buyPrice": 0.508,
+          "betSize": 200,
+          "pnl": 193.7,
+          "won": true,
+          "date": "2025-09-03",
+          "reason": "momentum: Δ-49.0%, entry@50.8¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-3-1am-et",
+          "title": "Ethereum Up or Down - September 3, 1AM ET",
+          "side": "NO",
+          "buyPrice": 0.485,
+          "betSize": 200,
+          "pnl": 212.37,
+          "won": true,
+          "date": "2025-09-03",
+          "reason": "momentum: Δ-48.5%, entry@48.5¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-3-7am-et",
+          "title": "XRP Up or Down - September 3, 7AM ET",
+          "side": "YES",
+          "buyPrice": 0.504,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-09-03",
+          "reason": "momentum: Δ49.5%, entry@50.4¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-september-3-8am-et",
+          "title": "Bitcoin Up or Down - September 3, 8AM ET",
+          "side": "NO",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 200.4,
+          "won": true,
+          "date": "2025-09-03",
+          "reason": "momentum: Δ-50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-3-8am-et",
+          "title": "Ethereum Up or Down - September 3, 8AM ET",
+          "side": "NO",
+          "buyPrice": 0.4905,
+          "betSize": 200,
+          "pnl": 207.75,
+          "won": true,
+          "date": "2025-09-03",
+          "reason": "momentum: Δ-50.0%, entry@49.1¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-3-8am-et",
+          "title": "XRP Up or Down - September 3, 8AM ET",
+          "side": "NO",
+          "buyPrice": 0.4905,
+          "betSize": 200,
+          "pnl": 207.75,
+          "won": true,
+          "date": "2025-09-03",
+          "reason": "momentum: Δ-50.0%, entry@49.1¢"
+        },
+        {
+          "slug": "mls-chi-ner-2025-09-06-ner",
+          "title": "Will New England Revolution win on 2025-09-06?",
+          "side": "NO",
+          "buyPrice": 0.7505,
+          "betSize": 200,
+          "pnl": 66.49,
+          "won": true,
+          "date": "2025-09-07",
+          "reason": "momentum: Δ-23.9%, entry@75.0¢"
+        },
+        {
+          "slug": "will-the-seattle-storm-make-the-playoffs",
+          "title": "Will the Seattle Storm make the playoffs?",
+          "side": "YES",
+          "buyPrice": 0.815,
+          "betSize": 200,
+          "pnl": 45.4,
+          "won": true,
+          "date": "2025-09-10",
+          "reason": "momentum: Δ18.4%, entry@81.5¢"
+        },
+        {
+          "slug": "solana-up-or-down-september-12-6pm-et",
+          "title": "Solana Up or Down - September 12, 6PM ET",
+          "side": "YES",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-09-13",
+          "reason": "momentum: Δ50.0%, entry@50.0¢"
+        }
+      ]
+    },
+    "contrarian": {
+      "bets": 127,
+      "wins": 44,
+      "losses": 83,
+      "winRate": 34.6,
+      "pnl": -4232.62,
+      "roi": -42.3,
+      "sharpe": -2.63,
+      "finalCash": 5767.38,
+      "equityCurve": [
+        {
+          "date": null,
+          "equity": 10000
+        },
+        {
+          "date": "2025-08-23",
+          "equity": 9800
+        },
+        {
+          "date": "2025-08-23",
+          "equity": 9604
+        },
+        {
+          "date": "2025-08-23",
+          "equity": 9411.92
+        },
+        {
+          "date": "2025-08-23",
+          "equity": 9223.68
+        },
+        {
+          "date": "2025-08-25",
+          "equity": 9407.79
+        },
+        {
+          "date": "2025-08-25",
+          "equity": 9219.63
+        },
+        {
+          "date": "2025-08-26",
+          "equity": 9035.24
+        },
+        {
+          "date": "2025-08-26",
+          "equity": 8854.53
+        },
+        {
+          "date": "2025-08-26",
+          "equity": 8677.44
+        },
+        {
+          "date": "2025-08-26",
+          "equity": 8503.89
+        },
+        {
+          "date": "2025-08-26",
+          "equity": 8752.73
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 8577.67
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 8406.12
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 8238
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 8402.43
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 8570.14
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 8398.74
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 8230.76
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 8066.15
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 7904.82
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 7746.73
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 7591.79
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 7439.96
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 7588.46
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 7739.93
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 7585.13
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 7433.42
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 7284.76
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 7139.06
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 7284.14
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 7432.18
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 7580.52
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 7428.91
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 7280.34
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 7134.73
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 6992.03
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 6852.19
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 7396.96
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 7653.23
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 7500.16
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 7649.87
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 7802.56
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 7977.82
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 8146.57
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 8309.18
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 8475.03
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 8647.27
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 8474.32
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 8304.83
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 8138.74
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 7975.96
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 7816.44
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 7660.11
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 7506.91
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 7356.77
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 7209.64
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 7507.75
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 7848.3
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 7691.34
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 7537.51
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 7687.96
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 7841.41
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 7997.93
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 8157.56
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 8320.39
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 8153.98
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 7990.9
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 7831.08
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 7674.46
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 7520.97
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 7370.55
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 7223.14
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 7078.68
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 6937.11
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 7075.57
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 6934.06
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 6795.38
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 6659.47
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 6526.28
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 6395.76
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 6523.42
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 6392.95
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 6551.77
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 6783.71
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 6648.04
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 6515.08
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 6384.77
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 6257.08
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 6447.95
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 6318.99
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 6192.61
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 6316.22
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 6442.29
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 6313.44
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 6439.46
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 6570.33
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 6438.92
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 6310.14
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 6183.94
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 6060.26
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 5939.05
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 6057.6
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 5936.45
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 6054.94
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 6175.8
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 6052.28
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 6175.28
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 6300.77
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 6174.76
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 6051.26
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 5930.24
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 6048.61
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 6169.34
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 6921.03
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 6782.61
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 6646.96
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 6514.02
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 6383.74
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 6256.07
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 6130.94
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 6255.54
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 6130.43
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 6007.82
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 5887.67
+        },
+        {
+          "date": "2025-09-07",
+          "equity": 5769.91
+        },
+        {
+          "date": "2025-09-10",
+          "equity": 5654.51
+        },
+        {
+          "date": "2025-09-13",
+          "equity": 5767.38
+        }
+      ],
+      "trades": [
+        {
+          "slug": "will-bill-gates-be-named-in-newly-released-epstein-files",
+          "title": "Will Bill Gates be named in newly released Epstein files?",
+          "side": "NO",
+          "buyPrice": 0.783,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-23",
+          "reason": "contrarian: fading Δ78.2%, entry@78.3¢"
+        },
+        {
+          "slug": "will-bill-clinton-be-named-in-newly-released-epstein-files",
+          "title": "Will Bill Clinton be named in newly released Epstein files?",
+          "side": "NO",
+          "buyPrice": 0.693,
+          "betSize": 196,
+          "pnl": -196,
+          "won": false,
+          "date": "2025-08-23",
+          "reason": "contrarian: fading Δ69.2%, entry@69.3¢"
+        },
+        {
+          "slug": "will-prince-andrew-be-named-in-newly-released-epstein-files",
+          "title": "Will Prince Andrew be named in newly released Epstein files?",
+          "side": "NO",
+          "buyPrice": 0.7355,
+          "betSize": 192.08,
+          "pnl": -192.08,
+          "won": false,
+          "date": "2025-08-23",
+          "reason": "contrarian: fading Δ73.5%, entry@73.6¢"
+        },
+        {
+          "slug": "will-hillary-clinton-be-named-in-newly-released-epstein-files",
+          "title": "Will Hillary Clinton be named in newly released Epstein files?",
+          "side": "NO",
+          "buyPrice": 0.8835,
+          "betSize": 188.24,
+          "pnl": -188.24,
+          "won": false,
+          "date": "2025-08-23",
+          "reason": "contrarian: fading Δ88.3%, entry@88.3¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-25-8am-et",
+          "title": "Ethereum Up or Down - August 25, 8AM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 184.47,
+          "pnl": 184.11,
+          "won": true,
+          "date": "2025-08-25",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-25-3pm-et",
+          "title": "XRP Up or Down - August 25, 3PM ET",
+          "side": "YES",
+          "buyPrice": 0.5095,
+          "betSize": 188.16,
+          "pnl": -188.16,
+          "won": false,
+          "date": "2025-08-25",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.9¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-26-7am-et",
+          "title": "Ethereum Up or Down - August 26, 7AM ET",
+          "side": "YES",
+          "buyPrice": 0.525,
+          "betSize": 184.39,
+          "pnl": -184.39,
+          "won": false,
+          "date": "2025-08-26",
+          "reason": "contrarian: fading Δ-48.5%, entry@52.5¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-26-9am-et",
+          "title": "Solana Up or Down - August 26, 9AM ET",
+          "side": "YES",
+          "buyPrice": 0.5095,
+          "betSize": 180.7,
+          "pnl": -180.7,
+          "won": false,
+          "date": "2025-08-26",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.9¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-26-9am-et",
+          "title": "XRP Up or Down - August 26, 9AM ET",
+          "side": "YES",
+          "buyPrice": 0.8595,
+          "betSize": 177.09,
+          "pnl": -177.09,
+          "won": false,
+          "date": "2025-08-26",
+          "reason": "contrarian: fading Δ-50.0%, entry@86.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-26-9am-et",
+          "title": "Ethereum Up or Down - August 26, 9AM ET",
+          "side": "YES",
+          "buyPrice": 0.5095,
+          "betSize": 173.55,
+          "pnl": -173.55,
+          "won": false,
+          "date": "2025-08-26",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.9¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-26-3pm-et",
+          "title": "Solana Up or Down - August 26, 3PM ET",
+          "side": "NO",
+          "buyPrice": 0.406,
+          "betSize": 170.08,
+          "pnl": 248.83,
+          "won": true,
+          "date": "2025-08-26",
+          "reason": "contrarian: fading Δ40.5%, entry@40.6¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-26-6pm-et",
+          "title": "Ethereum Up or Down - August 26, 6PM ET",
+          "side": "YES",
+          "buyPrice": 0.445,
+          "betSize": 175.05,
+          "pnl": -175.05,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ-42.5%, entry@44.5¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-26-6pm-et",
+          "title": "XRP Up or Down - August 26, 6PM ET",
+          "side": "YES",
+          "buyPrice": 0.485,
+          "betSize": 171.55,
+          "pnl": -171.55,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ-47.5%, entry@48.5¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-26-6pm-et",
+          "title": "Solana Up or Down - August 26, 6PM ET",
+          "side": "YES",
+          "buyPrice": 0.495,
+          "betSize": 168.12,
+          "pnl": -168.12,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ-25.5%, entry@49.5¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-12am-et",
+          "title": "Ethereum Up or Down - August 27, 12AM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 164.76,
+          "pnl": 164.43,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-27-12am-et",
+          "title": "XRP Up or Down - August 27, 12AM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 168.05,
+          "pnl": 167.71,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-27-1am-et",
+          "title": "Solana Up or Down - August 27, 1AM ET",
+          "side": "YES",
+          "buyPrice": 0.5005,
+          "betSize": 171.4,
+          "pnl": -171.4,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-1am-et",
+          "title": "Ethereum Up or Down - August 27, 1AM ET",
+          "side": "YES",
+          "buyPrice": 0.5095,
+          "betSize": 167.97,
+          "pnl": -167.97,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.9¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-august-27-1am-et",
+          "title": "Bitcoin Up or Down - August 27, 1AM ET",
+          "side": "YES",
+          "buyPrice": 0.5095,
+          "betSize": 164.62,
+          "pnl": -164.62,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.9¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-27-1am-et",
+          "title": "XRP Up or Down - August 27, 1AM ET",
+          "side": "YES",
+          "buyPrice": 0.5095,
+          "betSize": 161.32,
+          "pnl": -161.32,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.9¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-27-2am-et",
+          "title": "XRP Up or Down - August 27, 2AM ET",
+          "side": "YES",
+          "buyPrice": 0.49,
+          "betSize": 158.1,
+          "pnl": -158.1,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ-48.0%, entry@49.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-2am-et",
+          "title": "Ethereum Up or Down - August 27, 2AM ET",
+          "side": "YES",
+          "buyPrice": 0.505,
+          "betSize": 154.93,
+          "pnl": -154.93,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ-49.5%, entry@50.5¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-august-27-2am-et",
+          "title": "Bitcoin Up or Down - August 27, 2AM ET",
+          "side": "YES",
+          "buyPrice": 0.476,
+          "betSize": 151.84,
+          "pnl": -151.84,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ-47.5%, entry@47.6¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-27-8am-et",
+          "title": "XRP Up or Down - August 27, 8AM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 148.8,
+          "pnl": 148.5,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-8am-et",
+          "title": "Ethereum Up or Down - August 27, 8AM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 151.77,
+          "pnl": 151.47,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-27-8am-et",
+          "title": "Solana Up or Down - August 27, 8AM ET",
+          "side": "YES",
+          "buyPrice": 0.5095,
+          "betSize": 154.8,
+          "pnl": -154.8,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.9¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-9am-et",
+          "title": "Ethereum Up or Down - August 27, 9AM ET",
+          "side": "YES",
+          "buyPrice": 0.28,
+          "betSize": 151.7,
+          "pnl": -151.7,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ-27.0%, entry@28.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-27-9am-et",
+          "title": "XRP Up or Down - August 27, 9AM ET",
+          "side": "YES",
+          "buyPrice": 0.3,
+          "betSize": 148.67,
+          "pnl": -148.67,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ-24.0%, entry@30.0¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-27-9am-et",
+          "title": "Solana Up or Down - August 27, 9AM ET",
+          "side": "YES",
+          "buyPrice": 0.29,
+          "betSize": 145.7,
+          "pnl": -145.7,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ-26.0%, entry@29.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-27-10am-et",
+          "title": "XRP Up or Down - August 27, 10AM ET",
+          "side": "NO",
+          "buyPrice": 0.496,
+          "betSize": 142.78,
+          "pnl": 145.08,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ49.5%, entry@49.6¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-10am-et",
+          "title": "Ethereum Up or Down - August 27, 10AM ET",
+          "side": "NO",
+          "buyPrice": 0.496,
+          "betSize": 145.68,
+          "pnl": 148.03,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ49.5%, entry@49.6¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-27-10am-et",
+          "title": "Solana Up or Down - August 27, 10AM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 148.64,
+          "pnl": 148.35,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-3pm-et",
+          "title": "Ethereum Up or Down - August 27, 3PM ET",
+          "side": "YES",
+          "buyPrice": 0.48,
+          "betSize": 151.61,
+          "pnl": -151.61,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "contrarian: fading Δ-46.0%, entry@48.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-28-1am-et",
+          "title": "Ethereum Up or Down - August 28, 1AM ET",
+          "side": "YES",
+          "buyPrice": 0.505,
+          "betSize": 148.58,
+          "pnl": -148.58,
+          "won": false,
+          "date": "2025-08-28",
+          "reason": "contrarian: fading Δ-49.5%, entry@50.5¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-august-28-1am-et",
+          "title": "Bitcoin Up or Down - August 28, 1AM ET",
+          "side": "YES",
+          "buyPrice": 0.5295,
+          "betSize": 145.61,
+          "pnl": -145.61,
+          "won": false,
+          "date": "2025-08-28",
+          "reason": "contrarian: fading Δ-50.0%, entry@52.9¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-28-1am-et",
+          "title": "XRP Up or Down - August 28, 1AM ET",
+          "side": "YES",
+          "buyPrice": 0.5295,
+          "betSize": 142.69,
+          "pnl": -142.69,
+          "won": false,
+          "date": "2025-08-28",
+          "reason": "contrarian: fading Δ-50.0%, entry@52.9¢"
+        },
+        {
+          "slug": "will-la-galaxy-win-the-2025-leagues-cup",
+          "title": "Will LA Galaxy win the 2025 Leagues Cup?",
+          "side": "YES",
+          "buyPrice": 0.342,
+          "betSize": 139.84,
+          "pnl": -139.84,
+          "won": false,
+          "date": "2025-08-28",
+          "reason": "contrarian: fading Δ-24.4%, entry@34.2¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-28-2am-et",
+          "title": "Ethereum Up or Down - August 28, 2AM ET",
+          "side": "NO",
+          "buyPrice": 0.201,
+          "betSize": 137.04,
+          "pnl": 544.77,
+          "won": true,
+          "date": "2025-08-28",
+          "reason": "contrarian: fading Δ20.0%, entry@20.1¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-august-28-2am-et",
+          "title": "Bitcoin Up or Down - August 28, 2AM ET",
+          "side": "NO",
+          "buyPrice": 0.366,
+          "betSize": 147.94,
+          "pnl": 256.27,
+          "won": true,
+          "date": "2025-08-28",
+          "reason": "contrarian: fading Δ36.5%, entry@36.6¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-28-3pm-et",
+          "title": "XRP Up or Down - August 28, 3PM ET",
+          "side": "YES",
+          "buyPrice": 0.605,
+          "betSize": 153.06,
+          "pnl": -153.06,
+          "won": false,
+          "date": "2025-08-28",
+          "reason": "contrarian: fading Δ-49.5%, entry@60.5¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-28-4pm-et",
+          "title": "XRP Up or Down - August 28, 4PM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 150,
+          "pnl": 149.7,
+          "won": true,
+          "date": "2025-08-28",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-28-5pm-et",
+          "title": "XRP Up or Down - August 28, 5PM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 153,
+          "pnl": 152.69,
+          "won": true,
+          "date": "2025-08-28",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-28-11pm-et",
+          "title": "Solana Up or Down - August 28, 11PM ET",
+          "side": "NO",
+          "buyPrice": 0.471,
+          "betSize": 156.05,
+          "pnl": 175.27,
+          "won": true,
+          "date": "2025-08-29",
+          "reason": "contrarian: fading Δ47.0%, entry@47.1¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-28-11pm-et",
+          "title": "Ethereum Up or Down - August 28, 11PM ET",
+          "side": "NO",
+          "buyPrice": 0.486,
+          "betSize": 159.56,
+          "pnl": 168.75,
+          "won": true,
+          "date": "2025-08-29",
+          "reason": "contrarian: fading Δ48.5%, entry@48.6¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-29-8am-et",
+          "title": "Ethereum Up or Down - August 29, 8AM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 162.93,
+          "pnl": 162.61,
+          "won": true,
+          "date": "2025-08-29",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-29-8am-et",
+          "title": "Solana Up or Down - August 29, 8AM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 166.18,
+          "pnl": 165.85,
+          "won": true,
+          "date": "2025-08-29",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-29-8am-et",
+          "title": "XRP Up or Down - August 29, 8AM ET",
+          "side": "NO",
+          "buyPrice": 0.496,
+          "betSize": 169.5,
+          "pnl": 172.23,
+          "won": true,
+          "date": "2025-08-29",
+          "reason": "contrarian: fading Δ49.5%, entry@49.6¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-29-9am-et",
+          "title": "Solana Up or Down - August 29, 9AM ET",
+          "side": "YES",
+          "buyPrice": 0.24,
+          "betSize": 172.95,
+          "pnl": -172.95,
+          "won": false,
+          "date": "2025-08-29",
+          "reason": "contrarian: fading Δ-23.0%, entry@24.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-29-9am-et",
+          "title": "XRP Up or Down - August 29, 9AM ET",
+          "side": "YES",
+          "buyPrice": 0.275,
+          "betSize": 169.49,
+          "pnl": -169.49,
+          "won": false,
+          "date": "2025-08-29",
+          "reason": "contrarian: fading Δ-26.5%, entry@27.5¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-29-9am-et",
+          "title": "Ethereum Up or Down - August 29, 9AM ET",
+          "side": "YES",
+          "buyPrice": 0.16,
+          "betSize": 166.1,
+          "pnl": -166.1,
+          "won": false,
+          "date": "2025-08-29",
+          "reason": "contrarian: fading Δ-15.0%, entry@16.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-29-10am-et",
+          "title": "Ethereum Up or Down - August 29, 10AM ET",
+          "side": "YES",
+          "buyPrice": 0.505,
+          "betSize": 162.77,
+          "pnl": -162.77,
+          "won": false,
+          "date": "2025-08-29",
+          "reason": "contrarian: fading Δ-49.5%, entry@50.5¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-29-10am-et",
+          "title": "XRP Up or Down - August 29, 10AM ET",
+          "side": "YES",
+          "buyPrice": 0.515,
+          "betSize": 159.52,
+          "pnl": -159.52,
+          "won": false,
+          "date": "2025-08-29",
+          "reason": "contrarian: fading Δ-49.5%, entry@51.5¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-30-8am-et",
+          "title": "Ethereum Up or Down - August 30, 8AM ET",
+          "side": "YES",
+          "buyPrice": 0.5095,
+          "betSize": 156.33,
+          "pnl": -156.33,
+          "won": false,
+          "date": "2025-08-30",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.9¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-30-8am-et",
+          "title": "XRP Up or Down - August 30, 8AM ET",
+          "side": "YES",
+          "buyPrice": 0.5795,
+          "betSize": 153.2,
+          "pnl": -153.2,
+          "won": false,
+          "date": "2025-08-30",
+          "reason": "contrarian: fading Δ-50.0%, entry@58.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-30-9am-et",
+          "title": "XRP Up or Down - August 30, 9AM ET",
+          "side": "YES",
+          "buyPrice": 0.495,
+          "betSize": 150.14,
+          "pnl": -150.14,
+          "won": false,
+          "date": "2025-08-30",
+          "reason": "contrarian: fading Δ-33.5%, entry@49.5¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-30-9am-et",
+          "title": "Ethereum Up or Down - August 30, 9AM ET",
+          "side": "YES",
+          "buyPrice": 0.5095,
+          "betSize": 147.14,
+          "pnl": -147.14,
+          "won": false,
+          "date": "2025-08-30",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.9¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-30-10am-et",
+          "title": "XRP Up or Down - August 30, 10AM ET",
+          "side": "NO",
+          "buyPrice": 0.326,
+          "betSize": 144.19,
+          "pnl": 298.12,
+          "won": true,
+          "date": "2025-08-30",
+          "reason": "contrarian: fading Δ32.5%, entry@32.6¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-30-10am-et",
+          "title": "Ethereum Up or Down - August 30, 10AM ET",
+          "side": "NO",
+          "buyPrice": 0.306,
+          "betSize": 150.16,
+          "pnl": 340.55,
+          "won": true,
+          "date": "2025-08-30",
+          "reason": "contrarian: fading Δ30.5%, entry@30.6¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-30-4pm-et",
+          "title": "Ethereum Up or Down - August 30, 4PM ET",
+          "side": "YES",
+          "buyPrice": 0.5095,
+          "betSize": 156.97,
+          "pnl": -156.97,
+          "won": false,
+          "date": "2025-08-30",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.9¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-30-4pm-et",
+          "title": "XRP Up or Down - August 30, 4PM ET",
+          "side": "YES",
+          "buyPrice": 0.5095,
+          "betSize": 153.83,
+          "pnl": -153.83,
+          "won": false,
+          "date": "2025-08-30",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.9¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-30-6pm-et",
+          "title": "Ethereum Up or Down - August 30, 6PM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 150.75,
+          "pnl": 150.45,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-30-6pm-et",
+          "title": "Solana Up or Down - August 30, 6PM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 153.76,
+          "pnl": 153.45,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-30-6pm-et",
+          "title": "XRP Up or Down - August 30, 6PM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 156.83,
+          "pnl": 156.51,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-30-11pm-et",
+          "title": "XRP Up or Down - August 30, 11PM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 159.96,
+          "pnl": 159.64,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-30-11pm-et",
+          "title": "Ethereum Up or Down - August 30, 11PM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 163.15,
+          "pnl": 162.83,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-12am-et",
+          "title": "Ethereum Up or Down - August 31, 12AM ET",
+          "side": "YES",
+          "buyPrice": 0.5095,
+          "betSize": 166.41,
+          "pnl": -166.41,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.9¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-12am-et",
+          "title": "XRP Up or Down - August 31, 12AM ET",
+          "side": "YES",
+          "buyPrice": 0.5295,
+          "betSize": 163.08,
+          "pnl": -163.08,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ-50.0%, entry@52.9¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-august-31-12am-et",
+          "title": "Bitcoin Up or Down - August 31, 12AM ET",
+          "side": "YES",
+          "buyPrice": 0.5055,
+          "betSize": 159.82,
+          "pnl": -159.82,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.5¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-31-12am-et",
+          "title": "Solana Up or Down - August 31, 12AM ET",
+          "side": "YES",
+          "buyPrice": 0.5195,
+          "betSize": 156.62,
+          "pnl": -156.62,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ-50.0%, entry@51.9¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-1am-et",
+          "title": "XRP Up or Down - August 31, 1AM ET",
+          "side": "YES",
+          "buyPrice": 0.525,
+          "betSize": 153.49,
+          "pnl": -153.49,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ-46.5%, entry@52.5¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-august-31-1am-et",
+          "title": "Bitcoin Up or Down - August 31, 1AM ET",
+          "side": "YES",
+          "buyPrice": 0.325,
+          "betSize": 150.42,
+          "pnl": -150.42,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ-31.5%, entry@32.5¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-1am-et",
+          "title": "Ethereum Up or Down - August 31, 1AM ET",
+          "side": "YES",
+          "buyPrice": 0.34,
+          "betSize": 147.41,
+          "pnl": -147.41,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ-33.0%, entry@34.0¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-31-8am-et",
+          "title": "Solana Up or Down - August 31, 8AM ET",
+          "side": "YES",
+          "buyPrice": 0.5195,
+          "betSize": 144.46,
+          "pnl": -144.46,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ-50.0%, entry@51.9¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-8am-et",
+          "title": "XRP Up or Down - August 31, 8AM ET",
+          "side": "YES",
+          "buyPrice": 0.5005,
+          "betSize": 141.57,
+          "pnl": -141.57,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-8am-et",
+          "title": "Ethereum Up or Down - August 31, 8AM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 138.74,
+          "pnl": 138.46,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-9am-et",
+          "title": "XRP Up or Down - August 31, 9AM ET",
+          "side": "YES",
+          "buyPrice": 0.635,
+          "betSize": 141.51,
+          "pnl": -141.51,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ-40.5%, entry@63.5¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-10am-et",
+          "title": "XRP Up or Down - August 31, 10AM ET",
+          "side": "YES",
+          "buyPrice": 0.6495,
+          "betSize": 138.68,
+          "pnl": -138.68,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ-50.0%, entry@65.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-10am-et",
+          "title": "Ethereum Up or Down - August 31, 10AM ET",
+          "side": "YES",
+          "buyPrice": 0.5495,
+          "betSize": 135.91,
+          "pnl": -135.91,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ-50.0%, entry@54.9¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-3pm-et",
+          "title": "Ethereum Up or Down - August 31, 3PM ET",
+          "side": "YES",
+          "buyPrice": 0.493,
+          "betSize": 133.19,
+          "pnl": -133.19,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ-47.5%, entry@49.3¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-3pm-et",
+          "title": "XRP Up or Down - August 31, 3PM ET",
+          "side": "YES",
+          "buyPrice": 0.465,
+          "betSize": 130.53,
+          "pnl": -130.53,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ-45.5%, entry@46.5¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-4pm-et",
+          "title": "XRP Up or Down - August 31, 4PM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 127.92,
+          "pnl": 127.66,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-4pm-et",
+          "title": "Ethereum Up or Down - August 31, 4PM ET",
+          "side": "YES",
+          "buyPrice": 0.5095,
+          "betSize": 130.47,
+          "pnl": -130.47,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.9¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-5pm-et",
+          "title": "Ethereum Up or Down - August 31, 5PM ET",
+          "side": "NO",
+          "buyPrice": 0.446,
+          "betSize": 127.86,
+          "pnl": 158.82,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ44.5%, entry@44.6¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-5pm-et",
+          "title": "XRP Up or Down - August 31, 5PM ET",
+          "side": "NO",
+          "buyPrice": 0.361,
+          "betSize": 131.04,
+          "pnl": 231.94,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "contrarian: fading Δ36.0%, entry@36.1¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-6pm-et",
+          "title": "XRP Up or Down - August 31, 6PM ET",
+          "side": "YES",
+          "buyPrice": 0.5895,
+          "betSize": 135.67,
+          "pnl": -135.67,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "contrarian: fading Δ-50.0%, entry@59.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-6pm-et",
+          "title": "Ethereum Up or Down - August 31, 6PM ET",
+          "side": "YES",
+          "buyPrice": 0.5395,
+          "betSize": 132.96,
+          "pnl": -132.96,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "contrarian: fading Δ-50.0%, entry@53.9¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-august-31-6pm-et",
+          "title": "Bitcoin Up or Down - August 31, 6PM ET",
+          "side": "YES",
+          "buyPrice": 0.5095,
+          "betSize": 130.3,
+          "pnl": -130.3,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.9¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-31-6pm-et",
+          "title": "Solana Up or Down - August 31, 6PM ET",
+          "side": "YES",
+          "buyPrice": 0.505,
+          "betSize": 127.7,
+          "pnl": -127.7,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "contrarian: fading Δ-49.5%, entry@50.5¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-31-11pm-et",
+          "title": "Solana Up or Down - August 31, 11PM ET",
+          "side": "NO",
+          "buyPrice": 0.396,
+          "betSize": 125.14,
+          "pnl": 190.87,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "contrarian: fading Δ39.5%, entry@39.6¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-1-7am-et",
+          "title": "XRP Up or Down - September 1, 7AM ET",
+          "side": "YES",
+          "buyPrice": 0.37,
+          "betSize": 128.96,
+          "pnl": -128.96,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "contrarian: fading Δ-36.0%, entry@37.0¢"
+        },
+        {
+          "slug": "solana-up-or-down-september-1-7am-et",
+          "title": "Solana Up or Down - September 1, 7AM ET",
+          "side": "YES",
+          "buyPrice": 0.16,
+          "betSize": 126.38,
+          "pnl": -126.38,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "contrarian: fading Δ-15.0%, entry@16.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-1-8am-et",
+          "title": "XRP Up or Down - September 1, 8AM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 123.85,
+          "pnl": 123.6,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-1-8am-et",
+          "title": "Ethereum Up or Down - September 1, 8AM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 126.32,
+          "pnl": 126.07,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-1-9am-et",
+          "title": "XRP Up or Down - September 1, 9AM ET",
+          "side": "YES",
+          "buyPrice": 0.35,
+          "betSize": 128.85,
+          "pnl": -128.85,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "contrarian: fading Δ-28.0%, entry@35.0¢"
+        },
+        {
+          "slug": "solana-up-or-down-september-1-9am-et",
+          "title": "Solana Up or Down - September 1, 9AM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 126.27,
+          "pnl": 126.02,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-1-10am-et",
+          "title": "Ethereum Up or Down - September 1, 10AM ET",
+          "side": "NO",
+          "buyPrice": 0.496,
+          "betSize": 128.79,
+          "pnl": 130.87,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "contrarian: fading Δ49.5%, entry@49.6¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-1-4pm-et",
+          "title": "Ethereum Up or Down - September 1, 4PM ET",
+          "side": "YES",
+          "buyPrice": 0.5005,
+          "betSize": 131.41,
+          "pnl": -131.41,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-1-4pm-et",
+          "title": "XRP Up or Down - September 1, 4PM ET",
+          "side": "YES",
+          "buyPrice": 0.5095,
+          "betSize": 128.78,
+          "pnl": -128.78,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.9¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-1-5pm-et",
+          "title": "XRP Up or Down - September 1, 5PM ET",
+          "side": "YES",
+          "buyPrice": 0.5095,
+          "betSize": 126.2,
+          "pnl": -126.2,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.9¢"
+        },
+        {
+          "slug": "solana-up-or-down-september-1-5pm-et",
+          "title": "Solana Up or Down - September 1, 5PM ET",
+          "side": "YES",
+          "buyPrice": 0.5095,
+          "betSize": 123.68,
+          "pnl": -123.68,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.9¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-1-5pm-et",
+          "title": "Ethereum Up or Down - September 1, 5PM ET",
+          "side": "YES",
+          "buyPrice": 0.5005,
+          "betSize": 121.21,
+          "pnl": -121.21,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-1-11pm-et",
+          "title": "Ethereum Up or Down - September 1, 11PM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 118.78,
+          "pnl": 118.54,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-september-2-12am-et",
+          "title": "Bitcoin Up or Down - September 2, 12AM ET",
+          "side": "YES",
+          "buyPrice": 0.14,
+          "betSize": 121.15,
+          "pnl": -121.15,
+          "won": false,
+          "date": "2025-09-02",
+          "reason": "contrarian: fading Δ-13.0%, entry@14.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-2-12am-et",
+          "title": "Ethereum Up or Down - September 2, 12AM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 118.73,
+          "pnl": 118.49,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-2-12am-et",
+          "title": "XRP Up or Down - September 2, 12AM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 121.1,
+          "pnl": 120.86,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-2-1am-et",
+          "title": "Ethereum Up or Down - September 2, 1AM ET",
+          "side": "YES",
+          "buyPrice": 0.505,
+          "betSize": 123.52,
+          "pnl": -123.52,
+          "won": false,
+          "date": "2025-09-02",
+          "reason": "contrarian: fading Δ-49.5%, entry@50.5¢"
+        },
+        {
+          "slug": "solana-up-or-down-september-2-1am-et",
+          "title": "Solana Up or Down - September 2, 1AM ET",
+          "side": "NO",
+          "buyPrice": 0.496,
+          "betSize": 121.05,
+          "pnl": 123,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "contrarian: fading Δ49.5%, entry@49.6¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-2-1am-et",
+          "title": "XRP Up or Down - September 2, 1AM ET",
+          "side": "NO",
+          "buyPrice": 0.496,
+          "betSize": 123.51,
+          "pnl": 125.5,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "contrarian: fading Δ49.5%, entry@49.6¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-september-2-1am-et",
+          "title": "Bitcoin Up or Down - September 2, 1AM ET",
+          "side": "YES",
+          "buyPrice": 0.505,
+          "betSize": 126.02,
+          "pnl": -126.02,
+          "won": false,
+          "date": "2025-09-02",
+          "reason": "contrarian: fading Δ-49.5%, entry@50.5¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-september-2-7am-et",
+          "title": "Bitcoin Up or Down - September 2, 7AM ET",
+          "side": "YES",
+          "buyPrice": 0.47,
+          "betSize": 123.5,
+          "pnl": -123.5,
+          "won": false,
+          "date": "2025-09-02",
+          "reason": "contrarian: fading Δ-46.0%, entry@47.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-2-7am-et",
+          "title": "XRP Up or Down - September 2, 7AM ET",
+          "side": "YES",
+          "buyPrice": 0.35,
+          "betSize": 121.03,
+          "pnl": -121.03,
+          "won": false,
+          "date": "2025-09-02",
+          "reason": "contrarian: fading Δ-34.0%, entry@35.0¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-september-2-9am-et",
+          "title": "Bitcoin Up or Down - September 2, 9AM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 118.6,
+          "pnl": 118.37,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-2-9am-et",
+          "title": "XRP Up or Down - September 2, 9AM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 120.97,
+          "pnl": 120.73,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-2-10am-et",
+          "title": "XRP Up or Down - September 2, 10AM ET",
+          "side": "NO",
+          "buyPrice": 0.141,
+          "betSize": 123.39,
+          "pnl": 751.7,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "contrarian: fading Δ14.0%, entry@14.1¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-2-10am-et",
+          "title": "Ethereum Up or Down - September 2, 10AM ET",
+          "side": "YES",
+          "buyPrice": 0.175,
+          "betSize": 138.42,
+          "pnl": -138.42,
+          "won": false,
+          "date": "2025-09-02",
+          "reason": "contrarian: fading Δ-16.5%, entry@17.5¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-2-3pm-et",
+          "title": "Ethereum Up or Down - September 2, 3PM ET",
+          "side": "YES",
+          "buyPrice": 0.375,
+          "betSize": 135.65,
+          "pnl": -135.65,
+          "won": false,
+          "date": "2025-09-02",
+          "reason": "contrarian: fading Δ-35.5%, entry@37.5¢"
+        },
+        {
+          "slug": "will-the-new-york-liberty-make-the-playoffs",
+          "title": "Will the New York Liberty make the playoffs?",
+          "side": "NO",
+          "buyPrice": 0.249,
+          "betSize": 132.94,
+          "pnl": -132.94,
+          "won": false,
+          "date": "2025-09-03",
+          "reason": "contrarian: fading Δ24.8%, entry@24.9¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-3-1am-et",
+          "title": "XRP Up or Down - September 3, 1AM ET",
+          "side": "YES",
+          "buyPrice": 0.49,
+          "betSize": 130.28,
+          "pnl": -130.28,
+          "won": false,
+          "date": "2025-09-03",
+          "reason": "contrarian: fading Δ-48.0%, entry@49.0¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-september-3-1am-et",
+          "title": "Bitcoin Up or Down - September 3, 1AM ET",
+          "side": "YES",
+          "buyPrice": 0.492,
+          "betSize": 127.67,
+          "pnl": -127.67,
+          "won": false,
+          "date": "2025-09-03",
+          "reason": "contrarian: fading Δ-49.0%, entry@49.2¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-3-1am-et",
+          "title": "Ethereum Up or Down - September 3, 1AM ET",
+          "side": "YES",
+          "buyPrice": 0.515,
+          "betSize": 125.12,
+          "pnl": -125.12,
+          "won": false,
+          "date": "2025-09-03",
+          "reason": "contrarian: fading Δ-48.5%, entry@51.5¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-3-7am-et",
+          "title": "XRP Up or Down - September 3, 7AM ET",
+          "side": "NO",
+          "buyPrice": 0.496,
+          "betSize": 122.62,
+          "pnl": 124.6,
+          "won": true,
+          "date": "2025-09-03",
+          "reason": "contrarian: fading Δ49.5%, entry@49.6¢"
+        },
+        {
+          "slug": "bitcoin-up-or-down-september-3-8am-et",
+          "title": "Bitcoin Up or Down - September 3, 8AM ET",
+          "side": "YES",
+          "buyPrice": 0.5005,
+          "betSize": 125.11,
+          "pnl": -125.11,
+          "won": false,
+          "date": "2025-09-03",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-3-8am-et",
+          "title": "Ethereum Up or Down - September 3, 8AM ET",
+          "side": "YES",
+          "buyPrice": 0.5095,
+          "betSize": 122.61,
+          "pnl": -122.61,
+          "won": false,
+          "date": "2025-09-03",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.9¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-3-8am-et",
+          "title": "XRP Up or Down - September 3, 8AM ET",
+          "side": "YES",
+          "buyPrice": 0.5095,
+          "betSize": 120.16,
+          "pnl": -120.16,
+          "won": false,
+          "date": "2025-09-03",
+          "reason": "contrarian: fading Δ-50.0%, entry@50.9¢"
+        },
+        {
+          "slug": "mls-chi-ner-2025-09-06-ner",
+          "title": "Will New England Revolution win on 2025-09-06?",
+          "side": "YES",
+          "buyPrice": 0.2495,
+          "betSize": 117.75,
+          "pnl": -117.75,
+          "won": false,
+          "date": "2025-09-07",
+          "reason": "contrarian: fading Δ-23.9%, entry@24.9¢"
+        },
+        {
+          "slug": "will-the-seattle-storm-make-the-playoffs",
+          "title": "Will the Seattle Storm make the playoffs?",
+          "side": "NO",
+          "buyPrice": 0.185,
+          "betSize": 115.4,
+          "pnl": -115.4,
+          "won": false,
+          "date": "2025-09-10",
+          "reason": "contrarian: fading Δ18.4%, entry@18.5¢"
+        },
+        {
+          "slug": "solana-up-or-down-september-12-6pm-et",
+          "title": "Solana Up or Down - September 12, 6PM ET",
+          "side": "NO",
+          "buyPrice": 0.5005,
+          "betSize": 113.09,
+          "pnl": 112.86,
+          "won": true,
+          "date": "2025-09-13",
+          "reason": "contrarian: fading Δ50.0%, entry@50.0¢"
+        }
+      ]
+    },
+    "status_quo": {
+      "bets": 53,
+      "wins": 49,
+      "losses": 4,
+      "winRate": 92.5,
+      "pnl": 849.81,
+      "roi": 8.5,
+      "sharpe": 3.68,
+      "finalCash": 10849.81,
+      "equityCurve": [
+        {
+          "date": null,
+          "equity": 10000
+        },
+        {
+          "date": "2025-08-21",
+          "equity": 10008.77
+        },
+        {
+          "date": "2025-08-23",
+          "equity": 9808.77
+        },
+        {
+          "date": "2025-08-23",
+          "equity": 9612.59
+        },
+        {
+          "date": "2025-08-23",
+          "equity": 9420.34
+        },
+        {
+          "date": "2025-08-23",
+          "equity": 9231.93
+        },
+        {
+          "date": "2025-08-25",
+          "equity": 9264.9
+        },
+        {
+          "date": "2025-08-25",
+          "equity": 9274.55
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 9292
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 9388.6
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 9458.05
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 9474.49
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 9482.39
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 9493.11
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 9497.38
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 9566.57
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 9570.87
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 9578.33
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 9588.41
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 9603.74
+        },
+        {
+          "date": "2025-09-04",
+          "equity": 9609.68
+        },
+        {
+          "date": "2025-09-04",
+          "equity": 9618.95
+        },
+        {
+          "date": "2025-09-04",
+          "equity": 9683.07
+        },
+        {
+          "date": "2025-09-04",
+          "equity": 9691.14
+        },
+        {
+          "date": "2025-09-05",
+          "equity": 9699.22
+        },
+        {
+          "date": "2025-09-06",
+          "equity": 9716.09
+        },
+        {
+          "date": "2025-09-06",
+          "equity": 9730.27
+        },
+        {
+          "date": "2025-09-07",
+          "equity": 9794.96
+        },
+        {
+          "date": "2025-09-08",
+          "equity": 9853.48
+        },
+        {
+          "date": "2025-09-09",
+          "equity": 9861.37
+        },
+        {
+          "date": "2025-09-10",
+          "equity": 9893.47
+        },
+        {
+          "date": "2025-09-10",
+          "equity": 9966.66
+        },
+        {
+          "date": "2025-09-10",
+          "equity": 9999.11
+        },
+        {
+          "date": "2025-09-10",
+          "equity": 10021.33
+        },
+        {
+          "date": "2025-09-10",
+          "equity": 10053.89
+        },
+        {
+          "date": "2025-09-10",
+          "equity": 10062.65
+        },
+        {
+          "date": "2025-09-10",
+          "equity": 10071.42
+        },
+        {
+          "date": "2025-09-11",
+          "equity": 10096.14
+        },
+        {
+          "date": "2025-09-11",
+          "equity": 10134.24
+        },
+        {
+          "date": "2025-09-11",
+          "equity": 10158.96
+        },
+        {
+          "date": "2025-09-11",
+          "equity": 10218.7
+        },
+        {
+          "date": "2025-09-11",
+          "equity": 10251.25
+        },
+        {
+          "date": "2025-09-12",
+          "equity": 10257.65
+        },
+        {
+          "date": "2025-09-12",
+          "equity": 10295.75
+        },
+        {
+          "date": "2025-09-12",
+          "equity": 10333.84
+        },
+        {
+          "date": "2025-09-12",
+          "equity": 10369.14
+        },
+        {
+          "date": "2025-09-12",
+          "equity": 10486.6
+        },
+        {
+          "date": "2025-09-12",
+          "equity": 10507.59
+        },
+        {
+          "date": "2025-09-12",
+          "equity": 10557.59
+        },
+        {
+          "date": "2025-09-12",
+          "equity": 10631.57
+        },
+        {
+          "date": "2025-09-13",
+          "equity": 10660.01
+        },
+        {
+          "date": "2025-09-13",
+          "equity": 10690.69
+        },
+        {
+          "date": "2025-09-13",
+          "equity": 10811.71
+        },
+        {
+          "date": "2025-09-13",
+          "equity": 10849.81
+        }
+      ],
+      "trades": [
+        {
+          "slug": "will-puebla-win-the-2025-leagues-cup",
+          "title": "Will Puebla win the 2025 Leagues Cup?",
+          "side": "NO",
+          "buyPrice": 0.958,
+          "betSize": 200,
+          "pnl": 8.77,
+          "won": true,
+          "date": "2025-08-21",
+          "reason": "status quo: YES@4.2¢ → buying NO@95.8¢"
+        },
+        {
+          "slug": "will-bill-gates-be-named-in-newly-released-epstein-files",
+          "title": "Will Bill Gates be named in newly released Epstein files?",
+          "side": "NO",
+          "buyPrice": 0.783,
+          "betSize": 200,
+          "pnl": -200,
+          "won": false,
+          "date": "2025-08-23",
+          "reason": "status quo: YES@21.7¢ → buying NO@78.3¢"
+        },
+        {
+          "slug": "will-bill-clinton-be-named-in-newly-released-epstein-files",
+          "title": "Will Bill Clinton be named in newly released Epstein files?",
+          "side": "NO",
+          "buyPrice": 0.693,
+          "betSize": 196.18,
+          "pnl": -196.18,
+          "won": false,
+          "date": "2025-08-23",
+          "reason": "status quo: YES@30.7¢ → buying NO@69.3¢"
+        },
+        {
+          "slug": "will-prince-andrew-be-named-in-newly-released-epstein-files",
+          "title": "Will Prince Andrew be named in newly released Epstein files?",
+          "side": "NO",
+          "buyPrice": 0.7355,
+          "betSize": 192.25,
+          "pnl": -192.25,
+          "won": false,
+          "date": "2025-08-23",
+          "reason": "status quo: YES@26.5¢ → buying NO@73.6¢"
+        },
+        {
+          "slug": "will-hillary-clinton-be-named-in-newly-released-epstein-files",
+          "title": "Will Hillary Clinton be named in newly released Epstein files?",
+          "side": "NO",
+          "buyPrice": 0.8835,
+          "betSize": 188.41,
+          "pnl": -188.41,
+          "won": false,
+          "date": "2025-08-23",
+          "reason": "status quo: YES@11.7¢ → buying NO@88.3¢"
+        },
+        {
+          "slug": "will-hideki-matsuyama-win-the-2025-fedex-cup",
+          "title": "Will Hideki Matsuyama win the 2025 FedEx Cup?",
+          "side": "NO",
+          "buyPrice": 0.8485,
+          "betSize": 184.64,
+          "pnl": 32.97,
+          "won": true,
+          "date": "2025-08-25",
+          "reason": "status quo: YES@15.2¢ → buying NO@84.9¢"
+        },
+        {
+          "slug": "will-sungjae-im-win-the-2025-fedex-cup",
+          "title": "Will Sungjae Im win the 2025 FedEx Cup?",
+          "side": "NO",
+          "buyPrice": 0.9505,
+          "betSize": 185.3,
+          "pnl": 9.65,
+          "won": true,
+          "date": "2025-08-25",
+          "reason": "status quo: YES@5.0¢ → buying NO@95.0¢"
+        },
+        {
+          "slug": "will-orlando-city-sc-win-the-2025-leagues-cup",
+          "title": "Will Orlando City SC win the 2025 Leagues Cup?",
+          "side": "NO",
+          "buyPrice": 0.914,
+          "betSize": 185.49,
+          "pnl": 17.45,
+          "won": true,
+          "date": "2025-08-28",
+          "reason": "status quo: YES@8.6¢ → buying NO@91.4¢"
+        },
+        {
+          "slug": "will-la-galaxy-win-the-2025-leagues-cup",
+          "title": "Will LA Galaxy win the 2025 Leagues Cup?",
+          "side": "NO",
+          "buyPrice": 0.658,
+          "betSize": 185.84,
+          "pnl": 96.59,
+          "won": true,
+          "date": "2025-08-28",
+          "reason": "status quo: YES@34.2¢ → buying NO@65.8¢"
+        },
+        {
+          "slug": "eth-multistrike-4h-1756497600-4350",
+          "title": "Will the price of Ethereum be above $4,350 on August 29 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.73,
+          "betSize": 187.77,
+          "pnl": 69.45,
+          "won": true,
+          "date": "2025-08-29",
+          "reason": "status quo: YES@27.0¢ → buying NO@73.0¢"
+        },
+        {
+          "slug": "btc-multistrike-4h-1756584000-109k",
+          "title": "Will the price of Bitcoin be above $109,000 on August 30 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.92,
+          "betSize": 189.16,
+          "pnl": 16.45,
+          "won": true,
+          "date": "2025-08-30",
+          "reason": "status quo: YES@8.0¢ → buying NO@92.0¢"
+        },
+        {
+          "slug": "will-a-hurricane-make-landfall-in-the-us-by-august-31",
+          "title": "Will a hurricane make landfall in the US by August 31?",
+          "side": "NO",
+          "buyPrice": 0.96,
+          "betSize": 189.49,
+          "pnl": 7.9,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "status quo: YES@4.0¢ → buying NO@96.0¢"
+        },
+        {
+          "slug": "will-dogecoin-dip-to-0pt16-in-august",
+          "title": "Will Dogecoin dip to $0.16 in August?",
+          "side": "NO",
+          "buyPrice": 0.9465,
+          "betSize": 189.65,
+          "pnl": 10.72,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "status quo: YES@5.3¢ → buying NO@94.7¢"
+        },
+        {
+          "slug": "will-ethereum-reach-5200-august-2531",
+          "title": "Will Ethereum reach $5200 August 25–31?",
+          "side": "NO",
+          "buyPrice": 0.978,
+          "betSize": 189.86,
+          "pnl": 4.27,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "status quo: YES@2.2¢ → buying NO@97.8¢"
+        },
+        {
+          "slug": "will-dogecoin-reach-0pt26-in-august",
+          "title": "Will Dogecoin reach $0.26 in August?",
+          "side": "NO",
+          "buyPrice": 0.733,
+          "betSize": 189.95,
+          "pnl": 69.19,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "status quo: YES@26.7¢ → buying NO@73.3¢"
+        },
+        {
+          "slug": "will-solana-dip-to-170-august-2531-778",
+          "title": "Will Solana dip to $170 August 25–31?",
+          "side": "NO",
+          "buyPrice": 0.978,
+          "betSize": 191.33,
+          "pnl": 4.3,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "status quo: YES@2.2¢ → buying NO@97.8¢"
+        },
+        {
+          "slug": "cluely-ceo-roy-lee-get-a-girlfriend-by-august-31",
+          "title": "Will Cluely CEO Roy Lee get a girlfriend by August 31?",
+          "side": "NO",
+          "buyPrice": 0.9625,
+          "betSize": 191.42,
+          "pnl": 7.46,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "status quo: YES@3.8¢ → buying NO@96.3¢"
+        },
+        {
+          "slug": "sol-multistrike-4h-1756756800-202",
+          "title": "Will the price of Solana be above $202 on September 1 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.95,
+          "betSize": 191.57,
+          "pnl": 10.08,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "status quo: YES@5.0¢ → buying NO@95.0¢"
+        },
+        {
+          "slug": "will-vinicius-jr-sign-with-a-new-club-during-the-transfer-window",
+          "title": "Will Vinicius Jr sign with a new club during the transfer window?",
+          "side": "NO",
+          "buyPrice": 0.926,
+          "betSize": 191.77,
+          "pnl": 15.32,
+          "won": true,
+          "date": "2025-09-03",
+          "reason": "status quo: YES@7.4¢ → buying NO@92.6¢"
+        },
+        {
+          "slug": "sol-multistrike-4h-1757016000-210",
+          "title": "Will the price of Solana be above $210 on September 4 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.97,
+          "betSize": 192.07,
+          "pnl": 5.94,
+          "won": true,
+          "date": "2025-09-04",
+          "reason": "status quo: YES@3.0¢ → buying NO@97.0¢"
+        },
+        {
+          "slug": "btc-multistrike-4h-1757016000-111k",
+          "title": "Will the price of Bitcoin be above $111,000 on September 4 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.954,
+          "betSize": 192.19,
+          "pnl": 9.27,
+          "won": true,
+          "date": "2025-09-04",
+          "reason": "status quo: YES@4.6¢ → buying NO@95.4¢"
+        },
+        {
+          "slug": "eth-multistrike-4h-1757016000-4325",
+          "title": "Will the price of Ethereum be above $4,325 on September 4 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.75,
+          "betSize": 192.38,
+          "pnl": 64.13,
+          "won": true,
+          "date": "2025-09-04",
+          "reason": "status quo: YES@25.0¢ → buying NO@75.0¢"
+        },
+        {
+          "slug": "sol-multistrike-4h-1757016000-208",
+          "title": "Will the price of Solana be above $208 on September 4 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.96,
+          "betSize": 193.66,
+          "pnl": 8.07,
+          "won": true,
+          "date": "2025-09-04",
+          "reason": "status quo: YES@4.0¢ → buying NO@96.0¢"
+        },
+        {
+          "slug": "btc-multistrike-4h-1757073600-113pt5k",
+          "title": "Will the price of Bitcoin be above $113,500 on September 5 at 8AM ET?",
+          "side": "NO",
+          "buyPrice": 0.96,
+          "betSize": 193.82,
+          "pnl": 8.08,
+          "won": true,
+          "date": "2025-09-05",
+          "reason": "status quo: YES@4.0¢ → buying NO@96.0¢"
+        },
+        {
+          "slug": "btc-multistrike-4h-1757131200-111pt5k",
+          "title": "Will the price of Bitcoin be above $111,500 on September 6 at 12AM ET?",
+          "side": "NO",
+          "buyPrice": 0.92,
+          "betSize": 193.98,
+          "pnl": 16.87,
+          "won": true,
+          "date": "2025-09-06",
+          "reason": "status quo: YES@8.0¢ → buying NO@92.0¢"
+        },
+        {
+          "slug": "btc-multistrike-4h-1757160000-111k",
+          "title": "Will the price of Bitcoin be above $111,000 on September 6 at 8AM ET?",
+          "side": "NO",
+          "buyPrice": 0.932,
+          "betSize": 194.32,
+          "pnl": 14.18,
+          "won": true,
+          "date": "2025-09-06",
+          "reason": "status quo: YES@6.8¢ → buying NO@93.2¢"
+        },
+        {
+          "slug": "mls-chi-ner-2025-09-06-ner",
+          "title": "Will New England Revolution win on 2025-09-06?",
+          "side": "NO",
+          "buyPrice": 0.7505,
+          "betSize": 194.61,
+          "pnl": 64.7,
+          "won": true,
+          "date": "2025-09-07",
+          "reason": "status quo: YES@24.9¢ → buying NO@75.0¢"
+        },
+        {
+          "slug": "eth-multistrike-4h-1757332800-4325",
+          "title": "Will the price of Ethereum be above $4,325 on September 8 at 8AM ET?",
+          "side": "NO",
+          "buyPrice": 0.77,
+          "betSize": 195.9,
+          "pnl": 58.52,
+          "won": true,
+          "date": "2025-09-08",
+          "reason": "status quo: YES@23.0¢ → buying NO@77.0¢"
+        },
+        {
+          "slug": "will-oliver-bearman-finish-second-in-the-2025-drivers-championship",
+          "title": "Will Oliver Bearman finish second in the 2025 Drivers Championship?",
+          "side": "NO",
+          "buyPrice": 0.9615,
+          "betSize": 197.07,
+          "pnl": 7.89,
+          "won": true,
+          "date": "2025-09-09",
+          "reason": "status quo: YES@3.9¢ → buying NO@96.2¢"
+        },
+        {
+          "slug": "sol-multistrike-4h-1757534400-224",
+          "title": "Will the price of Solana be above $224 on September 10 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.86,
+          "betSize": 197.23,
+          "pnl": 32.11,
+          "won": true,
+          "date": "2025-09-10",
+          "reason": "status quo: YES@14.0¢ → buying NO@86.0¢"
+        },
+        {
+          "slug": "eth-multistrike-4h-1757534400-4400",
+          "title": "Will the price of Ethereum be above $4,400 on September 10 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.73,
+          "betSize": 197.87,
+          "pnl": 73.18,
+          "won": true,
+          "date": "2025-09-10",
+          "reason": "status quo: YES@27.0¢ → buying NO@73.0¢"
+        },
+        {
+          "slug": "will-the-price-of-solana-be-between-224-and-226-on-september-10-at-4pm-et",
+          "title": "Will the price of Solana be between $224 and $226 on September 10 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.86,
+          "betSize": 199.33,
+          "pnl": 32.45,
+          "won": true,
+          "date": "2025-09-10",
+          "reason": "status quo: YES@14.0¢ → buying NO@86.0¢"
+        },
+        {
+          "slug": "will-the-price-of-bitcoin-be-between-114k-and-114500-on-september-10-at-4pm-et",
+          "title": "Will the price of Bitcoin be between $114,000 and $114,500 on September 10 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.9,
+          "betSize": 199.98,
+          "pnl": 22.22,
+          "won": true,
+          "date": "2025-09-10",
+          "reason": "status quo: YES@10.0¢ → buying NO@90.0¢"
+        },
+        {
+          "slug": "will-the-price-of-ethereum-be-between-4325-and-4350-on-september-10-at-4pm-et",
+          "title": "Will the price of Ethereum be between $4,325 and $4,350 on September 10 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.86,
+          "betSize": 200,
+          "pnl": 32.56,
+          "won": true,
+          "date": "2025-09-10",
+          "reason": "status quo: YES@14.0¢ → buying NO@86.0¢"
+        },
+        {
+          "slug": "will-the-price-of-solana-be-between-226-and-228-on-september-10-at-4pm-et",
+          "title": "Will the price of Solana be between $226 and $228 on September 10 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.958,
+          "betSize": 200,
+          "pnl": 8.77,
+          "won": true,
+          "date": "2025-09-10",
+          "reason": "status quo: YES@4.2¢ → buying NO@95.8¢"
+        },
+        {
+          "slug": "will-the-price-of-solana-be-between-226-and-228-on-september-10-at-4pm-et",
+          "title": "Will the price of Solana be between $226 and $228 on September 10 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.958,
+          "betSize": 200,
+          "pnl": 8.77,
+          "won": true,
+          "date": "2025-09-10",
+          "reason": "status quo: YES@4.2¢ → buying NO@95.8¢"
+        },
+        {
+          "slug": "will-the-price-of-solana-be-between-222-and-224-on-september-11-at-12am-et",
+          "title": "Will the price of Solana be between $222 and $224 on September 11 at 12AM ET?",
+          "side": "NO",
+          "buyPrice": 0.89,
+          "betSize": 200,
+          "pnl": 24.72,
+          "won": true,
+          "date": "2025-09-11",
+          "reason": "status quo: YES@11.0¢ → buying NO@89.0¢"
+        },
+        {
+          "slug": "will-the-price-of-ethereum-be-between-4350-and-4375-on-september-11-at-12am-et",
+          "title": "Will the price of Ethereum be between $4,350 and $4,375 on September 11 at 12AM ET?",
+          "side": "NO",
+          "buyPrice": 0.84,
+          "betSize": 200,
+          "pnl": 38.1,
+          "won": true,
+          "date": "2025-09-11",
+          "reason": "status quo: YES@16.0¢ → buying NO@84.0¢"
+        },
+        {
+          "slug": "will-the-price-of-ethereum-be-between-4375-and-4400-on-september-11-at-12am-et",
+          "title": "Will the price of Ethereum be between $4,375 and $4,400 on September 11 at 12AM ET?",
+          "side": "NO",
+          "buyPrice": 0.89,
+          "betSize": 200,
+          "pnl": 24.72,
+          "won": true,
+          "date": "2025-09-11",
+          "reason": "status quo: YES@11.0¢ → buying NO@89.0¢"
+        },
+        {
+          "slug": "btc-multistrike-4h-1757620800-115k",
+          "title": "Will the price of Bitcoin be above $115,000 on September 11 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.77,
+          "betSize": 200,
+          "pnl": 59.74,
+          "won": true,
+          "date": "2025-09-11",
+          "reason": "status quo: YES@23.0¢ → buying NO@77.0¢"
+        },
+        {
+          "slug": "will-the-price-of-ethereum-be-between-4375-and-4400-on-september-11-at-4pm-et",
+          "title": "Will the price of Ethereum be between $4,375 and $4,400 on September 11 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.86,
+          "betSize": 200,
+          "pnl": 32.56,
+          "won": true,
+          "date": "2025-09-11",
+          "reason": "status quo: YES@14.0¢ → buying NO@86.0¢"
+        },
+        {
+          "slug": "btc-multistrike-4h-1757649600-115pt5k",
+          "title": "Will the price of Bitcoin be above $115,500 on September 12 at 12AM ET?",
+          "side": "NO",
+          "buyPrice": 0.969,
+          "betSize": 200,
+          "pnl": 6.4,
+          "won": true,
+          "date": "2025-09-12",
+          "reason": "status quo: YES@3.1¢ → buying NO@96.9¢"
+        },
+        {
+          "slug": "btc-multistrike-4h-1757649600-116k",
+          "title": "Will the price of Bitcoin be above $116,000 on September 12 at 12AM ET?",
+          "side": "NO",
+          "buyPrice": 0.84,
+          "betSize": 200,
+          "pnl": 38.1,
+          "won": true,
+          "date": "2025-09-12",
+          "reason": "status quo: YES@16.0¢ → buying NO@84.0¢"
+        },
+        {
+          "slug": "will-the-price-of-xrp-be-between-3pt06-and-3pt09-on-september-12-at-12am-et",
+          "title": "Will the price of XRP be between $3.06 and $3.09 on September 12 at 12AM ET?",
+          "side": "NO",
+          "buyPrice": 0.84,
+          "betSize": 200,
+          "pnl": 38.1,
+          "won": true,
+          "date": "2025-09-12",
+          "reason": "status quo: YES@16.0¢ → buying NO@84.0¢"
+        },
+        {
+          "slug": "will-the-price-of-solana-be-between-232-and-234-on-september-12-at-12am-et",
+          "title": "Will the price of Solana be between $232 and $234 on September 12 at 12AM ET?",
+          "side": "NO",
+          "buyPrice": 0.85,
+          "betSize": 200,
+          "pnl": 35.29,
+          "won": true,
+          "date": "2025-09-12",
+          "reason": "status quo: YES@15.0¢ → buying NO@85.0¢"
+        },
+        {
+          "slug": "will-the-price-of-ethereum-be-between-4475-and-4500-on-september-12-at-12am-et",
+          "title": "Will the price of Ethereum be between $4,475 and $4,500 on September 12 at 12AM ET?",
+          "side": "NO",
+          "buyPrice": 0.63,
+          "betSize": 200,
+          "pnl": 117.46,
+          "won": true,
+          "date": "2025-09-12",
+          "reason": "status quo: YES@37.0¢ → buying NO@63.0¢"
+        },
+        {
+          "slug": "sol-multistrike-4h-1757707200-244",
+          "title": "Will the price of Solana be above $244 on September 12 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.905,
+          "betSize": 200,
+          "pnl": 20.99,
+          "won": true,
+          "date": "2025-09-12",
+          "reason": "status quo: YES@9.5¢ → buying NO@90.5¢"
+        },
+        {
+          "slug": "will-the-price-of-xrp-be-between-3pt03-and-3pt06-on-september-12-at-4pm-et",
+          "title": "Will the price of XRP be between $3.03 and $3.06 on September 12 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.8,
+          "betSize": 200,
+          "pnl": 50,
+          "won": true,
+          "date": "2025-09-12",
+          "reason": "status quo: YES@20.0¢ → buying NO@80.0¢"
+        },
+        {
+          "slug": "will-the-price-of-xrp-be-between-3-and-3pt03-on-september-12-at-4pm-et",
+          "title": "Will the price of XRP be between $3.00 and $3.03 on September 12 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.73,
+          "betSize": 200,
+          "pnl": 73.97,
+          "won": true,
+          "date": "2025-09-12",
+          "reason": "status quo: YES@27.0¢ → buying NO@73.0¢"
+        },
+        {
+          "slug": "will-the-price-of-solana-be-between-200-210-on-september-13",
+          "title": "Will the price of Solana be between $200 and $210 on September 13?",
+          "side": "NO",
+          "buyPrice": 0.8755,
+          "betSize": 200,
+          "pnl": 28.44,
+          "won": true,
+          "date": "2025-09-13",
+          "reason": "status quo: YES@12.4¢ → buying NO@87.5¢"
+        },
+        {
+          "slug": "will-the-price-of-bitcoin-be-between-114500-and-115k-on-september-13-at-4pm-et",
+          "title": "Will the price of Bitcoin be between $114,500 and $115,000 on September 13 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.867,
+          "betSize": 200,
+          "pnl": 30.68,
+          "won": true,
+          "date": "2025-09-13",
+          "reason": "status quo: YES@13.3¢ → buying NO@86.7¢"
+        },
+        {
+          "slug": "will-the-price-of-xrp-be-between-3pt06-and-3pt09-on-september-13-at-4pm-et",
+          "title": "Will the price of XRP be between $3.06 and $3.09 on September 13 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.623,
+          "betSize": 200,
+          "pnl": 121.03,
+          "won": true,
+          "date": "2025-09-13",
+          "reason": "status quo: YES@37.7¢ → buying NO@62.3¢"
+        },
+        {
+          "slug": "will-the-price-of-bitcoin-be-between-115k-and-115500-on-september-13-at-4pm-et",
+          "title": "Will the price of Bitcoin be between $115,000 and $115,500 on September 13 at 4PM ET?",
+          "side": "NO",
+          "buyPrice": 0.84,
+          "betSize": 200,
+          "pnl": 38.1,
+          "won": true,
+          "date": "2025-09-13",
+          "reason": "status quo: YES@16.0¢ → buying NO@84.0¢"
+        }
+      ]
+    },
+    "cheap_contracts": {
+      "bets": 37,
+      "wins": 0,
+      "losses": 37,
+      "winRate": 0,
+      "pnl": -3105.51,
+      "roi": -31.1,
+      "sharpe": null,
+      "finalCash": 6894.49,
+      "equityCurve": [
+        {
+          "date": null,
+          "equity": 10000
+        },
+        {
+          "date": "2025-08-21",
+          "equity": 9900
+        },
+        {
+          "date": "2025-08-25",
+          "equity": 9801
+        },
+        {
+          "date": "2025-08-26",
+          "equity": 9702.99
+        },
+        {
+          "date": "2025-08-26",
+          "equity": 9605.96
+        },
+        {
+          "date": "2025-08-26",
+          "equity": 9509.9
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 9414.8
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 9320.65
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 9227.45
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 9135.17
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 9043.82
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 8953.38
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 8863.85
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 8775.21
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 8687.46
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 8600.58
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 8514.58
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 8429.43
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 8345.14
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 8261.69
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 8179.07
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 8097.28
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 8016.31
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 7936.14
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 7856.78
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 7778.21
+        },
+        {
+          "date": "2025-09-04",
+          "equity": 7700.43
+        },
+        {
+          "date": "2025-09-04",
+          "equity": 7623.43
+        },
+        {
+          "date": "2025-09-04",
+          "equity": 7547.19
+        },
+        {
+          "date": "2025-09-05",
+          "equity": 7471.72
+        },
+        {
+          "date": "2025-09-05",
+          "equity": 7397
+        },
+        {
+          "date": "2025-09-06",
+          "equity": 7323.03
+        },
+        {
+          "date": "2025-09-09",
+          "equity": 7249.8
+        },
+        {
+          "date": "2025-09-10",
+          "equity": 7177.31
+        },
+        {
+          "date": "2025-09-10",
+          "equity": 7105.53
+        },
+        {
+          "date": "2025-09-10",
+          "equity": 7034.48
+        },
+        {
+          "date": "2025-09-11",
+          "equity": 6964.13
+        },
+        {
+          "date": "2025-09-12",
+          "equity": 6894.49
+        }
+      ],
+      "trades": [
+        {
+          "slug": "will-puebla-win-the-2025-leagues-cup",
+          "title": "Will Puebla win the 2025 Leagues Cup?",
+          "side": "YES",
+          "buyPrice": 0.042,
+          "betSize": 100,
+          "pnl": -100,
+          "won": false,
+          "date": "2025-08-21",
+          "reason": "cheap contract: YES@4.2¢"
+        },
+        {
+          "slug": "will-sungjae-im-win-the-2025-fedex-cup",
+          "title": "Will Sungjae Im win the 2025 FedEx Cup?",
+          "side": "YES",
+          "buyPrice": 0.0495,
+          "betSize": 99,
+          "pnl": -99,
+          "won": false,
+          "date": "2025-08-25",
+          "reason": "cheap contract: YES@5.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-26-4pm-et",
+          "title": "XRP Up or Down - August 26, 4PM ET",
+          "side": "YES",
+          "buyPrice": 0.02,
+          "betSize": 98.01,
+          "pnl": -98.01,
+          "won": false,
+          "date": "2025-08-26",
+          "reason": "cheap contract: YES@2.0¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-26-4pm-et",
+          "title": "Ethereum Up or Down - August 26, 4PM ET",
+          "side": "YES",
+          "buyPrice": 0.015,
+          "betSize": 97.03,
+          "pnl": -97.03,
+          "won": false,
+          "date": "2025-08-26",
+          "reason": "cheap contract: YES@1.5¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-26-4pm-et",
+          "title": "Solana Up or Down - August 26, 4PM ET",
+          "side": "YES",
+          "buyPrice": 0.03,
+          "betSize": 96.06,
+          "pnl": -96.06,
+          "won": false,
+          "date": "2025-08-26",
+          "reason": "cheap contract: YES@3.0¢"
+        },
+        {
+          "slug": "bitcoin-above-113k-on-august-27-at-4pm-et",
+          "title": "Bitcoin above $113K on August 27 at 4PM ET?",
+          "side": "YES",
+          "buyPrice": 0.045,
+          "betSize": 95.1,
+          "pnl": -95.1,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "cheap contract: YES@4.5¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-5pm-et",
+          "title": "Ethereum Up or Down - August 27, 5PM ET",
+          "side": "YES",
+          "buyPrice": 0.025,
+          "betSize": 94.15,
+          "pnl": -94.15,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "cheap contract: YES@2.5¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-6pm-et",
+          "title": "Ethereum Up or Down - August 27, 6PM ET",
+          "side": "YES",
+          "buyPrice": 0.015,
+          "betSize": 93.21,
+          "pnl": -93.21,
+          "won": false,
+          "date": "2025-08-28",
+          "reason": "cheap contract: YES@1.5¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-28-7am-et",
+          "title": "Solana Up or Down - August 28, 7AM ET",
+          "side": "YES",
+          "buyPrice": 0.015,
+          "betSize": 92.27,
+          "pnl": -92.27,
+          "won": false,
+          "date": "2025-08-28",
+          "reason": "cheap contract: YES@1.5¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-28-8am-et",
+          "title": "Solana Up or Down - August 28, 8AM ET",
+          "side": "YES",
+          "buyPrice": 0.015,
+          "betSize": 91.35,
+          "pnl": -91.35,
+          "won": false,
+          "date": "2025-08-28",
+          "reason": "cheap contract: YES@1.5¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-28-9am-et",
+          "title": "XRP Up or Down - August 28, 9AM ET",
+          "side": "YES",
+          "buyPrice": 0.045,
+          "betSize": 90.44,
+          "pnl": -90.44,
+          "won": false,
+          "date": "2025-08-28",
+          "reason": "cheap contract: YES@4.5¢"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-29-12am-et",
+          "title": "Ethereum Up or Down - August 29, 12AM ET",
+          "side": "YES",
+          "buyPrice": 0.035,
+          "betSize": 89.53,
+          "pnl": -89.53,
+          "won": false,
+          "date": "2025-08-29",
+          "reason": "cheap contract: YES@3.5¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-29-1am-et",
+          "title": "Solana Up or Down - August 29, 1AM ET",
+          "side": "YES",
+          "buyPrice": 0.015,
+          "betSize": 88.64,
+          "pnl": -88.64,
+          "won": false,
+          "date": "2025-08-29",
+          "reason": "cheap contract: YES@1.5¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-29-2am-et",
+          "title": "XRP Up or Down - August 29, 2AM ET",
+          "side": "YES",
+          "buyPrice": 0.03,
+          "betSize": 87.75,
+          "pnl": -87.75,
+          "won": false,
+          "date": "2025-08-29",
+          "reason": "cheap contract: YES@3.0¢"
+        },
+        {
+          "slug": "solana-up-or-down-august-29-6pm-et",
+          "title": "Solana Up or Down - August 29, 6PM ET",
+          "side": "YES",
+          "buyPrice": 0.02,
+          "betSize": 86.87,
+          "pnl": -86.87,
+          "won": false,
+          "date": "2025-08-30",
+          "reason": "cheap contract: YES@2.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-2am-et",
+          "title": "XRP Up or Down - August 31, 2AM ET",
+          "side": "YES",
+          "buyPrice": 0.042,
+          "betSize": 86.01,
+          "pnl": -86.01,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "cheap contract: YES@4.2¢"
+        },
+        {
+          "slug": "solana-up-or-down-september-1-12am-et",
+          "title": "Solana Up or Down - September 1, 12AM ET",
+          "side": "YES",
+          "buyPrice": 0.04,
+          "betSize": 85.15,
+          "pnl": -85.15,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "cheap contract: YES@4.0¢"
+        },
+        {
+          "slug": "will-a-hurricane-make-landfall-in-the-us-by-august-31",
+          "title": "Will a hurricane make landfall in the US by August 31?",
+          "side": "YES",
+          "buyPrice": 0.04,
+          "betSize": 84.29,
+          "pnl": -84.29,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "cheap contract: YES@4.0¢"
+        },
+        {
+          "slug": "will-ethereum-reach-5200-august-2531",
+          "title": "Will Ethereum reach $5200 August 25–31?",
+          "side": "YES",
+          "buyPrice": 0.022,
+          "betSize": 83.45,
+          "pnl": -83.45,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "cheap contract: YES@2.2¢"
+        },
+        {
+          "slug": "will-solana-dip-to-170-august-2531-778",
+          "title": "Will Solana dip to $170 August 25–31?",
+          "side": "YES",
+          "buyPrice": 0.022,
+          "betSize": 82.62,
+          "pnl": -82.62,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "cheap contract: YES@2.2¢"
+        },
+        {
+          "slug": "cluely-ceo-roy-lee-get-a-girlfriend-by-august-31",
+          "title": "Will Cluely CEO Roy Lee get a girlfriend by August 31?",
+          "side": "YES",
+          "buyPrice": 0.0375,
+          "betSize": 81.79,
+          "pnl": -81.79,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "cheap contract: YES@3.8¢"
+        },
+        {
+          "slug": "eth-multistrike-4h-1756756800-4375",
+          "title": "Will the price of Ethereum be above $4,375 on September 1 at 4PM ET?",
+          "side": "YES",
+          "buyPrice": 0.02,
+          "betSize": 80.97,
+          "pnl": -80.97,
+          "won": false,
+          "date": "2025-09-01",
+          "reason": "cheap contract: YES@2.0¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-2-8am-et",
+          "title": "XRP Up or Down - September 2, 8AM ET",
+          "side": "YES",
+          "buyPrice": 0.015,
+          "betSize": 80.16,
+          "pnl": -80.16,
+          "won": false,
+          "date": "2025-09-02",
+          "reason": "cheap contract: YES@1.5¢"
+        },
+        {
+          "slug": "xrp-up-or-down-september-3-12am-et",
+          "title": "XRP Up or Down - September 3, 12AM ET",
+          "side": "YES",
+          "buyPrice": 0.02,
+          "betSize": 79.36,
+          "pnl": -79.36,
+          "won": false,
+          "date": "2025-09-03",
+          "reason": "cheap contract: YES@2.0¢"
+        },
+        {
+          "slug": "bitcoin-above-120k-on-september-3",
+          "title": "Bitcoin above $120K on September 3?",
+          "side": "YES",
+          "buyPrice": 0.0195,
+          "betSize": 78.57,
+          "pnl": -78.57,
+          "won": false,
+          "date": "2025-09-03",
+          "reason": "cheap contract: YES@1.9¢"
+        },
+        {
+          "slug": "sol-multistrike-4h-1757016000-210",
+          "title": "Will the price of Solana be above $210 on September 4 at 4PM ET?",
+          "side": "YES",
+          "buyPrice": 0.03,
+          "betSize": 77.78,
+          "pnl": -77.78,
+          "won": false,
+          "date": "2025-09-04",
+          "reason": "cheap contract: YES@3.0¢"
+        },
+        {
+          "slug": "btc-multistrike-4h-1757016000-111k",
+          "title": "Will the price of Bitcoin be above $111,000 on September 4 at 4PM ET?",
+          "side": "YES",
+          "buyPrice": 0.046,
+          "betSize": 77,
+          "pnl": -77,
+          "won": false,
+          "date": "2025-09-04",
+          "reason": "cheap contract: YES@4.6¢"
+        },
+        {
+          "slug": "sol-multistrike-4h-1757016000-208",
+          "title": "Will the price of Solana be above $208 on September 4 at 4PM ET?",
+          "side": "YES",
+          "buyPrice": 0.04,
+          "betSize": 76.23,
+          "pnl": -76.23,
+          "won": false,
+          "date": "2025-09-04",
+          "reason": "cheap contract: YES@4.0¢"
+        },
+        {
+          "slug": "will-the-price-of-ethereum-be-between-4200-and-4300-on-september-3-at-4pm-et",
+          "title": "Will the price of Ethereum be between $4200 and $4300 on September 3 at 4PM ET?",
+          "side": "YES",
+          "buyPrice": 0.019,
+          "betSize": 75.47,
+          "pnl": -75.47,
+          "won": false,
+          "date": "2025-09-05",
+          "reason": "cheap contract: YES@1.9¢"
+        },
+        {
+          "slug": "btc-multistrike-4h-1757073600-113pt5k",
+          "title": "Will the price of Bitcoin be above $113,500 on September 5 at 8AM ET?",
+          "side": "YES",
+          "buyPrice": 0.04,
+          "betSize": 74.72,
+          "pnl": -74.72,
+          "won": false,
+          "date": "2025-09-05",
+          "reason": "cheap contract: YES@4.0¢"
+        },
+        {
+          "slug": "will-mans-best-friends-first-week-album-sales-be-between-400000-and-450000",
+          "title": "Will Man’s Best Friend’s first-week album sales be between 400000 and 450000?",
+          "side": "YES",
+          "buyPrice": 0.014,
+          "betSize": 73.97,
+          "pnl": -73.97,
+          "won": false,
+          "date": "2025-09-06",
+          "reason": "cheap contract: YES@1.4¢"
+        },
+        {
+          "slug": "will-oliver-bearman-finish-second-in-the-2025-drivers-championship",
+          "title": "Will Oliver Bearman finish second in the 2025 Drivers Championship?",
+          "side": "YES",
+          "buyPrice": 0.0385,
+          "betSize": 73.23,
+          "pnl": -73.23,
+          "won": false,
+          "date": "2025-09-09",
+          "reason": "cheap contract: YES@3.9¢"
+        },
+        {
+          "slug": "btc-multistrike-4h-1757534400-114k",
+          "title": "Will the price of Bitcoin be above $114,000 on September 10 at 4PM ET?",
+          "side": "YES",
+          "buyPrice": 0.02,
+          "betSize": 72.5,
+          "pnl": -72.5,
+          "won": false,
+          "date": "2025-09-10",
+          "reason": "cheap contract: YES@2.0¢"
+        },
+        {
+          "slug": "will-the-price-of-solana-be-between-226-and-228-on-september-10-at-4pm-et",
+          "title": "Will the price of Solana be between $226 and $228 on September 10 at 4PM ET?",
+          "side": "YES",
+          "buyPrice": 0.042,
+          "betSize": 71.77,
+          "pnl": -71.77,
+          "won": false,
+          "date": "2025-09-10",
+          "reason": "cheap contract: YES@4.2¢"
+        },
+        {
+          "slug": "will-the-price-of-solana-be-between-226-and-228-on-september-10-at-4pm-et",
+          "title": "Will the price of Solana be between $226 and $228 on September 10 at 4PM ET?",
+          "side": "YES",
+          "buyPrice": 0.042,
+          "betSize": 71.06,
+          "pnl": -71.06,
+          "won": false,
+          "date": "2025-09-10",
+          "reason": "cheap contract: YES@4.2¢"
+        },
+        {
+          "slug": "btc-multistrike-4h-1757620800-114pt5k",
+          "title": "Will the price of Bitcoin be above $114,500 on September 11 at 4PM ET?",
+          "side": "YES",
+          "buyPrice": 0.02,
+          "betSize": 70.34,
+          "pnl": -70.34,
+          "won": false,
+          "date": "2025-09-11",
+          "reason": "cheap contract: YES@2.0¢"
+        },
+        {
+          "slug": "btc-multistrike-4h-1757649600-115pt5k",
+          "title": "Will the price of Bitcoin be above $115,500 on September 12 at 12AM ET?",
+          "side": "YES",
+          "buyPrice": 0.031,
+          "betSize": 69.64,
+          "pnl": -69.64,
+          "won": false,
+          "date": "2025-09-12",
+          "reason": "cheap contract: YES@3.1¢"
+        }
+      ]
+    },
+    "arb": {
+      "bets": 79,
+      "wins": 72,
+      "losses": 7,
+      "winRate": 91.1,
+      "pnl": 484.03,
+      "roi": 4.8,
+      "sharpe": 9.72,
+      "finalCash": 10484.03,
+      "equityCurve": [
+        {
+          "date": null,
+          "equity": 10000
+        },
+        {
+          "date": "2025-08-25",
+          "equity": 10001.82
+        },
+        {
+          "date": "2025-08-25",
+          "equity": 10007.75
+        },
+        {
+          "date": "2025-08-26",
+          "equity": 10020.4
+        },
+        {
+          "date": "2025-08-26",
+          "equity": 10026.34
+        },
+        {
+          "date": "2025-08-26",
+          "equity": 10032.27
+        },
+        {
+          "date": "2025-08-26",
+          "equity": 10081.06
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 10063.06
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 10059.2
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 10059.22
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 10061.04
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 10062.86
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 10065.08
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 10071.01
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 10076.94
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 10075
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 10079.06
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 10080.88
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 10086.82
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 10090.47
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 10092.28
+        },
+        {
+          "date": "2025-08-27",
+          "equity": 10086.53
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 10101.22
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 10103.04
+        },
+        {
+          "date": "2025-08-28",
+          "equity": 10104.86
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 10119.32
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 10127.16
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 10128.97
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 10130.79
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 10134.44
+        },
+        {
+          "date": "2025-08-29",
+          "equity": 10142.71
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 10148.64
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 10188.86
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 10188.88
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 10194.81
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 10200.74
+        },
+        {
+          "date": "2025-08-30",
+          "equity": 10206.68
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 10208.49
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 10210.31
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 10212.13
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 10213.95
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 10215.77
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 10221.7
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 10236.39
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 10246.61
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 10259.26
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 10269.48
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 10271.7
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 10273.52
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 10297.74
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 10296.97
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 10285.77
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 10287.59
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 10293.52
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 10320
+        },
+        {
+          "date": "2025-08-31",
+          "equity": 10330.44
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 10376.51
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 10395.86
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 10399.92
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 10401.73
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 10403.55
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 10405.37
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 10409.02
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 10414.95
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 10420.89
+        },
+        {
+          "date": "2025-09-01",
+          "equity": 10426.82
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 10428.64
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 10430.46
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 10432.27
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 10436.34
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 10439.98
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 10443.63
+        },
+        {
+          "date": "2025-09-02",
+          "equity": 10445.45
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 10443.51
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 10451.78
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 10455.43
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 10461.36
+        },
+        {
+          "date": "2025-09-03",
+          "equity": 10467.3
+        },
+        {
+          "date": "2025-09-11",
+          "equity": 10482.21
+        },
+        {
+          "date": "2025-09-13",
+          "equity": 10484.03
+        }
+      ],
+      "trades": [
+        {
+          "slug": "ethereum-up-or-down-august-25-8am-et",
+          "title": "Ethereum Up or Down - August 25, 8AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-08-25",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$12K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-25-3pm-et",
+          "title": "XRP Up or Down - August 25, 3PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5095,
+          "betSize": 200,
+          "pnl": 5.93,
+          "won": true,
+          "date": "2025-08-25",
+          "reason": "arb: YES@50.4¢ + NO@48.6¢, vol=$6K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-26-7am-et",
+          "title": "Ethereum Up or Down - August 26, 7AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.525,
+          "betSize": 200,
+          "pnl": 12.65,
+          "won": true,
+          "date": "2025-08-26",
+          "reason": "arb: YES@52.0¢ + NO@47.0¢, vol=$17K"
+        },
+        {
+          "slug": "solana-up-or-down-august-26-9am-et",
+          "title": "Solana Up or Down - August 26, 9AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5095,
+          "betSize": 200,
+          "pnl": 5.93,
+          "won": true,
+          "date": "2025-08-26",
+          "reason": "arb: YES@50.4¢ + NO@48.6¢, vol=$13K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-26-9am-et",
+          "title": "Ethereum Up or Down - August 26, 9AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5095,
+          "betSize": 200,
+          "pnl": 5.93,
+          "won": true,
+          "date": "2025-08-26",
+          "reason": "arb: YES@50.4¢ + NO@48.6¢, vol=$39K"
+        },
+        {
+          "slug": "solana-up-or-down-august-26-3pm-et",
+          "title": "Solana Up or Down - August 26, 3PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.594,
+          "betSize": 200,
+          "pnl": 48.79,
+          "won": true,
+          "date": "2025-08-26",
+          "reason": "arb: YES@58.8¢ + NO@40.2¢, vol=$8K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-26-6pm-et",
+          "title": "Ethereum Up or Down - August 26, 6PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.445,
+          "betSize": 200,
+          "pnl": -18,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "arb: YES@44.1¢ + NO@54.9¢, vol=$25K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-26-6pm-et",
+          "title": "XRP Up or Down - August 26, 6PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.485,
+          "betSize": 200,
+          "pnl": -3.86,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "arb: YES@48.0¢ + NO@51.0¢, vol=$7K"
+        },
+        {
+          "slug": "solana-up-or-down-august-26-6pm-et",
+          "title": "Solana Up or Down - August 26, 6PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.495,
+          "betSize": 200,
+          "pnl": 0.02,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "arb: YES@49.0¢ + NO@50.0¢, vol=$8K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-12am-et",
+          "title": "Ethereum Up or Down - August 27, 12AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$36K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-27-12am-et",
+          "title": "XRP Up or Down - August 27, 12AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$7K"
+        },
+        {
+          "slug": "solana-up-or-down-august-27-1am-et",
+          "title": "Solana Up or Down - August 27, 1AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5005,
+          "betSize": 200,
+          "pnl": 2.22,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$8K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-1am-et",
+          "title": "Ethereum Up or Down - August 27, 1AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5095,
+          "betSize": 200,
+          "pnl": 5.93,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "arb: YES@50.4¢ + NO@48.6¢, vol=$25K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-27-1am-et",
+          "title": "XRP Up or Down - August 27, 1AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5095,
+          "betSize": 200,
+          "pnl": 5.93,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "arb: YES@50.4¢ + NO@48.6¢, vol=$7K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-27-2am-et",
+          "title": "XRP Up or Down - August 27, 2AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.49,
+          "betSize": 200,
+          "pnl": -1.94,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "arb: YES@48.5¢ + NO@50.5¢, vol=$6K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-2am-et",
+          "title": "Ethereum Up or Down - August 27, 2AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.505,
+          "betSize": 200,
+          "pnl": 4.06,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "arb: YES@50.0¢ + NO@49.0¢, vol=$14K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-27-8am-et",
+          "title": "XRP Up or Down - August 27, 8AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$31K"
+        },
+        {
+          "slug": "solana-up-or-down-august-27-8am-et",
+          "title": "Solana Up or Down - August 27, 8AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5095,
+          "betSize": 200,
+          "pnl": 5.93,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "arb: YES@50.4¢ + NO@48.6¢, vol=$12K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-27-10am-et",
+          "title": "XRP Up or Down - August 27, 10AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.504,
+          "betSize": 200,
+          "pnl": 3.65,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "arb: YES@49.9¢ + NO@49.1¢, vol=$8K"
+        },
+        {
+          "slug": "solana-up-or-down-august-27-10am-et",
+          "title": "Solana Up or Down - August 27, 10AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-08-27",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$7K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-27-3pm-et",
+          "title": "Ethereum Up or Down - August 27, 3PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.48,
+          "betSize": 200,
+          "pnl": -5.75,
+          "won": false,
+          "date": "2025-08-27",
+          "reason": "arb: YES@47.5¢ + NO@51.5¢, vol=$32K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-28-1am-et",
+          "title": "XRP Up or Down - August 28, 1AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5295,
+          "betSize": 200,
+          "pnl": 14.69,
+          "won": true,
+          "date": "2025-08-28",
+          "reason": "arb: YES@52.4¢ + NO@46.6¢, vol=$6K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-28-4pm-et",
+          "title": "XRP Up or Down - August 28, 4PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-08-28",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$7K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-28-5pm-et",
+          "title": "XRP Up or Down - August 28, 5PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-08-28",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$8K"
+        },
+        {
+          "slug": "solana-up-or-down-august-28-11pm-et",
+          "title": "Solana Up or Down - August 28, 11PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.529,
+          "betSize": 200,
+          "pnl": 14.46,
+          "won": true,
+          "date": "2025-08-29",
+          "reason": "arb: YES@52.4¢ + NO@46.6¢, vol=$8K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-28-11pm-et",
+          "title": "Ethereum Up or Down - August 28, 11PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.514,
+          "betSize": 200,
+          "pnl": 7.84,
+          "won": true,
+          "date": "2025-08-29",
+          "reason": "arb: YES@50.9¢ + NO@48.1¢, vol=$13K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-29-8am-et",
+          "title": "Ethereum Up or Down - August 29, 8AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-08-29",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$24K"
+        },
+        {
+          "slug": "solana-up-or-down-august-29-8am-et",
+          "title": "Solana Up or Down - August 29, 8AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-08-29",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$11K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-29-8am-et",
+          "title": "XRP Up or Down - August 29, 8AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.504,
+          "betSize": 200,
+          "pnl": 3.65,
+          "won": true,
+          "date": "2025-08-29",
+          "reason": "arb: YES@49.9¢ + NO@49.1¢, vol=$17K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-29-10am-et",
+          "title": "XRP Up or Down - August 29, 10AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.515,
+          "betSize": 200,
+          "pnl": 8.27,
+          "won": true,
+          "date": "2025-08-29",
+          "reason": "arb: YES@51.0¢ + NO@48.0¢, vol=$14K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-30-8am-et",
+          "title": "Ethereum Up or Down - August 30, 8AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5095,
+          "betSize": 200,
+          "pnl": 5.93,
+          "won": true,
+          "date": "2025-08-30",
+          "reason": "arb: YES@50.4¢ + NO@48.6¢, vol=$12K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-30-8am-et",
+          "title": "XRP Up or Down - August 30, 8AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5795,
+          "betSize": 200,
+          "pnl": 40.21,
+          "won": true,
+          "date": "2025-08-30",
+          "reason": "arb: YES@57.4¢ + NO@41.6¢, vol=$6K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-30-9am-et",
+          "title": "XRP Up or Down - August 30, 9AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.495,
+          "betSize": 200,
+          "pnl": 0.02,
+          "won": true,
+          "date": "2025-08-30",
+          "reason": "arb: YES@49.0¢ + NO@50.0¢, vol=$7K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-30-9am-et",
+          "title": "Ethereum Up or Down - August 30, 9AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5095,
+          "betSize": 200,
+          "pnl": 5.93,
+          "won": true,
+          "date": "2025-08-30",
+          "reason": "arb: YES@50.4¢ + NO@48.6¢, vol=$15K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-30-4pm-et",
+          "title": "Ethereum Up or Down - August 30, 4PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5095,
+          "betSize": 200,
+          "pnl": 5.93,
+          "won": true,
+          "date": "2025-08-30",
+          "reason": "arb: YES@50.4¢ + NO@48.6¢, vol=$18K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-30-4pm-et",
+          "title": "XRP Up or Down - August 30, 4PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5095,
+          "betSize": 200,
+          "pnl": 5.93,
+          "won": true,
+          "date": "2025-08-30",
+          "reason": "arb: YES@50.4¢ + NO@48.6¢, vol=$7K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-30-6pm-et",
+          "title": "Ethereum Up or Down - August 30, 6PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$19K"
+        },
+        {
+          "slug": "solana-up-or-down-august-30-6pm-et",
+          "title": "Solana Up or Down - August 30, 6PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$9K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-30-6pm-et",
+          "title": "XRP Up or Down - August 30, 6PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$10K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-30-11pm-et",
+          "title": "XRP Up or Down - August 30, 11PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$9K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-30-11pm-et",
+          "title": "Ethereum Up or Down - August 30, 11PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$10K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-12am-et",
+          "title": "Ethereum Up or Down - August 31, 12AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5095,
+          "betSize": 200,
+          "pnl": 5.93,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "arb: YES@50.4¢ + NO@48.6¢, vol=$18K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-12am-et",
+          "title": "XRP Up or Down - August 31, 12AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5295,
+          "betSize": 200,
+          "pnl": 14.69,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "arb: YES@52.4¢ + NO@46.6¢, vol=$15K"
+        },
+        {
+          "slug": "solana-up-or-down-august-31-12am-et",
+          "title": "Solana Up or Down - August 31, 12AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5195,
+          "betSize": 200,
+          "pnl": 10.22,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "arb: YES@51.4¢ + NO@47.6¢, vol=$6K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-1am-et",
+          "title": "XRP Up or Down - August 31, 1AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.525,
+          "betSize": 200,
+          "pnl": 12.65,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "arb: YES@52.0¢ + NO@47.0¢, vol=$8K"
+        },
+        {
+          "slug": "solana-up-or-down-august-31-8am-et",
+          "title": "Solana Up or Down - August 31, 8AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5195,
+          "betSize": 200,
+          "pnl": 10.22,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "arb: YES@51.4¢ + NO@47.6¢, vol=$15K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-8am-et",
+          "title": "XRP Up or Down - August 31, 8AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5005,
+          "betSize": 200,
+          "pnl": 2.22,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$8K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-8am-et",
+          "title": "Ethereum Up or Down - August 31, 8AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$32K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-10am-et",
+          "title": "Ethereum Up or Down - August 31, 10AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5495,
+          "betSize": 200,
+          "pnl": 24.22,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "arb: YES@54.4¢ + NO@44.6¢, vol=$11K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-3pm-et",
+          "title": "Ethereum Up or Down - August 31, 3PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.493,
+          "betSize": 200,
+          "pnl": -0.77,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "arb: YES@48.8¢ + NO@50.2¢, vol=$24K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-3pm-et",
+          "title": "XRP Up or Down - August 31, 3PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.465,
+          "betSize": 200,
+          "pnl": -11.2,
+          "won": false,
+          "date": "2025-08-31",
+          "reason": "arb: YES@46.0¢ + NO@53.0¢, vol=$15K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-4pm-et",
+          "title": "XRP Up or Down - August 31, 4PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$21K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-4pm-et",
+          "title": "Ethereum Up or Down - August 31, 4PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5095,
+          "betSize": 200,
+          "pnl": 5.93,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "arb: YES@50.4¢ + NO@48.6¢, vol=$47K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-5pm-et",
+          "title": "Ethereum Up or Down - August 31, 5PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.554,
+          "betSize": 200,
+          "pnl": 26.48,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "arb: YES@54.8¢ + NO@44.2¢, vol=$30K"
+        },
+        {
+          "slug": "mlb-chc-col-2025-08-31-spread-away-2pt5",
+          "title": "Spread: Cubs (-2.5)",
+          "side": "BOTH",
+          "buyPrice": 0.52,
+          "betSize": 200,
+          "pnl": 10.44,
+          "won": true,
+          "date": "2025-08-31",
+          "reason": "arb: YES@51.5¢ + NO@47.5¢, vol=$10K"
+        },
+        {
+          "slug": "xrp-up-or-down-august-31-6pm-et",
+          "title": "XRP Up or Down - August 31, 6PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5895,
+          "betSize": 200,
+          "pnl": 46.07,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "arb: YES@58.4¢ + NO@40.6¢, vol=$15K"
+        },
+        {
+          "slug": "ethereum-up-or-down-august-31-6pm-et",
+          "title": "Ethereum Up or Down - August 31, 6PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5395,
+          "betSize": 200,
+          "pnl": 19.35,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "arb: YES@53.4¢ + NO@45.6¢, vol=$22K"
+        },
+        {
+          "slug": "solana-up-or-down-august-31-6pm-et",
+          "title": "Solana Up or Down - August 31, 6PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.505,
+          "betSize": 200,
+          "pnl": 4.06,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "arb: YES@50.0¢ + NO@49.0¢, vol=$12K"
+        },
+        {
+          "slug": "xrp-up-or-down-september-1-8am-et",
+          "title": "XRP Up or Down - September 1, 8AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$18K"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-1-8am-et",
+          "title": "Ethereum Up or Down - September 1, 8AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$15K"
+        },
+        {
+          "slug": "solana-up-or-down-september-1-9am-et",
+          "title": "Solana Up or Down - September 1, 9AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$12K"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-1-10am-et",
+          "title": "Ethereum Up or Down - September 1, 10AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.504,
+          "betSize": 200,
+          "pnl": 3.65,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "arb: YES@49.9¢ + NO@49.1¢, vol=$16K"
+        },
+        {
+          "slug": "xrp-up-or-down-september-1-4pm-et",
+          "title": "XRP Up or Down - September 1, 4PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5095,
+          "betSize": 200,
+          "pnl": 5.93,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "arb: YES@50.4¢ + NO@48.6¢, vol=$22K"
+        },
+        {
+          "slug": "xrp-up-or-down-september-1-5pm-et",
+          "title": "XRP Up or Down - September 1, 5PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5095,
+          "betSize": 200,
+          "pnl": 5.93,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "arb: YES@50.4¢ + NO@48.6¢, vol=$10K"
+        },
+        {
+          "slug": "solana-up-or-down-september-1-5pm-et",
+          "title": "Solana Up or Down - September 1, 5PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5095,
+          "betSize": 200,
+          "pnl": 5.93,
+          "won": true,
+          "date": "2025-09-01",
+          "reason": "arb: YES@50.4¢ + NO@48.6¢, vol=$14K"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-1-11pm-et",
+          "title": "Ethereum Up or Down - September 1, 11PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$22K"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-2-12am-et",
+          "title": "Ethereum Up or Down - September 2, 12AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$22K"
+        },
+        {
+          "slug": "xrp-up-or-down-september-2-12am-et",
+          "title": "XRP Up or Down - September 2, 12AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$7K"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-2-1am-et",
+          "title": "Ethereum Up or Down - September 2, 1AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.505,
+          "betSize": 200,
+          "pnl": 4.06,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "arb: YES@50.0¢ + NO@49.0¢, vol=$39K"
+        },
+        {
+          "slug": "solana-up-or-down-september-2-1am-et",
+          "title": "Solana Up or Down - September 2, 1AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.504,
+          "betSize": 200,
+          "pnl": 3.65,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "arb: YES@49.9¢ + NO@49.1¢, vol=$11K"
+        },
+        {
+          "slug": "xrp-up-or-down-september-2-1am-et",
+          "title": "XRP Up or Down - September 2, 1AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.504,
+          "betSize": 200,
+          "pnl": 3.65,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "arb: YES@49.9¢ + NO@49.1¢, vol=$8K"
+        },
+        {
+          "slug": "xrp-up-or-down-september-2-9am-et",
+          "title": "XRP Up or Down - September 2, 9AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-09-02",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$14K"
+        },
+        {
+          "slug": "xrp-up-or-down-september-3-1am-et",
+          "title": "XRP Up or Down - September 3, 1AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.49,
+          "betSize": 200,
+          "pnl": -1.94,
+          "won": false,
+          "date": "2025-09-03",
+          "reason": "arb: YES@48.5¢ + NO@50.5¢, vol=$13K"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-3-1am-et",
+          "title": "Ethereum Up or Down - September 3, 1AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.515,
+          "betSize": 200,
+          "pnl": 8.27,
+          "won": true,
+          "date": "2025-09-03",
+          "reason": "arb: YES@51.0¢ + NO@48.0¢, vol=$22K"
+        },
+        {
+          "slug": "xrp-up-or-down-september-3-7am-et",
+          "title": "XRP Up or Down - September 3, 7AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.504,
+          "betSize": 200,
+          "pnl": 3.65,
+          "won": true,
+          "date": "2025-09-03",
+          "reason": "arb: YES@49.9¢ + NO@49.1¢, vol=$10K"
+        },
+        {
+          "slug": "ethereum-up-or-down-september-3-8am-et",
+          "title": "Ethereum Up or Down - September 3, 8AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5095,
+          "betSize": 200,
+          "pnl": 5.93,
+          "won": true,
+          "date": "2025-09-03",
+          "reason": "arb: YES@50.4¢ + NO@48.6¢, vol=$22K"
+        },
+        {
+          "slug": "xrp-up-or-down-september-3-8am-et",
+          "title": "XRP Up or Down - September 3, 8AM ET",
+          "side": "BOTH",
+          "buyPrice": 0.5095,
+          "betSize": 200,
+          "pnl": 5.93,
+          "won": true,
+          "date": "2025-09-03",
+          "reason": "arb: YES@50.4¢ + NO@48.6¢, vol=$19K"
+        },
+        {
+          "slug": "will-the-price-of-xrp-be-between-3-and-3pt03-on-september-11-at-4pm-et",
+          "title": "Will the price of XRP be between $3.00 and $3.03 on September 11 at 4PM ET?",
+          "side": "BOTH",
+          "buyPrice": 0.47,
+          "betSize": 200,
+          "pnl": 14.92,
+          "won": true,
+          "date": "2025-09-11",
+          "reason": "arb: YES@46.5¢ + NO@52.5¢, vol=$29K"
+        },
+        {
+          "slug": "solana-up-or-down-september-12-6pm-et",
+          "title": "Solana Up or Down - September 12, 6PM ET",
+          "side": "BOTH",
+          "buyPrice": 0.4995,
+          "betSize": 200,
+          "pnl": 1.82,
+          "won": true,
+          "date": "2025-09-13",
+          "reason": "arb: YES@49.5¢ + NO@49.5¢, vol=$6K"
+        }
+      ]
+    }
+  }
+}
