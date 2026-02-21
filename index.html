@@ -76,6 +76,23 @@ header h1 .dot{width:8px;height:8px;border-radius:50%;background:var(--green);di
 .empty p{font-size:.85rem;max-width:360px;margin:0 auto}
 .empty code{background:var(--bg-2);padding:2px 6px;border-radius:4px;font-family:var(--font);font-size:.75rem;color:var(--fg-dim)}
 
+/* ─── Signal Cards ─────────────────────────────────────────── */
+.signals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.signal-card{background:var(--bg-1);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;transition:border-color .15s}
+.signal-card:hover{border-color:var(--bg-3)}
+.signal-card .sig-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.signal-card .sig-arrow{font-size:1.4rem;line-height:1}
+.signal-card .sig-title{font-size:.82rem;font-weight:600;line-height:1.3;flex:1;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.signal-card .sig-detail{display:flex;flex-wrap:wrap;gap:8px;font-size:.72rem;color:var(--fg-dim);margin-top:6px}
+.signal-card .sig-detail span{display:flex;align-items:center;gap:3px}
+.sig-badge{font-size:.6rem;font-weight:700;padding:2px 7px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em}
+.sig-badge.up{background:var(--green-bg);color:var(--green)}
+.sig-badge.down{background:var(--red-bg);color:var(--red)}
+.sig-badge.bet-yes{background:var(--green-bg);color:var(--green);border:1px solid rgba(34,197,94,.3)}
+.sig-badge.bet-no{background:var(--red-bg);color:var(--red);border:1px solid rgba(239,68,68,.3)}
+.sig-badge.no-bet{background:var(--bg-2);color:var(--fg-muted)}
+.sig-price{font-family:var(--font);font-weight:600;font-size:.8rem}
+
 /* ─── Footer ───────────────────────────────────────────────── */
 footer{text-align:center;padding:24px 0;color:var(--fg-muted);font-size:.7rem;border-top:1px solid var(--border);margin-top:20px}
 
@@ -112,6 +129,20 @@ footer{text-align:center;padding:24px 0;color:var(--fg-muted);font-size:.7rem;bo
   <div class="chart-wrap">
     <h2>Equity Curve</h2>
     <canvas id="equityChart"></canvas>
+  </div>
+
+  <!-- Recent Signals -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Recent Signals</h2>
+      <span class="count" id="signalCount">0</span>
+    </div>
+    <div class="signals-grid" id="signalsContainer">
+      <div class="empty" id="emptySignals">
+        <div class="icon">📡</div>
+        <p>No signals yet. Run <code>node sim.mjs snapshot</code> twice, then <code>node sim.mjs scan</code></p>
+      </div>
+    </div>
   </div>
 
   <!-- Open Positions -->
@@ -162,13 +193,15 @@ async function loadData(){
       fetch('data/bets.json').then(r=>r.json()),
       fetch('data/history.json').then(r=>r.json()),
     ]);
-    render(portfolio,bets,history);
+    let signals=null;
+    try{signals=await fetch('data/signals.json').then(r=>r.ok?r.json():null)}catch{}
+    render(portfolio,bets,history,signals);
   }catch(e){
     console.error('Failed to load data:',e);
   }
 }
 
-function render(portfolio,bets,history){
+function render(portfolio,bets,history,signalsData){
   // ── Stats ──
   const openValue=bets.reduce((s,b)=>s+b.shares*(b.currentPrice||b.entryPrice),0);
   const openCost=bets.reduce((s,b)=>s+b.cost,0);
@@ -255,6 +288,40 @@ function render(portfolio,bets,history){
       <thead><tr><th></th><th>Market</th><th>Side</th><th>Entry</th><th>Exit</th><th>Cost</th><th>P&L</th><th>Closed</th></tr></thead>
       <tbody>${rows}</tbody>
     </table></div>`;
+  }
+
+  // ── Signals ──
+  const sc=$('signalsContainer');
+  const sigs=signalsData&&signalsData.signals?signalsData.signals:[];
+  $('signalCount').textContent=sigs.length;
+  if(sigs.length===0){
+    sc.innerHTML=`<div class="empty" style="grid-column:1/-1"><div class="icon">📡</div><p>No signals yet. Run <code>node sim.mjs snapshot</code> twice, then <code>node sim.mjs scan</code></p></div>`;
+  }else{
+    sc.innerHTML=sigs.map(s=>{
+      const arrow=s.direction==='UP'?'🟢 ↑':s.direction==='DOWN'?'🔴 ↓':'⚪ →';
+      const dirClass=s.direction==='UP'?'up':'down';
+      const priceStr=`${(s.oldPrice*100).toFixed(1)}¢ → ${(s.newPrice*100).toFixed(1)}¢`;
+      const pctSign=parseFloat(s.pricePct)>0?'+':'';
+      const volStr=s.volumeChange!=='N/A'?`Vol +${s.volumeChange}%`:'';
+      const betBadge=s.betPlaced
+        ?`<span class="sig-badge bet-${s.betSide?s.betSide.toLowerCase():'yes'}">✓ Bet ${s.betSide||''} $${(s.betAmount||0).toFixed(0)}</span>`
+        :`<span class="sig-badge no-bet">No bet</span>`;
+      const flags=[];
+      if(s.isPriceSpike)flags.push(`<span class="sig-badge ${dirClass}">Price ${pctSign}${s.pricePct}%</span>`);
+      if(s.isVolSpike)flags.push(`<span class="sig-badge ${dirClass}">Vol +${s.volumeChange}%</span>`);
+      return `<div class="signal-card">
+        <div class="sig-header">
+          <span class="sig-arrow">${arrow}</span>
+          <span class="sig-title">${esc(s.title)}</span>
+        </div>
+        <div class="sig-price">${priceStr}</div>
+        <div class="sig-detail">
+          ${flags.join('')}
+          ${betBadge}
+          ${volStr?`<span>📊 ${volStr}</span>`:''}
+        </div>
+      </div>`;
+    }).join('');
   }
 }
 

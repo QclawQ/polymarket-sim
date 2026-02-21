@@ -3,16 +3,19 @@
  * Polymarket Paper Trading Simulator - CLI
  *
  * Commands:
- *   bet    --market <slug> --side YES|NO --amount <usd>
- *   sell   --bet-id <id> [--price <0-1>]
+ *   bet      --market <slug> --side YES|NO --amount <usd>
+ *   sell     --bet-id <id> [--price <0-1>]
  *   resolve  — settle resolved markets
  *   status   — show portfolio & open positions
  *   refresh  — update current prices for all open bets
  *   search   <query> — search polymarket markets
  *   reset    — reset portfolio to initial state
+ *   snapshot — capture current market prices & volumes
+ *   scan     — detect anomalous price/volume moves between snapshots
+ *   auto-bet — automatically bet on detected momentum signals
  */
 
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'fs';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -24,6 +27,8 @@ const DATA_DIR = join(__dirname, 'data');
 const PORTFOLIO_FILE = join(DATA_DIR, 'portfolio.json');
 const BETS_FILE = join(DATA_DIR, 'bets.json');
 const HISTORY_FILE = join(DATA_DIR, 'history.json');
+const SNAPSHOTS_DIR = join(DATA_DIR, 'snapshots');
+const SIGNALS_FILE = join(DATA_DIR, 'signals.json');
 
 const POLYMARKET_CLI = '/Users/quen/.openclaw/workspace/skills/polymarket-odds/polymarket.mjs';
 const GAMMA_API = 'https://gamma-api.polymarket.com';
@@ -466,6 +471,272 @@ function cmdReset() {
   console.log('✅ Portfolio reset to $10,000.');
 }
 
+// ─── Phase 2: Snapshot / Scan / Auto-Bet ─────────────────────────
+
+async function cmdSnapshot() {
+  if (!existsSync(SNAPSHOTS_DIR)) mkdirSync(SNAPSHOTS_DIR, { recursive: true });
+
+  console.log('📸 Fetching active markets from Polymarket…');
+
+  // Paginate through all active markets
+  let allMarkets = [];
+  let offset = 0;
+  const limit = 100;
+  let hasMore = true;
+
+  while (hasMore) {
+    const url = `${GAMMA_API}/markets?closed=false&active=true&limit=${limit}&offset=${offset}`;
+    try {
+      const batch = await fetchJSON(url);
+      if (!batch || batch.length === 0) {
+        hasMore = false;
+      } else {
+        allMarkets = allMarkets.concat(batch);
+        offset += batch.length;
+        if (batch.length < limit) hasMore = false;
+      }
+    } catch (e) {
+      console.error(`  Error fetching page at offset ${offset}: ${e.message}`);
+      hasMore = false;
+    }
+  }
+
+  if (allMarkets.length === 0) {
+    console.log('  No markets fetched. Check API connectivity.');
+    return;
+  }
+
+  // Normalize market data
+  const markets = allMarkets.map(m => {
+    const outcomes = parseOutcomes(m);
+    const yesPrice = outcomes.find(o => o.name.toUpperCase() === 'YES')?.price || null;
+    return {
+      slug: m.slug || m.id,
+      title: m.question || m.title || m.slug,
+      price: yesPrice,
+      volume: parseFloat(m.volume || m.volumeNum || 0),
+      liquidity: parseFloat(m.liquidity || 0),
+      marketId: m.id || m.condition_id || null,
+    };
+  }).filter(m => m.price !== null);
+
+  const now = new Date();
+  const pad = n => String(n).padStart(2, '0');
+  const filename = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}T${pad(now.getHours())}-${pad(now.getMinutes())}.json`;
+  const filepath = join(SNAPSHOTS_DIR, filename);
+
+  const snapshot = {
+    timestamp: now.toISOString(),
+    marketCount: markets.length,
+    markets,
+  };
+
+  saveJSON(filepath, snapshot);
+  console.log(`✅ Snapshot saved: data/snapshots/${filename}`);
+  console.log(`   ${markets.length} markets captured.`);
+}
+
+function getRecentSnapshots(count = 2) {
+  if (!existsSync(SNAPSHOTS_DIR)) return [];
+  const files = readdirSync(SNAPSHOTS_DIR)
+    .filter(f => f.endsWith('.json'))
+    .sort()
+    .slice(-count);
+  return files.map(f => loadJSON(join(SNAPSHOTS_DIR, f)));
+}
+
+function detectSignals(oldSnap, newSnap) {
+  const PRICE_THRESHOLD = 0.10;  // 10% absolute
+  const VOLUME_THRESHOLD = 2.0;  // 200% increase (3x)
+
+  // Index old markets by slug
+  const oldBySlug = {};
+  for (const m of oldSnap.markets) {
+    oldBySlug[m.slug] = m;
+  }
+
+  const signals = [];
+
+  for (const m of newSnap.markets) {
+    const old = oldBySlug[m.slug];
+    if (!old) continue;
+
+    const priceDelta = m.price - old.price;
+    const priceAbsDelta = Math.abs(priceDelta);
+    const volumeRatio = old.volume > 0 ? m.volume / old.volume : 0;
+
+    const isPriceSpike = priceAbsDelta > PRICE_THRESHOLD;
+    const isVolSpike = old.volume > 0 && (volumeRatio - 1) > VOLUME_THRESHOLD;
+
+    if (isPriceSpike || isVolSpike) {
+      signals.push({
+        slug: m.slug,
+        title: m.title,
+        oldPrice: old.price,
+        newPrice: m.price,
+        priceDelta,
+        pricePct: (priceDelta * 100).toFixed(1),
+        oldVolume: old.volume,
+        newVolume: m.volume,
+        volumeChange: old.volume > 0 ? ((volumeRatio - 1) * 100).toFixed(0) : 'N/A',
+        isPriceSpike,
+        isVolSpike,
+        direction: priceDelta > 0 ? 'UP' : priceDelta < 0 ? 'DOWN' : 'FLAT',
+        detectedAt: new Date().toISOString(),
+      });
+    }
+  }
+
+  return signals;
+}
+
+async function cmdScan() {
+  const snaps = getRecentSnapshots(2);
+  if (snaps.length < 2) {
+    console.log('⚠️  Need at least 2 snapshots to scan. Run `sim.mjs snapshot` first.');
+    return [];
+  }
+
+  const [oldSnap, newSnap] = snaps;
+  console.log(`🔍 Scanning: ${oldSnap.timestamp} → ${newSnap.timestamp}`);
+  console.log(`   Comparing ${oldSnap.marketCount} vs ${newSnap.marketCount} markets\n`);
+
+  const signals = detectSignals(oldSnap, newSnap);
+
+  if (signals.length === 0) {
+    console.log('No significant moves detected.');
+    // Save empty signals
+    saveJSON(SIGNALS_FILE, { timestamp: new Date().toISOString(), signals: [] });
+    return [];
+  }
+
+  // Sort by absolute price change
+  signals.sort((a, b) => Math.abs(b.priceDelta) - Math.abs(a.priceDelta));
+
+  console.log(`🚨 ${signals.length} anomal${signals.length === 1 ? 'y' : 'ies'} detected:\n`);
+
+  for (const s of signals) {
+    const arrow = s.direction === 'UP' ? '↑' : s.direction === 'DOWN' ? '↓' : '→';
+    const flags = [];
+    if (s.isPriceSpike) flags.push(`price ${s.pricePct > 0 ? '+' : ''}${s.pricePct}%`);
+    if (s.isVolSpike) flags.push(`volume +${s.volumeChange}%`);
+
+    console.log(`  ${arrow} ${s.title}`);
+    console.log(`    Price: ${(s.oldPrice * 100).toFixed(1)}¢ → ${(s.newPrice * 100).toFixed(1)}¢  [${flags.join(' | ')}]`);
+    console.log(`    Volume: $${fmtNum(s.oldVolume)} → $${fmtNum(s.newVolume)}`);
+    console.log();
+  }
+
+  // Save signals for dashboard / auto-bet
+  saveJSON(SIGNALS_FILE, { timestamp: new Date().toISOString(), signals });
+  return signals;
+}
+
+function fmtNum(n) {
+  if (n >= 1e6) return (n / 1e6).toFixed(1) + 'M';
+  if (n >= 1e3) return (n / 1e3).toFixed(1) + 'K';
+  return n.toFixed(0);
+}
+
+async function cmdAutoBet() {
+  console.log('🤖 Auto-Bet: Running scan first…\n');
+  const signals = await cmdScan();
+
+  if (!signals || signals.length === 0) {
+    console.log('\n🤖 No signals → no bets placed.');
+    return;
+  }
+
+  // Only bet on price spikes (momentum)
+  const actionable = signals.filter(s => s.isPriceSpike);
+  if (actionable.length === 0) {
+    console.log('\n🤖 Volume-only signals — no price momentum to bet on.');
+    return;
+  }
+
+  const portfolio = loadPortfolio();
+  const bets = loadBets();
+
+  // Kelly-simplified: bet 2% of total equity per signal, capped
+  const totalEquity = portfolio.cashBalance + bets.reduce((s, b) => s + b.shares * (b.currentPrice || b.entryPrice), 0);
+  const betSize = Math.min(parseFloat((totalEquity * 0.02).toFixed(2)), 200);
+
+  console.log(`\n🤖 Auto-Bet: ${actionable.length} actionable signal(s), $${betSize.toFixed(2)}/bet\n`);
+
+  let placed = 0;
+
+  for (const sig of actionable) {
+    if (portfolio.cashBalance < betSize) {
+      console.log(`  ⚠️  Insufficient cash ($${portfolio.cashBalance.toFixed(2)}). Stopping.`);
+      break;
+    }
+
+    // Momentum: price going up → YES, price going down → NO
+    const side = sig.direction === 'UP' ? 'YES' : 'NO';
+    const price = side === 'YES' ? sig.newPrice : (1 - sig.newPrice);
+
+    if (price <= 0.01 || price >= 0.99) {
+      console.log(`  ⏭️  Skipping ${sig.slug}: price too extreme (${(price * 100).toFixed(1)}¢)`);
+      continue;
+    }
+
+    // Check if we already have an open bet on this market
+    const existing = bets.find(b => b.marketSlug === sig.slug && b.status === 'open');
+    if (existing) {
+      console.log(`  ⏭️  Skipping ${sig.slug}: already have open position`);
+      continue;
+    }
+
+    const shares = parseFloat((betSize / price).toFixed(4));
+    const cost = parseFloat(betSize.toFixed(2));
+
+    const reason = `momentum signal: price moved from ${(sig.oldPrice * 100).toFixed(1)}¢ to ${(sig.newPrice * 100).toFixed(1)}¢ (${sig.pricePct > 0 ? '+' : ''}${sig.pricePct}%)`;
+
+    const bet = {
+      id: genId(),
+      marketSlug: sig.slug,
+      marketId: null,
+      question: sig.title,
+      side,
+      entryPrice: price,
+      currentPrice: price,
+      shares,
+      cost,
+      openedAt: new Date().toISOString(),
+      status: 'open',
+      autoBet: true,
+      reason,
+    };
+
+    bets.push(bet);
+    portfolio.cashBalance = parseFloat((portfolio.cashBalance - cost).toFixed(2));
+    placed++;
+
+    const arrow = sig.direction === 'UP' ? '↑' : '↓';
+    console.log(`  ✅ ${arrow} ${sig.title}`);
+    console.log(`     ${side} @ ${(price * 100).toFixed(1)}¢ | $${cost.toFixed(2)} | ${shares.toFixed(2)} shares`);
+    console.log(`     Reason: ${reason}`);
+    console.log();
+
+    // Update signal with bet info
+    sig.betPlaced = true;
+    sig.betId = bet.id;
+    sig.betSide = side;
+    sig.betAmount = cost;
+  }
+
+  updateEquityCurve(portfolio, bets);
+  saveJSON(BETS_FILE, bets);
+  saveJSON(PORTFOLIO_FILE, portfolio);
+
+  // Update signals file with bet info
+  const existingSignals = loadJSON(SIGNALS_FILE) || { timestamp: new Date().toISOString(), signals: [] };
+  existingSignals.signals = signals;
+  saveJSON(SIGNALS_FILE, existingSignals);
+
+  console.log(`🤖 Auto-Bet complete: ${placed} bet(s) placed. Balance: $${portfolio.cashBalance.toFixed(2)}`);
+}
+
 // ─── Arg parsing ─────────────────────────────────────────────────
 
 function argVal(args, flag) {
@@ -502,6 +773,15 @@ const [,, cmd, ...args] = process.argv;
       case 'reset':
         cmdReset();
         break;
+      case 'snapshot':
+        await cmdSnapshot();
+        break;
+      case 'scan':
+        await cmdScan();
+        break;
+      case 'auto-bet':
+        await cmdAutoBet();
+        break;
       default:
         console.log(`Polymarket Paper Trading Simulator
 
@@ -513,6 +793,9 @@ Commands:
   refresh                                                  Update prices
   search   <query>                                         Search markets
   reset                                                    Reset portfolio
+  snapshot                                                 Capture market prices & volumes
+  scan                                                     Detect anomalous moves
+  auto-bet                                                 Auto-bet on momentum signals
 
 Examples:
   node sim.mjs search "bitcoin"
@@ -521,6 +804,9 @@ Examples:
   node sim.mjs sell --bet-id abc123
   node sim.mjs refresh
   node sim.mjs resolve
+  node sim.mjs snapshot
+  node sim.mjs scan
+  node sim.mjs auto-bet
 `);
     }
   } catch (e) {
