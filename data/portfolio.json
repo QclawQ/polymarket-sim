@@ -1,12 +1,56 @@
 {
-  "initialBalance": 10000,
-  "cashBalance": 10000,
-  "totalDeposited": 10000,
-  "createdAt": "2026-02-21T05:29:10.903Z",
-  "equityCurve": [
-    {
-      "date": "2026-02-21",
-      "equity": 10000
+  "strategies": {
+    "momentum": {
+      "cash": 2000,
+      "initialCash": 2000,
+      "equityCurve": [
+        {
+          "date": "2026-02-21",
+          "equity": 2000
+        }
+      ]
+    },
+    "contrarian": {
+      "cash": 2000,
+      "initialCash": 2000,
+      "equityCurve": [
+        {
+          "date": "2026-02-21",
+          "equity": 2000
+        }
+      ]
+    },
+    "status_quo": {
+      "cash": 1547.56,
+      "initialCash": 2000,
+      "equityCurve": [
+        {
+          "date": "2026-02-21",
+          "equity": 2000
+        }
+      ]
+    },
+    "cheap_contracts": {
+      "cash": 1901.98,
+      "initialCash": 2000,
+      "equityCurve": [
+        {
+          "date": "2026-02-21",
+          "equity": 2000
+        }
+      ]
+    },
+    "arb": {
+      "cash": 1825.34,
+      "initialCash": 2000,
+      "equityCurve": [
+        {
+          "date": "2026-02-21",
+          "equity": 2000
+        }
+      ]
     }
-  ]
+  },
+  "totalInitial": 10000,
+  "createdAt": "2026-02-21T07:55:32.827Z"
 }

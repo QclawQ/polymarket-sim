@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Polymarket Sim — Paper Trading</title>
+<title>Polymarket Sim — Multi-Strategy Paper Trading</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
 /* ─── Reset & Base ─────────────────────────────────────────── */
@@ -14,7 +14,8 @@
   --green:#22c55e;--green-bg:rgba(34,197,94,.12);
   --red:#ef4444;--red-bg:rgba(239,68,68,.12);
   --accent:#6366f1;--accent-bg:rgba(99,102,241,.12);
-  --yellow:#eab308;
+  --yellow:#eab308;--yellow-bg:rgba(234,179,8,.12);
+  --cyan:#06b6d4;--orange:#f97316;--pink:#ec4899;
   --border:#1e293b;
   --radius:10px;
   --font:'SF Mono','Cascadia Code','Fira Code',monospace;
@@ -33,17 +34,56 @@ header h1 .dot{width:8px;height:8px;border-radius:50%;background:var(--green);di
 .refresh-btn:hover{background:var(--bg-3);color:var(--fg)}
 
 /* ─── Stats Row ────────────────────────────────────────────── */
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:20px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:20px}
 .stat-card{background:var(--bg-1);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px}
 .stat-card .label{font-size:.7rem;color:var(--fg-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;font-weight:600}
 .stat-card .value{font-size:1.4rem;font-weight:700;font-family:var(--font)}
 .stat-card .sub{font-size:.75rem;color:var(--fg-dim);margin-top:2px}
 .positive{color:var(--green)}.negative{color:var(--red)}.neutral{color:var(--fg)}
 
+/* ─── Leaderboard ──────────────────────────────────────────── */
+.leaderboard-wrap{background:var(--bg-1);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:20px}
+.leaderboard-wrap h2{font-size:.85rem;color:var(--fg-dim);margin-bottom:14px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;display:flex;align-items:center;gap:8px}
+.lb-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.lb-table th{text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);color:var(--fg-muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:.68rem}
+.lb-table th.num{text-align:right}
+.lb-table td{padding:10px 12px;border-bottom:1px solid var(--border);transition:background .15s}
+.lb-table td.num{text-align:right;font-family:var(--font);font-weight:600}
+.lb-table tr.lb-row{cursor:pointer}
+.lb-table tr.lb-row:hover td{background:var(--bg-2)}
+.lb-table tr.lb-row.expanded td{background:var(--bg-2);border-bottom:none}
+.lb-rank{font-weight:700;font-size:1rem;min-width:28px;display:inline-block}
+.lb-strategy{font-weight:700;font-size:.88rem}
+.lb-strategy-desc{font-size:.7rem;color:var(--fg-muted);margin-top:2px}
+
+/* Strategy colors */
+.strat-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:8px;flex-shrink:0}
+.strat-momentum .strat-dot{background:#22c55e}
+.strat-contrarian .strat-dot{background:#ef4444}
+.strat-status_quo .strat-dot{background:#6366f1}
+.strat-cheap_contracts .strat-dot{background:#eab308}
+.strat-arb .strat-dot{background:#06b6d4}
+
+/* Expanded detail row */
+.lb-detail{display:none}
+.lb-detail.show{display:table-row}
+.lb-detail td{padding:0;border-bottom:1px solid var(--border)}
+.lb-detail-inner{padding:12px 16px;background:var(--bg-2)}
+.lb-detail-bets{font-size:.78rem;margin-top:8px}
+.lb-detail-bets .bet-row{display:flex;gap:12px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);align-items:center;flex-wrap:wrap}
+.lb-detail-bets .bet-row:last-child{border-bottom:none}
+.lb-detail-stats{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:8px;font-size:.76rem;color:var(--fg-dim)}
+.lb-detail-stats span{display:flex;align-items:center;gap:4px}
+.lb-no-bets{color:var(--fg-muted);font-size:.78rem;font-style:italic;padding:8px 0}
+
 /* ─── Chart ────────────────────────────────────────────────── */
 .chart-wrap{background:var(--bg-1);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:20px}
 .chart-wrap h2{font-size:.85rem;color:var(--fg-dim);margin-bottom:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
-.chart-wrap canvas{width:100%!important;max-height:240px}
+.chart-wrap canvas{width:100%!important;max-height:280px}
+.chart-legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;font-size:.75rem}
+.chart-legend-item{display:flex;align-items:center;gap:6px;cursor:pointer;opacity:.9;transition:opacity .15s}
+.chart-legend-item:hover{opacity:1}
+.chart-legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 
 /* ─── Sections ─────────────────────────────────────────────── */
 .section{margin-bottom:24px}
@@ -53,14 +93,15 @@ header h1 .dot{width:8px;height:8px;border-radius:50%;background:var(--green);di
 
 /* ─── Position Cards ───────────────────────────────────────── */
 .positions{display:grid;gap:10px}
-.pos-card{background:var(--bg-1);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;display:grid;grid-template-columns:1fr auto;gap:8px;transition:border-color .15s}
+.pos-card{background:var(--bg-1);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;transition:border-color .15s}
 .pos-card:hover{border-color:var(--bg-3)}
-.pos-card .title{font-size:.85rem;font-weight:600;line-height:1.4;grid-column:1/-1}
-.pos-card .meta{display:flex;gap:16px;flex-wrap:wrap;font-size:.75rem;color:var(--fg-dim);grid-column:1/-1}
+.pos-card .title{font-size:.85rem;font-weight:600;line-height:1.4;margin-bottom:6px}
+.pos-card .meta{display:flex;gap:12px;flex-wrap:wrap;font-size:.75rem;color:var(--fg-dim)}
 .pos-card .meta span{display:flex;align-items:center;gap:4px}
 .side-badge{font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em}
 .side-yes{background:var(--green-bg);color:var(--green)}
 .side-no{background:var(--red-bg);color:var(--red)}
+.strat-badge{font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em;background:var(--accent-bg);color:var(--accent)}
 .pnl-tag{font-family:var(--font);font-weight:700;font-size:.8rem}
 
 /* ─── History Table ────────────────────────────────────────── */
@@ -156,6 +197,8 @@ footer{text-align:center;padding:24px 0;color:var(--fg-muted);font-size:.7rem;bo
   .pos-card{padding:12px}
   .history-table{font-size:.72rem}
   .history-table th,.history-table td{padding:6px 8px}
+  .lb-table{font-size:.72rem}
+  .lb-table th,.lb-table td{padding:6px 8px}
   .strat-grid{grid-template-columns:1fr}
   .wallets-grid{grid-template-columns:1fr}
   .tab-btn{padding:8px 12px;font-size:.75rem}
@@ -166,7 +209,7 @@ footer{text-align:center;padding:24px 0;color:var(--fg-muted);font-size:.7rem;bo
 <body>
 <div class="app">
   <header>
-    <h1><span class="dot"></span> Polymarket Sim <span class="tag">Paper</span></h1>
+    <h1><span class="dot"></span> Polymarket Sim <span class="tag">Multi-Strategy</span></h1>
     <button class="refresh-btn" onclick="loadData()">↻ Refresh</button>
   </header>
 
@@ -182,17 +225,37 @@ footer{text-align:center;padding:24px 0;color:var(--fg-muted);font-size:.7rem;bo
   <!-- Stats -->
   <div class="stats-grid" id="statsGrid">
     <div class="stat-card"><div class="label">Total Equity</div><div class="value neutral" id="stEquity">$10,000.00</div></div>
-    <div class="stat-card"><div class="label">Cash Balance</div><div class="value neutral" id="stCash">$10,000.00</div></div>
+    <div class="stat-card"><div class="label">Total Cash</div><div class="value neutral" id="stCash">$10,000.00</div></div>
     <div class="stat-card"><div class="label">Total P&L</div><div class="value neutral" id="stPnl">$0.00</div><div class="sub" id="stRoi">ROI 0.00%</div></div>
     <div class="stat-card"><div class="label">Open Positions</div><div class="value neutral" id="stOpen">0</div></div>
     <div class="stat-card"><div class="label">Win Rate</div><div class="value neutral" id="stWinRate">—</div><div class="sub" id="stTrades">0 trades</div></div>
-    <div class="stat-card"><div class="label">Sharpe Ratio</div><div class="value neutral" id="stSharpe">—</div></div>
+    <div class="stat-card"><div class="label">Strategies Active</div><div class="value neutral" id="stStrats">5</div></div>
   </div>
 
-  <!-- Equity Curve -->
+  <!-- Strategy Leaderboard -->
+  <div class="leaderboard-wrap" id="leaderboardWrap">
+    <h2>🏆 Strategy Leaderboard</h2>
+    <table class="lb-table" id="lbTable">
+      <thead>
+        <tr>
+          <th style="width:40px">#</th>
+          <th>Strategy</th>
+          <th class="num">Win %</th>
+          <th class="num">P&L</th>
+          <th class="num">ROI %</th>
+          <th class="num">Sharpe</th>
+          <th class="num">Open</th>
+        </tr>
+      </thead>
+      <tbody id="lbBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Multi-Strategy Equity Curve -->
   <div class="chart-wrap">
-    <h2>Equity Curve</h2>
+    <h2>Equity Curves — All Strategies</h2>
     <canvas id="equityChart"></canvas>
+    <div class="chart-legend" id="chartLegend"></div>
   </div>
 
   <!-- Recent Signals -->
@@ -218,8 +281,8 @@ footer{text-align:center;padding:24px 0;color:var(--fg-muted);font-size:.7rem;bo
     <div class="positions" id="positionsContainer">
       <div class="empty" id="emptyPositions">
         <div class="icon">📭</div>
-        <p>No open positions yet. Place your first bet:</p>
-        <p style="margin-top:8px"><code>node sim.mjs bet --market &lt;slug&gt; --side YES --amount 100</code></p>
+        <p>No open positions yet. Run:</p>
+        <p style="margin-top:8px"><code>node sim.mjs auto-bet</code></p>
       </div>
     </div>
   </div>
@@ -246,36 +309,97 @@ footer{text-align:center;padding:24px 0;color:var(--fg-muted);font-size:.7rem;bo
       <span class="pulse-dot"></span> Last updated: loading...
     </div>
 
-    <!-- Strategies -->
     <div class="strat-section-title"><span class="icon">🧠</span> Trading Strategies</div>
     <div class="strat-grid" id="stratGrid">
       <div class="empty"><div class="icon">📚</div><p>Loading strategies...</p></div>
     </div>
 
-    <!-- Notable Wallets -->
     <div class="strat-section-title"><span class="icon">🐋</span> Notable Wallets</div>
     <div class="wallets-grid" id="walletsGrid">
       <div class="empty"><div class="icon">👛</div><p>Loading wallets...</p></div>
     </div>
 
-    <!-- KOLs -->
     <div class="strat-section-title"><span class="icon">📡</span> KOLs to Track</div>
     <div class="kol-list" id="kolList">
       <span class="kol-chip">Loading...</span>
     </div>
   </div><!-- /tab-strategies -->
 
-  <footer>Polymarket Paper Trading Simulator &mdash; Data is simulated. Not financial advice.</footer>
+  <footer>Polymarket Paper Trading Simulator — Multi-Strategy Engine — Not financial advice.</footer>
 </div>
 
 <script>
 let chart = null;
+
+const STRATEGY_NAMES = ['momentum', 'contrarian', 'status_quo', 'cheap_contracts', 'arb'];
+const STRATEGY_LABELS = {
+  momentum: '📈 Momentum',
+  contrarian: '📉 Contrarian',
+  status_quo: '🏛️ Status Quo',
+  cheap_contracts: '🎰 Cheap Contracts',
+  arb: '⚖️ Arbitrage',
+};
+const STRATEGY_DESCRIPTIONS = {
+  momentum: 'Follow price spikes >10%',
+  contrarian: 'Fade price spikes (opposite)',
+  status_quo: 'Bet against unlikely events',
+  cheap_contracts: 'Lottery tickets <5¢',
+  arb: 'YES+NO pricing gaps',
+};
+const STRATEGY_COLORS = {
+  momentum: '#22c55e',
+  contrarian: '#ef4444',
+  status_quo: '#6366f1',
+  cheap_contracts: '#eab308',
+  arb: '#06b6d4',
+};
 
 function $(id){return document.getElementById(id)}
 function fmt(v){return v>=0?`+$${v.toFixed(2)}`:`-$${Math.abs(v).toFixed(2)}`}
 function fmtUsd(v){return `$${v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`}
 function pnlClass(v){return v>0?'positive':v<0?'negative':'neutral'}
 function pctStr(v){return (v*100).toFixed(1)+'¢'}
+
+function computeStratStats(name, portfolio, bets, history) {
+  const strat = portfolio.strategies[name];
+  if (!strat) return null;
+  const openBets = bets.filter(b => b.strategy === name && b.status === 'open');
+  const closedBets = history.filter(h => h.strategy === name);
+
+  const openValue = openBets.reduce((s, b) => s + b.shares * (b.currentPrice || b.entryPrice), 0);
+  const openCost = openBets.reduce((s, b) => s + b.cost, 0);
+  const unrealizedPnl = openValue - openCost;
+  const realizedPnl = closedBets.reduce((s, h) => s + (h.pnl || 0), 0);
+  const totalPnl = realizedPnl + unrealizedPnl;
+  const totalEquity = strat.cash + openValue;
+  const initialCash = strat.initialCash || 2000;
+  const roi = (totalPnl / initialCash * 100);
+  const wins = closedBets.filter(h => (h.pnl || 0) > 0).length;
+  const winRate = closedBets.length > 0 ? (wins / closedBets.length * 100) : null;
+
+  // Sharpe
+  const curve = strat.equityCurve || [];
+  let sharpe = null;
+  if (curve.length >= 3) {
+    const returns = [];
+    for (let i = 1; i < curve.length; i++) {
+      returns.push((curve[i].equity - curve[i-1].equity) / curve[i-1].equity);
+    }
+    const mean = returns.reduce((a, b) => a + b, 0) / returns.length;
+    const std = Math.sqrt(returns.reduce((a, r) => a + Math.pow(r - mean, 2), 0) / returns.length);
+    sharpe = std > 0 ? parseFloat((mean / std * Math.sqrt(252)).toFixed(2)) : null;
+  }
+
+  return {
+    name, cash: strat.cash, initialCash, totalEquity, openValue,
+    unrealizedPnl, realizedPnl, totalPnl, roi, wins,
+    losses: closedBets.filter(h => (h.pnl||0) <= 0).length,
+    winRate, trades: closedBets.length, sharpe,
+    openPositions: openBets.length,
+    equityCurve: curve,
+    openBets, closedBets,
+  };
+}
 
 async function loadData(){
   try{
@@ -293,81 +417,99 @@ async function loadData(){
 }
 
 function render(portfolio,bets,history,signalsData){
-  // ── Stats ──
-  const openValue=bets.reduce((s,b)=>s+b.shares*(b.currentPrice||b.entryPrice),0);
-  const openCost=bets.reduce((s,b)=>s+b.cost,0);
-  const unrealizedPnl=openValue-openCost;
-  const realizedPnl=history.reduce((s,h)=>s+(h.pnl||0),0);
-  const totalPnl=realizedPnl+unrealizedPnl;
-  const totalEquity=portfolio.cashBalance+openValue;
-  const roi=(totalPnl/portfolio.initialBalance*100).toFixed(2);
-  const wins=history.filter(h=>h.pnl>0).length;
-  const winRate=history.length>0?(wins/history.length*100).toFixed(1)+'%':'—';
-
-  $('stEquity').textContent=fmtUsd(totalEquity);
-  $('stEquity').className='value '+pnlClass(totalPnl);
-  $('stCash').textContent=fmtUsd(portfolio.cashBalance);
-  $('stPnl').textContent=fmt(totalPnl);
-  $('stPnl').className='value '+pnlClass(totalPnl);
-  $('stRoi').textContent=`ROI ${roi}%`;
-  $('stOpen').textContent=bets.length;
-  $('stWinRate').textContent=winRate;
-  $('stTrades').textContent=`${history.length} trades`;
-
-  // Sharpe (annualized, from equity curve daily returns)
-  const curve=portfolio.equityCurve||[];
-  if(curve.length>=3){
-    const returns=[];
-    for(let i=1;i<curve.length;i++){
-      returns.push((curve[i].equity-curve[i-1].equity)/curve[i-1].equity);
-    }
-    const mean=returns.reduce((a,b)=>a+b,0)/returns.length;
-    const std=Math.sqrt(returns.reduce((a,r)=>a+Math.pow(r-mean,2),0)/returns.length);
-    const sharpe=std>0?(mean/std*Math.sqrt(252)).toFixed(2):'—';
-    $('stSharpe').textContent=sharpe;
-  }else{
-    $('stSharpe').textContent='—';
+  // Check for new multi-strategy format
+  const isMultiStrategy = portfolio.strategies != null;
+  if (!isMultiStrategy) {
+    // Legacy fallback
+    renderLegacy(portfolio, bets, history, signalsData);
+    return;
   }
 
-  // ── Equity Chart ──
-  renderChart(curve,portfolio.initialBalance);
+  // ── Aggregate Stats ──
+  let totalCash = 0, totalOpenValue = 0, totalRealizedPnl = 0, totalOpenCost = 0;
+  const allStats = {};
+  for (const name of STRATEGY_NAMES) {
+    const s = computeStratStats(name, portfolio, bets, history);
+    if (s) {
+      allStats[name] = s;
+      totalCash += s.cash;
+      totalOpenValue += s.openValue;
+      totalRealizedPnl += s.realizedPnl;
+      totalOpenCost += bets.filter(b => b.strategy === name && b.status === 'open').reduce((sum, b) => sum + b.cost, 0);
+    }
+  }
+  const totalUnrealizedPnl = totalOpenValue - totalOpenCost;
+  const totalPnl = totalRealizedPnl + totalUnrealizedPnl;
+  const totalEquity = totalCash + totalOpenValue;
+  const totalInitial = portfolio.totalInitial || 10000;
+  const roi = (totalPnl / totalInitial * 100).toFixed(2);
+  const allClosed = history;
+  const wins = allClosed.filter(h => (h.pnl||0) > 0).length;
+  const winRate = allClosed.length > 0 ? (wins / allClosed.length * 100).toFixed(1) + '%' : '—';
+  const activeStrats = Object.values(allStats).filter(s => s.openPositions > 0 || s.trades > 0).length;
+  const openBetsAll = bets.filter(b => b.status === 'open');
 
-  // ── Open Positions ──
-  $('openCount').textContent=bets.length;
-  const pc=$('positionsContainer');
-  if(bets.length===0){
-    pc.innerHTML=`<div class="empty"><div class="icon">📭</div><p>No open positions yet. Place your first bet:</p><p style="margin-top:8px"><code>node sim.mjs bet --market &lt;slug&gt; --side YES --amount 100</code></p></div>`;
-  }else{
-    pc.innerHTML=bets.map(b=>{
-      const cv=b.shares*(b.currentPrice||b.entryPrice);
-      const pnl=cv-b.cost;
-      const pnlPct=(pnl/b.cost*100).toFixed(1);
-      return `<div class="pos-card">
-        <div class="title">${esc(b.question||b.marketSlug)}</div>
-        <div class="meta">
-          <span class="side-badge side-${b.side.toLowerCase()}">${b.side}</span>
-          <span>Entry ${pctStr(b.entryPrice)}</span>
-          <span>Now ${pctStr(b.currentPrice||b.entryPrice)}</span>
-          <span>${b.shares.toFixed(2)} shares</span>
-          <span>Cost ${fmtUsd(b.cost)}</span>
-          <span class="pnl-tag ${pnlClass(pnl)}">${fmt(pnl)} (${pnlPct}%)</span>
-        </div>
-      </div>`;
-    }).join('');
+  $('stEquity').textContent = fmtUsd(totalEquity);
+  $('stEquity').className = 'value ' + pnlClass(totalPnl);
+  $('stCash').textContent = fmtUsd(totalCash);
+  $('stPnl').textContent = fmt(totalPnl);
+  $('stPnl').className = 'value ' + pnlClass(totalPnl);
+  $('stRoi').textContent = `ROI ${roi}%`;
+  $('stOpen').textContent = openBetsAll.length;
+  $('stWinRate').textContent = winRate;
+  $('stTrades').textContent = `${allClosed.length} trades`;
+  $('stStrats').textContent = activeStrats || STRATEGY_NAMES.length;
+
+  // ── Leaderboard ──
+  renderLeaderboard(allStats, bets);
+
+  // ── Multi-Strategy Equity Chart ──
+  renderMultiChart(allStats, totalInitial);
+
+  // ── Open Positions (grouped by strategy) ──
+  $('openCount').textContent = openBetsAll.length;
+  const pc = $('positionsContainer');
+  if (openBetsAll.length === 0) {
+    pc.innerHTML = `<div class="empty"><div class="icon">📭</div><p>No open positions. Run <code>node sim.mjs auto-bet</code> to start all strategies.</p></div>`;
+  } else {
+    let html = '';
+    for (const name of STRATEGY_NAMES) {
+      const stratBets = openBetsAll.filter(b => b.strategy === name);
+      if (stratBets.length === 0) continue;
+      html += stratBets.map(b => {
+        const cv = b.shares * (b.currentPrice || b.entryPrice);
+        const pnl = cv - b.cost;
+        const pnlPct = (pnl / b.cost * 100).toFixed(1);
+        return `<div class="pos-card">
+          <div class="title">${esc(b.question || b.marketSlug)}</div>
+          <div class="meta">
+            <span class="strat-badge">${name}</span>
+            <span class="side-badge side-${b.side.toLowerCase()}">${b.side}</span>
+            <span>Entry ${pctStr(b.entryPrice)}</span>
+            <span>Now ${pctStr(b.currentPrice || b.entryPrice)}</span>
+            <span>${b.shares.toFixed(2)} shares</span>
+            <span>Cost ${fmtUsd(b.cost)}</span>
+            <span class="pnl-tag ${pnlClass(pnl)}">${fmt(pnl)} (${pnlPct}%)</span>
+          </div>
+        </div>`;
+      }).join('');
+    }
+    pc.innerHTML = html;
   }
 
   // ── History ──
-  $('histCount').textContent=history.length;
-  const hc=$('historyContainer');
-  if(history.length===0){
-    hc.innerHTML=`<div class="empty"><div class="icon">📋</div><p>No closed trades yet.</p></div>`;
-  }else{
-    const rows=history.slice().reverse().map(h=>{
-      const icon=h.status==='won'?'🏆':h.status==='lost'?'❌':'💰';
+  $('histCount').textContent = history.length;
+  const hc = $('historyContainer');
+  if (history.length === 0) {
+    hc.innerHTML = `<div class="empty"><div class="icon">📋</div><p>No closed trades yet.</p></div>`;
+  } else {
+    const rows = history.slice().reverse().slice(0, 50).map(h => {
+      const icon = h.status === 'won' ? '🏆' : h.status === 'lost' ? '❌' : '💰';
       return `<tr>
         <td>${icon}</td>
-        <td>${esc(h.question||h.marketSlug)}</td>
-        <td><span class="side-badge side-${h.side.toLowerCase()}">${h.side}</span></td>
+        <td><span class="strat-badge">${h.strategy || '—'}</span></td>
+        <td>${esc(h.question || h.marketSlug)}</td>
+        <td><span class="side-badge side-${(h.side||'').toLowerCase()}">${h.side}</span></td>
         <td>${pctStr(h.entryPrice)}</td>
         <td>${pctStr(h.exitPrice)}</td>
         <td>${fmtUsd(h.cost)}</td>
@@ -375,31 +517,30 @@ function render(portfolio,bets,history,signalsData){
         <td>${h.closedAt?new Date(h.closedAt).toLocaleDateString():''}</td>
       </tr>`;
     }).join('');
-    hc.innerHTML=`<div style="overflow-x:auto"><table class="history-table">
-      <thead><tr><th></th><th>Market</th><th>Side</th><th>Entry</th><th>Exit</th><th>Cost</th><th>P&L</th><th>Closed</th></tr></thead>
+    hc.innerHTML = `<div style="overflow-x:auto"><table class="history-table">
+      <thead><tr><th></th><th>Strategy</th><th>Market</th><th>Side</th><th>Entry</th><th>Exit</th><th>Cost</th><th>P&L</th><th>Closed</th></tr></thead>
       <tbody>${rows}</tbody>
     </table></div>`;
   }
 
   // ── Signals ──
-  const sc=$('signalsContainer');
-  const sigs=signalsData&&signalsData.signals?signalsData.signals:[];
-  $('signalCount').textContent=sigs.length;
-  if(sigs.length===0){
-    sc.innerHTML=`<div class="empty" style="grid-column:1/-1"><div class="icon">📡</div><p>No signals yet. Run <code>node sim.mjs snapshot</code> twice, then <code>node sim.mjs scan</code></p></div>`;
-  }else{
-    sc.innerHTML=sigs.map(s=>{
-      const arrow=s.direction==='UP'?'🟢 ↑':s.direction==='DOWN'?'🔴 ↓':'⚪ →';
-      const dirClass=s.direction==='UP'?'up':'down';
-      const priceStr=`${(s.oldPrice*100).toFixed(1)}¢ → ${(s.newPrice*100).toFixed(1)}¢`;
-      const pctSign=parseFloat(s.pricePct)>0?'+':'';
-      const volStr=s.volumeChange!=='N/A'?`Vol +${s.volumeChange}%`:'';
-      const betBadge=s.betPlaced
-        ?`<span class="sig-badge bet-${s.betSide?s.betSide.toLowerCase():'yes'}">✓ Bet ${s.betSide||''} $${(s.betAmount||0).toFixed(0)}</span>`
-        :`<span class="sig-badge no-bet">No bet</span>`;
-      const flags=[];
-      if(s.isPriceSpike)flags.push(`<span class="sig-badge ${dirClass}">Price ${pctSign}${s.pricePct}%</span>`);
-      if(s.isVolSpike)flags.push(`<span class="sig-badge ${dirClass}">Vol +${s.volumeChange}%</span>`);
+  const sc = $('signalsContainer');
+  const sigs = signalsData && signalsData.signals ? signalsData.signals : [];
+  $('signalCount').textContent = sigs.length;
+  if (sigs.length === 0) {
+    sc.innerHTML = `<div class="empty" style="grid-column:1/-1"><div class="icon">📡</div><p>No signals yet. Run <code>node sim.mjs snapshot</code> twice, then <code>node sim.mjs scan</code></p></div>`;
+  } else {
+    sc.innerHTML = sigs.map(s => {
+      const arrow = s.direction === 'UP' ? '🟢 ↑' : s.direction === 'DOWN' ? '🔴 ↓' : '⚪ →';
+      const dirClass = s.direction === 'UP' ? 'up' : 'down';
+      const priceStr = `${(s.oldPrice*100).toFixed(1)}¢ → ${(s.newPrice*100).toFixed(1)}¢`;
+      const pctSign = parseFloat(s.pricePct) > 0 ? '+' : '';
+      const betBadge = s.betPlaced
+        ? `<span class="sig-badge bet-${s.betSide?s.betSide.toLowerCase():'yes'}">✓ Bet ${s.betSide||''} $${(s.betAmount||0).toFixed(0)}</span>`
+        : `<span class="sig-badge no-bet">No bet</span>`;
+      const flags = [];
+      if (s.isPriceSpike) flags.push(`<span class="sig-badge ${dirClass}">Price ${pctSign}${s.pricePct}%</span>`);
+      if (s.isVolSpike) flags.push(`<span class="sig-badge ${dirClass}">Vol +${s.volumeChange}%</span>`);
       return `<div class="signal-card">
         <div class="sig-header">
           <span class="sig-arrow">${arrow}</span>
@@ -409,57 +550,185 @@ function render(portfolio,bets,history,signalsData){
         <div class="sig-detail">
           ${flags.join('')}
           ${betBadge}
-          ${volStr?`<span>📊 ${volStr}</span>`:''}
         </div>
       </div>`;
     }).join('');
   }
 }
 
-function renderChart(curve,initialBalance){
-  const ctx=$('equityChart').getContext('2d');
-  if(chart)chart.destroy();
-  
-  const labels=curve.map(c=>c.date);
-  const data=curve.map(c=>c.equity);
-  const isUp=data.length>0&&data[data.length-1]>=initialBalance;
+function renderLeaderboard(allStats, bets) {
+  const sorted = Object.values(allStats).sort((a, b) => b.roi - a.roi);
+  const body = $('lbBody');
 
-  chart=new Chart(ctx,{
-    type:'line',
-    data:{
-      labels,
-      datasets:[{
-        data,
-        borderColor:isUp?'#22c55e':'#ef4444',
-        backgroundColor:isUp?'rgba(34,197,94,.08)':'rgba(239,68,68,.08)',
-        fill:true,
-        tension:.3,
-        pointRadius:data.length>30?0:3,
-        pointHoverRadius:5,
-        borderWidth:2,
-      },{
-        data:Array(labels.length).fill(initialBalance),
-        borderColor:'#334155',
-        borderDash:[4,4],
-        borderWidth:1,
-        pointRadius:0,
-        fill:false,
-      }]
-    },
-    options:{
-      responsive:true,
-      maintainAspectRatio:false,
-      interaction:{mode:'index',intersect:false},
-      plugins:{legend:{display:false},tooltip:{
-        backgroundColor:'#1e293b',titleColor:'#e2e8f0',bodyColor:'#e2e8f0',borderColor:'#334155',borderWidth:1,
-        callbacks:{label:ctx=>'$'+ctx.parsed.y.toLocaleString('en-US',{minimumFractionDigits:2})}
-      }},
-      scales:{
-        x:{grid:{color:'#1e293b'},ticks:{color:'#64748b',maxTicksLimit:8,font:{size:11}}},
-        y:{grid:{color:'#1e293b'},ticks:{color:'#64748b',font:{size:11},callback:v=>'$'+v.toLocaleString()}}
+  body.innerHTML = sorted.map((s, i) => {
+    const rank = i === 0 ? '🏆' : `#${i+1}`;
+    const color = STRATEGY_COLORS[s.name];
+    const label = STRATEGY_LABELS[s.name] || s.name;
+    const desc = STRATEGY_DESCRIPTIONS[s.name] || '';
+    const winStr = s.winRate !== null ? s.winRate.toFixed(1) + '%' : '—';
+    const sharpeStr = s.sharpe !== null ? s.sharpe.toFixed(2) : '—';
+    const pnlCls = pnlClass(s.totalPnl);
+    const roiCls = pnlClass(s.roi);
+
+    // Open bets for this strategy
+    const stratBets = s.openBets || [];
+    const betRows = stratBets.length > 0
+      ? stratBets.map(b => {
+          const cv = b.shares * (b.currentPrice || b.entryPrice);
+          const pnl = cv - b.cost;
+          return `<div class="bet-row">
+            <span class="side-badge side-${b.side.toLowerCase()}">${b.side}</span>
+            <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(b.question || b.marketSlug)}</span>
+            <span style="font-family:var(--font)">${pctStr(b.entryPrice)} → ${pctStr(b.currentPrice || b.entryPrice)}</span>
+            <span class="pnl-tag ${pnlClass(pnl)}">${fmt(pnl)}</span>
+          </div>`;
+        }).join('')
+      : `<div class="lb-no-bets">No open positions</div>`;
+
+    return `
+      <tr class="lb-row strat-${s.name}" onclick="toggleLbDetail('lb-detail-${s.name}', this)">
+        <td><span class="lb-rank">${rank}</span></td>
+        <td>
+          <div style="display:flex;align-items:center">
+            <span class="strat-dot" style="background:${color}"></span>
+            <div>
+              <div class="lb-strategy">${label}</div>
+              <div class="lb-strategy-desc">${desc}</div>
+            </div>
+          </div>
+        </td>
+        <td class="num">${winStr}</td>
+        <td class="num ${pnlCls}">${fmt(s.totalPnl)}</td>
+        <td class="num ${roiCls}">${s.roi.toFixed(1)}%</td>
+        <td class="num">${sharpeStr}</td>
+        <td class="num">${s.openPositions}</td>
+      </tr>
+      <tr class="lb-detail" id="lb-detail-${s.name}">
+        <td colspan="7">
+          <div class="lb-detail-inner">
+            <div class="lb-detail-stats">
+              <span>💰 Cash: ${fmtUsd(s.cash)}</span>
+              <span>📊 Equity: ${fmtUsd(s.totalEquity)}</span>
+              <span>📈 Realized: <span class="${pnlClass(s.realizedPnl)}">${fmt(s.realizedPnl)}</span></span>
+              <span>📉 Unrealized: <span class="${pnlClass(s.unrealizedPnl)}">${fmt(s.unrealizedPnl)}</span></span>
+              <span>🎯 W/L: ${s.wins}/${s.losses}</span>
+              <span>📋 Trades: ${s.trades}</span>
+            </div>
+            <div class="lb-detail-bets">${betRows}</div>
+          </div>
+        </td>
+      </tr>`;
+  }).join('');
+}
+
+function toggleLbDetail(id, row) {
+  const detail = document.getElementById(id);
+  if (!detail) return;
+  const isOpen = detail.classList.contains('show');
+  // Close all
+  document.querySelectorAll('.lb-detail').forEach(d => d.classList.remove('show'));
+  document.querySelectorAll('.lb-row').forEach(r => r.classList.remove('expanded'));
+  if (!isOpen) {
+    detail.classList.add('show');
+    row.classList.add('expanded');
+  }
+}
+
+function renderMultiChart(allStats, totalInitial) {
+  const ctx = $('equityChart').getContext('2d');
+  if (chart) chart.destroy();
+
+  // Collect all unique dates across all strategies
+  const allDates = new Set();
+  for (const name of STRATEGY_NAMES) {
+    const curve = allStats[name]?.equityCurve || [];
+    curve.forEach(c => allDates.add(c.date));
+  }
+  const labels = [...allDates].sort();
+
+  const datasets = STRATEGY_NAMES.map(name => {
+    const curve = allStats[name]?.equityCurve || [];
+    const curveMap = {};
+    curve.forEach(c => { curveMap[c.date] = c.equity; });
+
+    // Fill missing dates with last known value
+    const data = [];
+    let last = allStats[name]?.initialCash || 2000;
+    for (const d of labels) {
+      if (curveMap[d] !== undefined) {
+        last = curveMap[d];
+      }
+      data.push(last);
+    }
+
+    return {
+      label: STRATEGY_LABELS[name] || name,
+      data,
+      borderColor: STRATEGY_COLORS[name],
+      backgroundColor: STRATEGY_COLORS[name] + '15',
+      fill: false,
+      tension: .3,
+      pointRadius: data.length > 30 ? 0 : 3,
+      pointHoverRadius: 5,
+      borderWidth: 2,
+    };
+  });
+
+  // Add baseline
+  datasets.push({
+    label: 'Baseline ($2,000)',
+    data: Array(labels.length).fill(2000),
+    borderColor: '#334155',
+    borderDash: [4, 4],
+    borderWidth: 1,
+    pointRadius: 0,
+    fill: false,
+  });
+
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1e293b', titleColor: '#e2e8f0', bodyColor: '#e2e8f0',
+          borderColor: '#334155', borderWidth: 1,
+          callbacks: { label: ctx => `${ctx.dataset.label}: $${ctx.parsed.y.toLocaleString('en-US',{minimumFractionDigits:2})}` }
+        }
+      },
+      scales: {
+        x: { grid: { color: '#1e293b' }, ticks: { color: '#64748b', maxTicksLimit: 10, font: { size: 11 } } },
+        y: { grid: { color: '#1e293b' }, ticks: { color: '#64748b', font: { size: 11 }, callback: v => '$' + v.toLocaleString() } }
       }
     }
   });
+
+  // Custom legend
+  const legend = $('chartLegend');
+  legend.innerHTML = STRATEGY_NAMES.map(name => {
+    return `<div class="chart-legend-item" onclick="toggleDataset('${name}')">
+      <span class="chart-legend-dot" style="background:${STRATEGY_COLORS[name]}"></span>
+      <span>${STRATEGY_LABELS[name]}</span>
+    </div>`;
+  }).join('');
+}
+
+function toggleDataset(name) {
+  if (!chart) return;
+  const idx = STRATEGY_NAMES.indexOf(name);
+  if (idx === -1) return;
+  const meta = chart.getDatasetMeta(idx);
+  meta.hidden = !meta.hidden;
+  chart.update();
+  // Toggle visual
+  const items = document.querySelectorAll('.chart-legend-item');
+  if (items[idx]) {
+    items[idx].style.opacity = meta.hidden ? '0.3' : '0.9';
+  }
 }
 
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
@@ -503,13 +772,11 @@ function riskLabel(r){
 }
 
 function renderStrategies(data){
-  // Updated timestamp
   if(data.lastUpdated){
     const d=new Date(data.lastUpdated);
     $('stratUpdated').innerHTML=`<span class="pulse-dot"></span> Last updated: ${d.toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short'})}`;
   }
 
-  // Strategy cards
   const sg=$('stratGrid');
   if(data.strategies&&data.strategies.length>0){
     sg.innerHTML=data.strategies.map(s=>{
@@ -527,7 +794,6 @@ function renderStrategies(data){
     sg.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="icon">📚</div><p>No strategies found.</p></div>';
   }
 
-  // Notable wallets
   const wg=$('walletsGrid');
   if(data.notableWallets&&data.notableWallets.length>0){
     wg.innerHTML=data.notableWallets.map(w=>{
@@ -546,7 +812,6 @@ function renderStrategies(data){
     wg.innerHTML='<div class="empty"><div class="icon">👛</div><p>No notable wallets.</p></div>';
   }
 
-  // KOLs
   const kl=$('kolList');
   if(data.kols&&data.kols.length>0){
     kl.innerHTML=data.kols.map(h=>{
