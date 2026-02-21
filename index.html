@@ -93,6 +93,57 @@ header h1 .dot{width:8px;height:8px;border-radius:50%;background:var(--green);di
 .sig-badge.no-bet{background:var(--bg-2);color:var(--fg-muted)}
 .sig-price{font-family:var(--font);font-weight:600;font-size:.8rem}
 
+/* ─── Tabs ─────────────────────────────────────────────────── */
+.tab-bar{display:flex;gap:4px;margin-bottom:20px;border-bottom:1px solid var(--border);padding-bottom:0}
+.tab-btn{background:none;border:none;color:var(--fg-muted);font-size:.82rem;font-weight:600;padding:10px 18px;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;text-transform:uppercase;letter-spacing:.05em}
+.tab-btn:hover{color:var(--fg-dim)}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* ─── Strategy Library ─────────────────────────────────────── */
+.strat-updated{font-size:.72rem;color:var(--fg-muted);margin-bottom:18px;display:flex;align-items:center;gap:6px}
+.strat-updated .pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse 2s infinite}
+
+.strat-section-title{font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--fg-dim);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.strat-section-title .icon{font-size:1.1rem}
+
+.strat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;margin-bottom:32px}
+.strat-card{background:var(--bg-1);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:border-color .2s,transform .15s}
+.strat-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.strat-card .strat-name{font-size:1rem;font-weight:700;margin-bottom:8px;line-height:1.4}
+.strat-card .strat-desc{font-size:.8rem;color:var(--fg-dim);line-height:1.6;margin-bottom:12px}
+.strat-card .strat-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.strat-card .strat-source{font-size:.72rem;color:var(--fg-muted)}
+.strat-card .strat-source a{color:var(--accent);text-decoration:none;transition:color .15s}
+.strat-card .strat-source a:hover{color:#818cf8;text-decoration:underline}
+
+.risk-badge{font-size:.6rem;font-weight:700;padding:3px 10px;border-radius:99px;text-transform:uppercase;letter-spacing:.06em}
+.risk-low{background:rgba(34,197,94,.12);color:var(--green)}
+.risk-medium{background:rgba(234,179,8,.12);color:var(--yellow)}
+.risk-high{background:rgba(239,68,68,.12);color:var(--red)}
+.risk-mixed{background:rgba(99,102,241,.12);color:var(--accent)}
+
+.appl-badge{font-size:.6rem;font-weight:600;padding:3px 10px;border-radius:99px;background:var(--bg-3);color:var(--fg-dim);letter-spacing:.02em}
+
+/* ─── Wallets Grid ─────────────────────────────────────────── */
+.wallets-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:32px}
+.wallet-card{background:var(--bg-1);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;display:flex;align-items:center;gap:14px;transition:border-color .15s}
+.wallet-card:hover{border-color:var(--accent)}
+.wallet-avatar{width:42px;height:42px;border-radius:50%;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.wallet-info{flex:1;min-width:0}
+.wallet-info .wname{font-size:.88rem;font-weight:700}
+.wallet-info .wstats{font-size:.75rem;color:var(--fg-dim);margin-top:2px}
+.wallet-info .wsource{font-size:.68rem;margin-top:4px}
+.wallet-info .wsource a{color:var(--accent);text-decoration:none}
+.wallet-info .wsource a:hover{text-decoration:underline}
+
+/* ─── KOL List ─────────────────────────────────────────────── */
+.kol-list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+.kol-chip{background:var(--bg-1);border:1px solid var(--border);border-radius:99px;padding:6px 16px;font-size:.78rem;font-weight:600;color:var(--fg-dim);cursor:pointer;text-decoration:none;transition:all .15s;display:flex;align-items:center;gap:6px}
+.kol-chip:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-bg)}
+.kol-chip .x-icon{font-size:.7rem;opacity:.6}
+
 /* ─── Footer ───────────────────────────────────────────────── */
 footer{text-align:center;padding:24px 0;color:var(--fg-muted);font-size:.7rem;border-top:1px solid var(--border);margin-top:20px}
 
@@ -105,6 +156,10 @@ footer{text-align:center;padding:24px 0;color:var(--fg-muted);font-size:.7rem;bo
   .pos-card{padding:12px}
   .history-table{font-size:.72rem}
   .history-table th,.history-table td{padding:6px 8px}
+  .strat-grid{grid-template-columns:1fr}
+  .wallets-grid{grid-template-columns:1fr}
+  .tab-btn{padding:8px 12px;font-size:.75rem}
+  .strat-card{padding:14px}
 }
 </style>
 </head>
@@ -114,6 +169,15 @@ footer{text-align:center;padding:24px 0;color:var(--fg-muted);font-size:.7rem;bo
     <h1><span class="dot"></span> Polymarket Sim <span class="tag">Paper</span></h1>
     <button class="refresh-btn" onclick="loadData()">↻ Refresh</button>
   </header>
+
+  <!-- Tab Navigation -->
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="dashboard" onclick="switchTab('dashboard')">📊 Dashboard</button>
+    <button class="tab-btn" data-tab="strategies" onclick="switchTab('strategies')">📚 Strategy Library</button>
+  </div>
+
+  <!-- Dashboard Tab -->
+  <div class="tab-content active" id="tab-dashboard">
 
   <!-- Stats -->
   <div class="stats-grid" id="statsGrid">
@@ -173,6 +237,33 @@ footer{text-align:center;padding:24px 0;color:var(--fg-muted);font-size:.7rem;bo
       </div>
     </div>
   </div>
+
+  </div><!-- /tab-dashboard -->
+
+  <!-- Strategy Library Tab -->
+  <div class="tab-content" id="tab-strategies">
+    <div class="strat-updated" id="stratUpdated">
+      <span class="pulse-dot"></span> Last updated: loading...
+    </div>
+
+    <!-- Strategies -->
+    <div class="strat-section-title"><span class="icon">🧠</span> Trading Strategies</div>
+    <div class="strat-grid" id="stratGrid">
+      <div class="empty"><div class="icon">📚</div><p>Loading strategies...</p></div>
+    </div>
+
+    <!-- Notable Wallets -->
+    <div class="strat-section-title"><span class="icon">🐋</span> Notable Wallets</div>
+    <div class="wallets-grid" id="walletsGrid">
+      <div class="empty"><div class="icon">👛</div><p>Loading wallets...</p></div>
+    </div>
+
+    <!-- KOLs -->
+    <div class="strat-section-title"><span class="icon">📡</span> KOLs to Track</div>
+    <div class="kol-list" id="kolList">
+      <span class="kol-chip">Loading...</span>
+    </div>
+  </div><!-- /tab-strategies -->
 
   <footer>Polymarket Paper Trading Simulator &mdash; Data is simulated. Not financial advice.</footer>
 </div>
@@ -372,6 +463,101 @@ function renderChart(curve,initialBalance){
 }
 
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+
+// ── Tab Switching ──
+function switchTab(tab){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.toggle('active',c.id==='tab-'+tab));
+  if(tab==='strategies'&&!window._stratLoaded)loadStrategies();
+}
+
+// ── Strategy Library ──
+async function loadStrategies(){
+  try{
+    const data=await fetch('data/strategies.json').then(r=>r.json());
+    window._stratLoaded=true;
+    renderStrategies(data);
+  }catch(e){
+    console.error('Failed to load strategies:',e);
+    $('stratGrid').innerHTML='<div class="empty" style="grid-column:1/-1"><div class="icon">⚠️</div><p>Failed to load strategies data.</p></div>';
+  }
+}
+
+function riskClass(r){
+  const rl=r.toLowerCase();
+  if(rl.includes('very low')||rl==='low')return 'risk-low';
+  if(rl.includes('low'))return 'risk-mixed';
+  if(rl==='medium')return 'risk-medium';
+  if(rl.includes('high'))return 'risk-high';
+  return 'risk-medium';
+}
+
+function riskLabel(r){
+  const rl=r.toLowerCase();
+  if(rl.includes('very low'))return '🟢 Very Low';
+  if(rl==='low')return '🟢 Low';
+  if(rl.includes('low-medium')||rl.includes('low'))return '🟡 Low-Med';
+  if(rl==='medium')return '🟡 Medium';
+  if(rl.includes('high'))return '🔴 High';
+  return '⚪ '+r;
+}
+
+function renderStrategies(data){
+  // Updated timestamp
+  if(data.lastUpdated){
+    const d=new Date(data.lastUpdated);
+    $('stratUpdated').innerHTML=`<span class="pulse-dot"></span> Last updated: ${d.toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short'})}`;
+  }
+
+  // Strategy cards
+  const sg=$('stratGrid');
+  if(data.strategies&&data.strategies.length>0){
+    sg.innerHTML=data.strategies.map(s=>{
+      const applTags=(s.applicability||'').split(',').map(t=>t.trim()).filter(Boolean).map(t=>`<span class="appl-badge">${esc(t)}</span>`).join('');
+      const rBadge=s.risk?`<span class="risk-badge ${riskClass(s.risk)}">${riskLabel(s.risk)}</span>`:'';
+      const sourceLink=s.sourceUrl?`<a href="${esc(s.sourceUrl)}" target="_blank" rel="noopener">𝕏 ${esc(s.source)}</a>`:esc(s.source);
+      return `<div class="strat-card">
+        <div class="strat-name">${esc(s.name)}</div>
+        <div class="strat-desc">${esc(s.description)}</div>
+        <div class="strat-tags">${rBadge}${applTags}</div>
+        <div class="strat-source">Source: ${sourceLink}</div>
+      </div>`;
+    }).join('');
+  }else{
+    sg.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="icon">📚</div><p>No strategies found.</p></div>';
+  }
+
+  // Notable wallets
+  const wg=$('walletsGrid');
+  if(data.notableWallets&&data.notableWallets.length>0){
+    wg.innerHTML=data.notableWallets.map(w=>{
+      const initial=w.name.charAt(0).toUpperCase();
+      const sourceLink=w.source?`<a href="${esc(w.source)}" target="_blank" rel="noopener">View source →</a>`:'';
+      return `<div class="wallet-card">
+        <div class="wallet-avatar">${initial}</div>
+        <div class="wallet-info">
+          <div class="wname">${esc(w.name)}</div>
+          <div class="wstats">${esc(w.stats)}</div>
+          <div class="wsource">${sourceLink}</div>
+        </div>
+      </div>`;
+    }).join('');
+  }else{
+    wg.innerHTML='<div class="empty"><div class="icon">👛</div><p>No notable wallets.</p></div>';
+  }
+
+  // KOLs
+  const kl=$('kolList');
+  if(data.kols&&data.kols.length>0){
+    kl.innerHTML=data.kols.map(h=>{
+      const handle=h.startsWith('@')?h:'@'+h;
+      const username=handle.slice(1);
+      return `<a class="kol-chip" href="https://x.com/${esc(username)}" target="_blank" rel="noopener"><span class="x-icon">𝕏</span> ${esc(handle)}</a>`;
+    }).join('');
+  }else{
+    kl.innerHTML='<span class="kol-chip">No KOLs tracked</span>';
+  }
+}
 
 loadData();
 </script>

@@ -1,0 +1,104 @@
+{
+  "lastUpdated": "2026-02-21T06:50:00Z",
+  "strategies": [
+    {
+      "name": "Contrarian / Fade Favorites",
+      "description": "Bet NO on overhyped events at peak hype. When crowd piles into favorites, fade them.",
+      "source": "@polycommand — tracked a wallet with 100% win rate on NO/YES reversals, $612K profit from 8 trades",
+      "sourceUrl": "https://x.com/polycommand/status/2025077926236987410",
+      "applicability": "politics, geopolitics",
+      "risk": "medium"
+    },
+    {
+      "name": "Vitalik Strategy — Bet Against Overhyped Narratives",
+      "description": "Bet against events that have high perceived probability but can't actually happen (e.g., Trump receiving Nobel Prize). The real alpha is betting against overhyped narratives, not chasing them.",
+      "source": "@doj1t47318 + @whales_drop analyzing Vitalik Buterin's Polymarket account",
+      "sourceUrl": "https://x.com/doj1t47318/status/2024919990437376305",
+      "applicability": "politics, geopolitics",
+      "risk": "low-medium"
+    },
+    {
+      "name": "Bet Against the US",
+      "description": "Contrarian strategy: buy NO on US attack/intervention markets. Deposit salary, wait for new US attack market, buy No.",
+      "source": "@lorden_eth — tracked a consistently profitable contrarian trader",
+      "sourceUrl": "https://x.com/lorden_eth/status/2024909708281135417",
+      "applicability": "geopolitics",
+      "risk": "medium"
+    },
+    {
+      "name": "Sub-5-Cent Contracts (Event Alpha)",
+      "description": "Buy very cheap contracts (<$0.05) in illiquid markets. One big bet on resolution — if it hits, massive return. Not arb, it's event alpha.",
+      "source": "@ArgusNexusAI",
+      "sourceUrl": "https://x.com/ArgusNexusAI/status/2025002457785368658",
+      "applicability": "all categories",
+      "risk": "high (binary outcome)"
+    },
+    {
+      "name": "YES+NO Arbitrage",
+      "description": "When YES + NO price < $1.00, buy both for guaranteed profit at resolution. Cleanest edge. Alpha is in execution speed.",
+      "source": "@ArgusNexusAI — runs 1,126 trades across 8 bots",
+      "sourceUrl": "https://x.com/ArgusNexusAI/status/2025002025772003518",
+      "applicability": "all — needs speed",
+      "risk": "very low (arb)"
+    },
+    {
+      "name": "Oracle/Broadcast Delay Exploit",
+      "description": "30-second broadcast delay creates free edge. Use raw feeds vs Polymarket's oracle to front-run price adjustments. Information asymmetry that oracle design hasn't priced out.",
+      "source": "@sorokx",
+      "sourceUrl": "https://x.com/sorokx/status/2024904836655804429",
+      "applicability": "sports, live events",
+      "risk": "low (speed-dependent)"
+    },
+    {
+      "name": "Prediction Market vs Derivatives Divergence",
+      "description": "Track when prediction market odds diverge from derivatives implied probability. That spread is your edge.",
+      "source": "@tazmancrypto",
+      "sourceUrl": "https://x.com/tazmancrypto/status/2024951363210297666",
+      "applicability": "crypto, finance",
+      "risk": "medium"
+    },
+    {
+      "name": "Whale Behavior Tracking",
+      "description": "Track behavior before odds adjust. Monitor whale clusters, fresh wallet activity. The alpha is in tracking behavior, not guessing outcomes.",
+      "source": "@Ghostoncandle — recommends @PolyAlertHub for AI-powered alerts",
+      "sourceUrl": "https://x.com/Ghostoncandle/status/2024737398517637451",
+      "applicability": "all",
+      "risk": "medium"
+    },
+    {
+      "name": "Status Quo Bias Exploitation",
+      "description": "Bet on the world staying exactly as it is. Trader @denizz: $688K active positions, ~$500K all-time profit by betting on no-change outcomes.",
+      "source": "@saygun_research analyzing @denizz wallet",
+      "sourceUrl": "https://x.com/saygun_research/status/2009958974347763791",
+      "applicability": "geopolitics, macro",
+      "risk": "low-medium"
+    }
+  ],
+  "notableWallets": [
+    {
+      "name": "elkmonkey",
+      "stats": "+1240% growth, 98% accuracy",
+      "source": "https://x.com/XPredicter/status/2025002529126580440"
+    },
+    {
+      "name": "swisstony",
+      "stats": "$261M volume, $3.9M profit, avg bet $17K",
+      "source": "https://x.com/nexoIss/status/2013049809603641848"
+    },
+    {
+      "name": "denizz",
+      "stats": "$688K positions, ~$500K profit, status-quo strategy",
+      "source": "https://x.com/saygun_research/status/2009958974347763791"
+    }
+  ],
+  "kols": [
+    "@polycommand",
+    "@ArgusNexusAI",
+    "@Ghostoncandle",
+    "@lorden_eth",
+    "@sorokx",
+    "@tazmancrypto",
+    "@saygun_research",
+    "@CelStrategy"
+  ]
+}
