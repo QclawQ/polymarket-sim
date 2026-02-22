@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Polymarket Sim — Multi-Strategy Paper Trading</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 <style>
 /* ─── Reset & Base ─────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -203,6 +204,7 @@ footer{text-align:center;padding:24px 0;color:var(--fg-muted);font-size:.7rem;bo
   .wallets-grid{grid-template-columns:1fr}
   .tab-btn{padding:8px 12px;font-size:.75rem}
   .strat-card{padding:14px}
+  #csTradesGrid{grid-template-columns:1fr!important}
 }
 </style>
 </head>
@@ -218,6 +220,7 @@ footer{text-align:center;padding:24px 0;color:var(--fg-muted);font-size:.7rem;bo
     <button class="tab-btn active" data-tab="backtest" onclick="switchTab('backtest')">📈 Backtest</button>
     <button class="tab-btn" data-tab="dashboard" onclick="switchTab('dashboard')">📊 Live Trading</button>
     <button class="tab-btn" data-tab="strategies" onclick="switchTab('strategies')">📚 Strategy Library</button>
+    <button class="tab-btn" data-tab="casestudy" onclick="switchTab('casestudy')">🔬 Case Studies</button>
   </div>
 
   <!-- Backtest Tab (DEFAULT) -->
@@ -389,6 +392,83 @@ footer{text-align:center;padding:24px 0;color:var(--fg-muted);font-size:.7rem;bo
       <span class="kol-chip">Loading...</span>
     </div>
   </div><!-- /tab-strategies -->
+
+  <!-- Case Study Tab -->
+  <div class="tab-content" id="tab-casestudy">
+    <div id="cs-loading" class="empty"><div class="icon">⏳</div><p>Loading case study results…</p></div>
+    <div id="cs-content" style="display:none">
+
+    <!-- Case Study Header -->
+    <div style="margin-bottom:24px">
+      <h2 style="font-size:1.2rem;font-weight:700;margin-bottom:8px">🔬 Case Study: 5 Resolved Markets Backtest</h2>
+      <p style="font-size:.85rem;color:var(--fg-dim);line-height:1.6;max-width:800px" id="csSummaryText"></p>
+    </div>
+
+    <!-- Case Study Stats Grid -->
+    <div class="stats-grid" id="csStatsGrid"></div>
+
+    <!-- Strategy × Timing Heatmap -->
+    <div class="leaderboard-wrap" style="margin-bottom:20px">
+      <h2>🎯 Strategy × Entry Timing (Avg ROI %)</h2>
+      <div style="overflow-x:auto">
+        <table class="lb-table" id="csHeatmapTable">
+          <thead><tr id="csHeatmapHead"></tr></thead>
+          <tbody id="csHeatmapBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Strategy Leaderboard -->
+    <div class="leaderboard-wrap" style="margin-bottom:20px">
+      <h2>🏆 Strategy Performance</h2>
+      <table class="lb-table">
+        <thead>
+          <tr>
+            <th style="width:40px">#</th>
+            <th>Strategy</th>
+            <th class="num">Signals</th>
+            <th class="num">Win Rate</th>
+            <th class="num">Avg ROI</th>
+            <th class="num">Markets</th>
+          </tr>
+        </thead>
+        <tbody id="csStratBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Per-Event Breakdown -->
+    <div class="section" style="margin-bottom:20px">
+      <div class="section-header"><h2>📊 Per-Event Results</h2></div>
+      <div id="csEventsContainer"></div>
+    </div>
+
+    <!-- Price History Charts -->
+    <div class="chart-wrap" style="margin-bottom:20px">
+      <h2>📈 Market Price Histories</h2>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px" id="csChartPicker"></div>
+      <canvas id="csPriceChart" style="max-height:350px"></canvas>
+    </div>
+
+    <!-- Top / Worst Trades -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px" id="csTradesGrid">
+      <div class="leaderboard-wrap" style="margin:0">
+        <h2>🏆 Top 5 Trades</h2>
+        <div id="csTopTrades"></div>
+      </div>
+      <div class="leaderboard-wrap" style="margin:0">
+        <h2>📉 Worst 5 Trades</h2>
+        <div id="csWorstTrades"></div>
+      </div>
+    </div>
+
+    <!-- Key Insights -->
+    <div class="leaderboard-wrap">
+      <h2>💡 Key Insights</h2>
+      <div id="csInsights" style="font-size:.85rem;line-height:1.8;color:var(--fg-dim)"></div>
+    </div>
+
+    </div>
+  </div><!-- /tab-casestudy -->
 
   <footer>Polymarket Paper Trading Simulator — Multi-Strategy Engine — Not financial advice.</footer>
 </div>
@@ -803,6 +883,7 @@ function switchTab(tab){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
   document.querySelectorAll('.tab-content').forEach(c=>c.classList.toggle('active',c.id==='tab-'+tab));
   if(tab==='strategies'&&!window._stratLoaded)loadStrategies();
+  if(tab==='casestudy'&&!window._csLoaded)loadCaseStudy();
 }
 
 // ── Strategy Library ──
@@ -1141,6 +1222,201 @@ function toggleBtDataset(name) {
 loadBacktest();
 
 loadData();
+
+// ── Case Study Tab ──
+let csChart = null;
+
+async function loadCaseStudy() {
+  try {
+    const [csData, mktsData] = await Promise.all([
+      fetch('data/case-studies/results.json').then(r => r.json()),
+      fetch('data/case-studies/markets.json').then(r => r.json()),
+    ]);
+    window._csLoaded = true;
+    $('cs-loading').style.display = 'none';
+    $('cs-content').style.display = 'block';
+    renderCaseStudy(csData, mktsData);
+  } catch (e) {
+    console.error('Failed to load case study:', e);
+    $('cs-loading').innerHTML = '<div class="icon">⚠️</div><p>No case study data yet. Run: <code>node sim.mjs case-study</code></p>';
+  }
+}
+
+function renderCaseStudy(cs, mkts) {
+  const strats = cs.strategies;
+  const results = cs.results;
+  const windows = cs.entryWindows;
+  const stratNames = Object.keys(strats);
+  const stratColors = {momentum:'#22c55e',contrarian:'#ef4444',status_quo:'#6366f1',cheap_contracts:'#eab308',value:'#f97316'};
+  const catEmoji = {macro:'💰','politics':'🏛',crypto:'🪙','geo-politics':'🌍',event:'📌'};
+
+  // Summary text
+  $('csSummaryText').innerHTML = `Backtested <strong>5 strategies</strong> across <strong>${cs.events} resolved Polymarket events</strong>
+    (Trump 2024, Fed Jan 2026, Bitcoin 2025, Germany Election, US Shutdown).
+    Each strategy walks through every day of real price history, placing $200 bets whenever a signal triggers.
+    <strong>Key finding:</strong> <span style="color:var(--green)">status_quo</span> (bet NO on unlikely events) dominates with
+    <strong>${strats.status_quo?.avgROI?.toFixed?.(1) || strats.status_quo?.avgROI}% avg ROI</strong> and
+    <strong>${(strats.status_quo?.totalWins/(strats.status_quo?.totalSignals||1)*100).toFixed(0)}% win rate</strong>.
+    Entry timing matters: <span style="color:var(--accent)">value</span> strategy performs best entering 7-30 days before resolution.`;
+
+  // Stats grid
+  const totalSignals = stratNames.reduce((s,n) => s + (strats[n]?.totalSignals||0), 0);
+  const totalWins = stratNames.reduce((s,n) => s + (strats[n]?.totalWins||0), 0);
+  const bestStrat = stratNames.reduce((a,b) => (strats[a]?.avgROI||0) > (strats[b]?.avgROI||0) ? a : b);
+  const worstStrat = stratNames.reduce((a,b) => (strats[a]?.avgROI||0) < (strats[b]?.avgROI||0) ? a : b);
+
+  $('csStatsGrid').innerHTML = `
+    <div class="stat-card"><div class="label">Events</div><div class="value neutral">${cs.events}</div></div>
+    <div class="stat-card"><div class="label">Total Signals</div><div class="value neutral">${totalSignals.toLocaleString()}</div></div>
+    <div class="stat-card"><div class="label">Overall Win Rate</div><div class="value ${totalWins/totalSignals>.5?'positive':'negative'}">${(totalWins/totalSignals*100).toFixed(1)}%</div></div>
+    <div class="stat-card"><div class="label">Best Strategy</div><div class="value positive">${bestStrat}</div><div class="sub">ROI ${strats[bestStrat]?.avgROI}%</div></div>
+    <div class="stat-card"><div class="label">Worst Strategy</div><div class="value negative">${worstStrat}</div><div class="sub">ROI ${strats[worstStrat]?.avgROI}%</div></div>
+    <div class="stat-card"><div class="label">Strategies Tested</div><div class="value neutral">${stratNames.length}</div></div>
+  `;
+
+  // Strategy leaderboard
+  const sorted = [...stratNames].sort((a,b) => (strats[b]?.avgROI||0) - (strats[a]?.avgROI||0));
+  $('csStratBody').innerHTML = sorted.map((name, i) => {
+    const s = strats[name];
+    const wr = s.totalSignals > 0 ? (s.totalWins/s.totalSignals*100).toFixed(1) : '—';
+    const roiCls = s.avgROI >= 0 ? 'positive' : 'negative';
+    return `<tr>
+      <td><span class="lb-rank">${i+1}</span></td>
+      <td><span class="strat-dot" style="background:${stratColors[name]||'#888'}"></span><span class="lb-strategy">${name}</span></td>
+      <td class="num">${(s.totalSignals||0).toLocaleString()}</td>
+      <td class="num">${wr}%</td>
+      <td class="num ${roiCls}">${s.avgROI >= 0 ? '+' : ''}${s.avgROI?.toFixed?.(1) || s.avgROI}%</td>
+      <td class="num">${s.markets||0}</td>
+    </tr>`;
+  }).join('');
+
+  // Heatmap: Strategy × Window
+  $('csHeatmapHead').innerHTML = '<th>Strategy</th>' + windows.map(w => `<th class="num" style="font-size:.65rem">${w}</th>`).join('');
+
+  $('csHeatmapBody').innerHTML = sorted.map(name => {
+    const cells = windows.map(w => {
+      let signals = 0, totalROI = 0;
+      for (const r of results.filter(r => r.strategy === name)) {
+        for (const e of r.entries) {
+          if (e.window === w) { signals++; totalROI += e.roi; }
+        }
+      }
+      if (signals === 0) return '<td class="num" style="color:var(--fg-muted)">—</td>';
+      const avg = totalROI / signals;
+      const bg = avg > 20 ? 'var(--green-bg)' : avg > 0 ? 'rgba(34,197,94,.06)' : avg > -20 ? 'rgba(239,68,68,.06)' : 'var(--red-bg)';
+      const fg = avg >= 0 ? 'var(--green)' : 'var(--red)';
+      return `<td class="num" style="background:${bg};color:${fg};font-weight:700">${avg>=0?'+':''}${avg.toFixed(0)}% <span style="font-weight:400;font-size:.65rem;color:var(--fg-muted)">(${signals})</span></td>`;
+    }).join('');
+    return `<tr><td><span class="strat-dot" style="background:${stratColors[name]||'#888'}"></span>${name}</td>${cells}</tr>`;
+  }).join('');
+
+  // Per-event breakdown
+  const eventGroups = {};
+  for (const r of results) {
+    if (!eventGroups[r.event]) eventGroups[r.event] = { cat: r.cat, results: [] };
+    eventGroups[r.event].results.push(r);
+  }
+  $('csEventsContainer').innerHTML = Object.entries(eventGroups).map(([name, eg]) => {
+    const emoji = catEmoji[eg.cat] || '📌';
+    const bestR = eg.results.reduce((a, b) => (a.avgROI > b.avgROI) ? a : b);
+    const totalSig = eg.results.reduce((s, r) => s + r.totalSignals, 0);
+    const totalWin = eg.results.reduce((s, r) => s + r.winSignals, 0);
+    return `<div class="pos-card" style="margin-bottom:10px">
+      <div class="title">${emoji} ${name}</div>
+      <div class="meta">
+        <span>📊 ${totalSig} signals</span>
+        <span>✅ ${(totalWin/totalSig*100).toFixed(0)}% win rate</span>
+        <span>🏆 Best: <strong style="color:${stratColors[bestR.strategy]||'#fff'}">${bestR.strategy}</strong> (${bestR.avgROI>=0?'+':''}${bestR.avgROI}% ROI)</span>
+        <span>📈 Markets: ${eg.results.length}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Price history chart
+  const chartEvents = mkts.filter(e => e.markets.some(m => m.pts >= 10));
+  $('csChartPicker').innerHTML = chartEvents.map((e, i) =>
+    `<button class="refresh-btn" style="font-size:.72rem;padding:4px 10px;${i===0?'background:var(--accent-bg);color:var(--accent);border-color:var(--accent)':''}" onclick="renderCSChart(${i})">${catEmoji[e.cat]||'📌'} ${e.name}</button>`
+  ).join('');
+  window._csMkts = mkts;
+  if (chartEvents.length > 0) renderCSChart(0);
+
+  // Top / Worst trades
+  const allEntries = [];
+  for (const r of results) {
+    for (const e of r.entries) {
+      allEntries.push({ ...e, event: r.event, market: r.market, strategy: r.strategy });
+    }
+  }
+  allEntries.sort((a, b) => b.roi - a.roi);
+  const tradeFmt = e => `<div style="padding:8px 0;border-bottom:1px solid var(--border);font-size:.8rem">
+    <div>${e.won?'✅':'❌'} <span style="color:${stratColors[e.strategy]||'#fff'};font-weight:700">[${e.strategy}]</span> ${e.event}</div>
+    <div style="color:var(--fg-dim);margin-top:2px">${e.market} · ${e.side} @ ${(e.entryPrice*100).toFixed(1)}¢ · ${e.daysToEnd}d before · <span class="${e.roi>=0?'positive':'negative'}">${e.roi>=0?'+':''}${e.roi.toFixed(0)}% ($${e.pnl.toFixed(0)})</span></div>
+  </div>`;
+  $('csTopTrades').innerHTML = allEntries.slice(0, 5).map(tradeFmt).join('');
+  $('csWorstTrades').innerHTML = allEntries.slice(-5).reverse().map(tradeFmt).join('');
+
+  // Key insights
+  $('csInsights').innerHTML = `
+    <div style="margin-bottom:12px">📌 <strong>Status Quo wins decisively:</strong> Betting NO on low-probability events (YES < 40¢) yields +${strats.status_quo?.avgROI}% avg ROI with ${(strats.status_quo?.totalWins/(strats.status_quo?.totalSignals||1)*100).toFixed(0)}% win rate. Most prediction markets overestimate unlikely outcomes.</div>
+    <div style="margin-bottom:12px">⏰ <strong>Timing matters:</strong> The <span style="color:var(--orange)">value</span> strategy (buy YES at 60-95¢) performs best when entering 7-30 days before resolution (+24-33% ROI), too early and you tie up capital, too late and prices are already efficient.</div>
+    <div style="margin-bottom:12px">🎰 <strong>Cheap contracts are a trap:</strong> Buying lottery tickets (YES < 15¢) has -96.8% ROI — these contracts are cheap for a reason.</div>
+    <div style="margin-bottom:12px">📈 <strong>Momentum is real but thin:</strong> Following 3-day trends is slightly profitable only in the last 1-3 days before resolution. Earlier entry = noise.</div>
+    <div>🔄 <strong>Contrarian only works for black swans:</strong> The US Shutdown bet at 8.5¢ returned +1077%, but overall the strategy loses -12.5%. You need massive position sizing discipline.</div>
+  `;
+}
+
+function renderCSChart(eventIdx) {
+  const mkts = window._csMkts;
+  if (!mkts || !mkts[eventIdx]) return;
+  const event = mkts[eventIdx];
+  const catEmoji = {macro:'💰','politics':'🏛',crypto:'🪙','geo-politics':'🌍',event:'📌'};
+  const colors = ['#22c55e','#ef4444','#6366f1','#eab308','#06b6d4','#f97316','#ec4899','#a855f7','#14b8a6','#f43f5e'];
+
+  // Update button states
+  document.querySelectorAll('#csChartPicker button').forEach((b, i) => {
+    b.style.background = i === eventIdx ? 'var(--accent-bg)' : '';
+    b.style.color = i === eventIdx ? 'var(--accent)' : '';
+    b.style.borderColor = i === eventIdx ? 'var(--accent)' : '';
+  });
+
+  // Pick top markets by volume (max 6 for readability)
+  const topMkts = [...event.markets].filter(m => m.pts >= 10).sort((a, b) => b.vol - a.vol).slice(0, 6);
+
+  const datasets = topMkts.map((m, i) => ({
+    label: m.label.slice(0, 30),
+    data: m.history.map(h => ({ x: new Date(h.t * 1000), y: h.p * 100 })),
+    borderColor: colors[i % colors.length],
+    backgroundColor: 'transparent',
+    borderWidth: m.resolved_yes ? 2.5 : 1.5,
+    borderDash: m.resolved_yes ? [] : [4, 4],
+    pointRadius: 0,
+    tension: 0.3,
+  }));
+
+  if (csChart) csChart.destroy();
+  csChart = new Chart($('csPriceChart'), {
+    type: 'line',
+    data: { datasets },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: true, labels: { color: '#94a3b8', font: { size: 11 }, boxWidth: 12 } },
+        title: { display: true, text: `${catEmoji[event.cat]||''} ${event.name} — Price History`, color: '#e2e8f0', font: { size: 14 } },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)}¢`,
+          }
+        }
+      },
+      scales: {
+        x: { type: 'time', time: { unit: 'day' }, ticks: { color: '#64748b', maxTicksLimit: 12 }, grid: { color: '#1e293b' } },
+        y: { min: 0, max: 100, ticks: { color: '#64748b', callback: v => v + '¢' }, grid: { color: '#1e293b' } },
+      },
+    },
+  });
+}
+
 </script>
 </body>
 </html>

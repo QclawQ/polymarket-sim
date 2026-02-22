@@ -1,31 +1,43 @@
 {
   "strategies": {
     "momentum": {
-      "cash": 1197.47,
+      "cash": 975.35,
       "initialCash": 2000,
       "equityCurve": [
         {
           "date": "2026-02-21",
+          "equity": 2000
+        },
+        {
+          "date": "2026-02-22",
           "equity": 2000
         }
       ]
     },
     "contrarian": {
-      "cash": 1197.47,
+      "cash": 975.35,
       "initialCash": 2000,
       "equityCurve": [
         {
           "date": "2026-02-21",
           "equity": 2000
+        },
+        {
+          "date": "2026-02-22",
+          "equity": 2000
         }
       ]
     },
     "status_quo": {
-      "cash": 1197.47,
+      "cash": 975.35,
       "initialCash": 2000,
       "equityCurve": [
         {
           "date": "2026-02-21",
+          "equity": 2000
+        },
+        {
+          "date": "2026-02-22",
           "equity": 2000
         }
       ]
@@ -37,15 +49,23 @@
         {
           "date": "2026-02-21",
           "equity": 2000
+        },
+        {
+          "date": "2026-02-22",
+          "equity": 2000
         }
       ]
     },
     "arb": {
-      "cash": 1825.34,
+      "cash": 1665.94,
       "initialCash": 2000,
       "equityCurve": [
         {
           "date": "2026-02-21",
+          "equity": 2000
+        },
+        {
+          "date": "2026-02-22",
           "equity": 2000
         }
       ]

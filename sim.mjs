@@ -16,6 +16,7 @@
  *   auto-bet — run all 5 strategies simultaneously
  *   fetch-history — fetch resolved markets from Polymarket API
  *   backtest — run backtest on historical data with all 5 strategies
+ *   case-study — run case study backtest on 5 curated resolved markets
  */
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'fs';
@@ -34,6 +35,9 @@ const SNAPSHOTS_DIR = join(DATA_DIR, 'snapshots');
 const SIGNALS_FILE = join(DATA_DIR, 'signals.json');
 const HISTORICAL_MARKETS_FILE = join(DATA_DIR, 'historical-markets.json');
 const BACKTEST_RESULTS_FILE = join(DATA_DIR, 'backtest-results.json');
+const CASE_STUDIES_DIR = join(DATA_DIR, 'case-studies');
+const CASE_STUDIES_FILE = join(CASE_STUDIES_DIR, 'markets.json');
+const CASE_STUDIES_RESULTS_FILE = join(CASE_STUDIES_DIR, 'results.json');
 
 const POLYMARKET_CLI = '/Users/quen/.openclaw/workspace/skills/polymarket-odds/polymarket.mjs';
 const GAMMA_API = 'https://gamma-api.polymarket.com';
@@ -1618,6 +1622,303 @@ function runBacktest() {
 
 // ─── Arg parsing ─────────────────────────────────────────────────
 
+// ─── Case Study Engine ───────────────────────────────────────────
+
+function runCaseStudy() {
+  if (!existsSync(CASE_STUDIES_FILE)) {
+    console.error('❌ No case study data. Run the data fetch script first.');
+    process.exit(1);
+  }
+  const data = JSON.parse(readFileSync(CASE_STUDIES_FILE, 'utf8'));
+  console.log(`\n🔬 CASE STUDY BACKTEST — ${data.length} Events\n`);
+
+  const CAPITAL = 10000;  // $10K per strategy
+  const BET_SIZE_PCT = 0.02;  // 2% of capital per bet
+  const MAX_BET = 200;
+
+  // Entry timing windows: days before resolution
+  const ENTRY_WINDOWS = [
+    { label: 'Early (>30d)', minDays: 30, maxDays: Infinity },
+    { label: 'Mid (14-30d)', minDays: 14, maxDays: 30 },
+    { label: 'Late (7-14d)', minDays: 7, maxDays: 14 },
+    { label: 'Last Week (3-7d)', minDays: 3, maxDays: 7 },
+    { label: 'Last Minute (1-3d)', minDays: 1, maxDays: 3 },
+  ];
+
+  // Strategy definitions: given price history, when and how to enter
+  const strategies = {
+    momentum: {
+      desc: 'Follow the trend — buy in direction of recent move',
+      shouldEnter: (prices, idx) => {
+        if (idx < 3) return null;
+        // Look at 3-day price change
+        const curr = prices[idx].p;
+        const prev = prices[idx - 3].p;
+        const delta = curr - prev;
+        if (Math.abs(delta) < 0.05) return null;  // need 5%+ move over 3 days
+        return {
+          side: delta > 0 ? 'YES' : 'NO',
+          price: delta > 0 ? curr : (1 - curr),
+          reason: `3d Δ${(delta * 100).toFixed(1)}%`,
+        };
+      },
+    },
+    contrarian: {
+      desc: 'Fade the trend — bet against recent move',
+      shouldEnter: (prices, idx) => {
+        if (idx < 3) return null;
+        const curr = prices[idx].p;
+        const prev = prices[idx - 3].p;
+        const delta = curr - prev;
+        if (Math.abs(delta) < 0.05) return null;
+        return {
+          side: delta > 0 ? 'NO' : 'YES',
+          price: delta > 0 ? (1 - curr) : curr,
+          reason: `fade 3d Δ${(delta * 100).toFixed(1)}%`,
+        };
+      },
+    },
+    status_quo: {
+      desc: 'Bet NO on unlikely events (YES < 40¢)',
+      shouldEnter: (prices, idx) => {
+        const curr = prices[idx].p;
+        if (curr >= 0.40) return null;
+        return {
+          side: 'NO',
+          price: 1 - curr,
+          reason: `YES@${(curr * 100).toFixed(0)}¢ → buy NO`,
+        };
+      },
+    },
+    cheap_contracts: {
+      desc: 'Buy cheap YES contracts < 15¢ (lottery tickets)',
+      shouldEnter: (prices, idx) => {
+        const curr = prices[idx].p;
+        if (curr >= 0.15 || curr <= 0.01) return null;
+        return {
+          side: 'YES',
+          price: curr,
+          reason: `lottery YES@${(curr * 100).toFixed(0)}¢`,
+        };
+      },
+    },
+    value: {
+      desc: 'Buy YES when price > 60¢ (high conviction favorites)',
+      shouldEnter: (prices, idx) => {
+        const curr = prices[idx].p;
+        if (curr <= 0.60 || curr >= 0.95) return null;
+        return {
+          side: 'YES',
+          price: curr,
+          reason: `value YES@${(curr * 100).toFixed(0)}¢`,
+        };
+      },
+    },
+  };
+
+  const stratNames = Object.keys(strategies);
+  const allResults = [];
+
+  // Process each event
+  for (const event of data) {
+    console.log(`${'═'.repeat(70)}`);
+    console.log(`📊 ${event.name} (${event.cat}) — Event Vol: $${(event.event_vol / 1e6).toFixed(0)}M`);
+    console.log(`   ${event.event}`);
+    console.log();
+
+    // For each market in this event
+    for (const mkt of event.markets) {
+      if (mkt.pts < 10) continue;  // skip sparse data
+      const history = mkt.history;
+      const lastDay = history[history.length - 1];
+      const resolvedYes = mkt.resolved_yes;
+      const resolvedPrice = resolvedYes ? 1.0 : 0.0;
+
+      console.log(`  ${resolvedYes ? '✅' : '❌'} ${mkt.label} | ${mkt.pts} days | ${(mkt.p0).toFixed(0)}→${(mkt.p1).toFixed(0)}¢ | $${(mkt.vol / 1e6).toFixed(1)}M`);
+
+      // For each strategy, walk through time and find entry signals
+      for (const [stratName, strat] of Object.entries(strategies)) {
+        const entries = [];
+
+        for (let i = 0; i < history.length; i++) {
+          const daysToEnd = history.length - 1 - i;
+          const signal = strat.shouldEnter(history, i);
+          if (!signal) continue;
+          if (signal.price <= 0.01 || signal.price >= 0.99) continue;
+
+          // Calculate P&L
+          const shares = MAX_BET / signal.price;
+          const won = (signal.side === 'YES' && resolvedYes) || (signal.side === 'NO' && !resolvedYes);
+          const payout = won ? shares : 0;
+          const pnl = payout - MAX_BET;
+          const roi = (pnl / MAX_BET) * 100;
+
+          // Find which entry window this falls into
+          let window = 'Unknown';
+          for (const w of ENTRY_WINDOWS) {
+            if (daysToEnd >= w.minDays && daysToEnd < w.maxDays) {
+              window = w.label;
+              break;
+            }
+          }
+
+          const entryDate = new Date(history[i].t * 1000).toISOString().slice(0, 10);
+          entries.push({
+            date: entryDate,
+            daysToEnd,
+            window,
+            side: signal.side,
+            entryPrice: parseFloat(signal.price.toFixed(4)),
+            reason: signal.reason,
+            won,
+            pnl: parseFloat(pnl.toFixed(2)),
+            roi: parseFloat(roi.toFixed(1)),
+            betSize: MAX_BET,
+          });
+        }
+
+        if (entries.length > 0) {
+          // Pick best entry (earliest profitable, or best ROI)
+          const bestEntry = entries.reduce((a, b) => a.roi > b.roi ? a : b);
+          const winEntries = entries.filter(e => e.won);
+          const lossEntries = entries.filter(e => !e.won);
+
+          allResults.push({
+            event: event.name,
+            eventSlug: event.event_slug,
+            cat: event.cat,
+            market: mkt.label,
+            marketSlug: mkt.slug,
+            strategy: stratName,
+            totalSignals: entries.length,
+            winSignals: winEntries.length,
+            lossSignals: lossEntries.length,
+            winRate: parseFloat((winEntries.length / entries.length * 100).toFixed(1)),
+            bestEntry,
+            avgROI: parseFloat((entries.reduce((s, e) => s + e.roi, 0) / entries.length).toFixed(1)),
+            entries,  // all entry points for charting
+          });
+        }
+      }
+    }
+  }
+
+  // ── Summary Report ──
+  console.log(`\n${'═'.repeat(70)}`);
+  console.log(`\n📈 STRATEGY PERFORMANCE ACROSS ALL CASE STUDIES\n`);
+
+  // Aggregate by strategy
+  const stratSummary = {};
+  for (const s of stratNames) {
+    const sResults = allResults.filter(r => r.strategy === s);
+    const totalSignals = sResults.reduce((sum, r) => sum + r.totalSignals, 0);
+    const totalWins = sResults.reduce((sum, r) => sum + r.winSignals, 0);
+    const totalLosses = sResults.reduce((sum, r) => sum + r.lossSignals, 0);
+    const avgROI = totalSignals > 0
+      ? sResults.reduce((sum, r) => sum + r.avgROI * r.totalSignals, 0) / totalSignals
+      : 0;
+    const markets = sResults.length;
+
+    stratSummary[s] = { totalSignals, totalWins, totalLosses, avgROI, markets };
+
+    const winRate = totalSignals > 0 ? (totalWins / totalSignals * 100).toFixed(1) : '—';
+    console.log(`  [${s}] ${strategies[s].desc}`);
+    console.log(`    Markets triggered: ${markets} | Signals: ${totalSignals} | Win rate: ${winRate}% | Avg ROI: ${avgROI >= 0 ? '+' : ''}${avgROI.toFixed(1)}%`);
+    console.log();
+  }
+
+  // Aggregate by entry window
+  console.log(`\n⏰ PERFORMANCE BY ENTRY TIMING\n`);
+  const hdr = ['Window', 'Signals', 'Wins', 'Win%', 'Avg ROI'].map((h, i) =>
+    i === 0 ? h.padEnd(20) : h.padStart(10)
+  ).join(' │ ');
+  console.log(hdr);
+  console.log('─'.repeat(20) + '─┼─' + ('─'.repeat(10) + '─┼─').repeat(3) + '─'.repeat(10));
+
+  for (const w of ENTRY_WINDOWS) {
+    let signals = 0, wins = 0, totalROI = 0;
+    for (const r of allResults) {
+      for (const e of r.entries) {
+        if (e.window === w.label) {
+          signals++;
+          if (e.won) wins++;
+          totalROI += e.roi;
+        }
+      }
+    }
+    const winRate = signals > 0 ? (wins / signals * 100).toFixed(1) + '%' : '—';
+    const avgROI = signals > 0 ? (totalROI / signals).toFixed(1) + '%' : '—';
+    const row = [
+      w.label.padEnd(20),
+      (signals + '').padStart(10),
+      (wins + '').padStart(10),
+      winRate.padStart(10),
+      avgROI.padStart(10),
+    ].join(' │ ');
+    console.log(row);
+  }
+
+  // Aggregate by strategy × window
+  console.log(`\n\n🎯 STRATEGY × ENTRY TIMING (Avg ROI %)\n`);
+  const windowLabels = ENTRY_WINDOWS.map(w => w.label);
+  const colW = 14;
+  const headerRow = 'Strategy'.padEnd(18) + windowLabels.map(w => w.slice(0, colW).padStart(colW)).join(' │ ');
+  console.log(headerRow);
+  console.log('─'.repeat(18) + ('─┼─' + '─'.repeat(colW)).repeat(windowLabels.length));
+
+  for (const s of stratNames) {
+    const cells = [];
+    for (const w of ENTRY_WINDOWS) {
+      let signals = 0, totalROI = 0;
+      for (const r of allResults.filter(r => r.strategy === s)) {
+        for (const e of r.entries) {
+          if (e.window === w.label) { signals++; totalROI += e.roi; }
+        }
+      }
+      if (signals > 0) {
+        const avg = (totalROI / signals).toFixed(0);
+        cells.push(`${avg}% (${signals})`.padStart(colW));
+      } else {
+        cells.push('—'.padStart(colW));
+      }
+    }
+    console.log(s.padEnd(18) + cells.join(' │ '));
+  }
+
+  // Best trades
+  console.log(`\n\n🏆 TOP 5 BEST TRADES\n`);
+  const allEntries = [];
+  for (const r of allResults) {
+    for (const e of r.entries) {
+      allEntries.push({ ...e, event: r.event, market: r.market, strategy: r.strategy });
+    }
+  }
+  allEntries.sort((a, b) => b.roi - a.roi);
+  for (const e of allEntries.slice(0, 5)) {
+    console.log(`  ${e.won ? '✅' : '❌'} [${e.strategy}] ${e.event} / ${e.market}`);
+    console.log(`     ${e.side} @ ${(e.entryPrice * 100).toFixed(1)}¢ | ${e.daysToEnd}d before | ROI: ${e.roi >= 0 ? '+' : ''}${e.roi.toFixed(0)}% | P&L: $${e.pnl.toFixed(0)}`);
+  }
+
+  // Worst trades
+  console.log(`\n📉 TOP 5 WORST TRADES\n`);
+  for (const e of allEntries.slice(-5).reverse()) {
+    console.log(`  ${e.won ? '✅' : '❌'} [${e.strategy}] ${e.event} / ${e.market}`);
+    console.log(`     ${e.side} @ ${(e.entryPrice * 100).toFixed(1)}¢ | ${e.daysToEnd}d before | ROI: ${e.roi >= 0 ? '+' : ''}${e.roi.toFixed(0)}% | P&L: $${e.pnl.toFixed(0)}`);
+  }
+
+  // Save results
+  const output = {
+    runAt: new Date().toISOString(),
+    events: data.length,
+    strategies: stratSummary,
+    entryWindows: ENTRY_WINDOWS.map(w => w.label),
+    results: allResults,
+  };
+  if (!existsSync(CASE_STUDIES_DIR)) mkdirSync(CASE_STUDIES_DIR, { recursive: true });
+  saveJSON(CASE_STUDIES_RESULTS_FILE, output);
+  console.log(`\n💾 Results saved to data/case-studies/results.json`);
+}
+
 function argVal(args, flag) {
   const idx = args.indexOf(flag);
   if (idx === -1 || idx + 1 >= args.length) return undefined;
@@ -1670,6 +1971,9 @@ const [,, cmd, ...args] = process.argv;
       case 'backtest':
         runBacktest();
         break;
+      case 'case-study':
+        runCaseStudy();
+        break;
       default:
         console.log(`Polymarket Paper Trading Simulator — Multi-Strategy Engine
 
@@ -1693,6 +1997,7 @@ Strategies: ${STRATEGY_NAMES.join(', ')}
 Examples:
   node sim.mjs fetch-history      # Pull historical data
   node sim.mjs backtest           # Run backtest report
+  node sim.mjs case-study         # Run case study on 5 curated markets
   node sim.mjs auto-bet
   node sim.mjs status
   node sim.mjs leaderboard

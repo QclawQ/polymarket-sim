@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-21T06:50:00Z",
+  "lastUpdated": "2026-02-21T10:08:00Z",
   "strategies": [
     {
       "name": "Contrarian / Fade Favorites",
@@ -72,6 +72,15 @@
       "sourceUrl": "https://x.com/saygun_research/status/2009958974347763791",
       "applicability": "geopolitics, macro",
       "risk": "low-medium"
+    }
+  ],
+    {
+      "name": "Volatility Split (BTC 15-Min Farming)",
+      "description": "Targets 15-minute BTC markets. Doesn't guess direction — farms volatility by playing both sides. Reverse-engineered from top 3 profitable bots on Polymarket.",
+      "source": "@stacyonchain — 205 likes, 17 RTs",
+      "sourceUrl": "https://x.com/stacyonchain/status/2024486122231853187",
+      "applicability": "crypto (BTC short-term)",
+      "risk": "medium (requires speed + execution)"
     }
   ],
   "notableWallets": [
